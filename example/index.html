@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+  <title>Iceoh | Minimal JS library for isometric and 2d tilemaps</title>
+  <meta name="description" content="~1kb unopinionated library to help you make sweet dynamic tilemaps">
+  <link ref="canonical" href="https://github.com/sammccord/iceoh">
+  <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+</head>
+
+<body>
+  <header>
+    <div style="display: flex;justify-content: center;">
+      <img src='/public/brand.png' style="height: 64px;" />
+      <h1 style="margin-left: 0.25em;">Iceoh</h1>
+    </div>
+    <p style="text-align: center;">Minimal JS library for isometric and 2d tilemaps</p>
+    <nav style="text-align: center;">
+      <a href="https://github.com/sammccord/iceoh" target="_blank">Docs on Github</a>
+    </nav>
+  </header>
+  <main style="display: flex;flex-direction: column;align-items: center;">
+    <div>
+      <label for="samples">Choose a sample:</label>
+      <select name="samples" id="samples">
+        <option value="Basic 2D">Basic 2D</option>
+        <option value="Basic Isometric">Basic Isometric</option>
+        <option value="Centering">Centering</option>
+        <option value="Stacking Various Depths">Stacking Various Depths</option>
+      </select>
+    </div>
+    <canvas id='canvas'></canvas>
+    <br />
+    <blockquote style="text-align: center; margin: 2em;">
+      All examples use Pixi.js
+      <br>
+      2d examples use (poorly upscaled) <a href="https://scut.itch.io/7drl-tileset-2018" target="_blank">Scut
+        Tileset</a>
+      <br>
+      Isometric examples use <a href="https://everestpipkin.itch.io/mushy" target="_blank">Mushy</a>
+    </blockquote>
+  </main>
+  <script src="./index.ts"></script>
+</body>
+
+</html>

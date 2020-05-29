@@ -1,0 +1,38 @@
+{
+  "name": "iceoh",
+  "version": "0.0.0-canary",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.modern.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "pixi",
+    "pixi.js",
+    "phaser",
+    "isometric",
+    "minimalist",
+    "small",
+    "game",
+    "gamedev",
+    "tilemap"
+  ],
+  "author": "Sam McCord <sam.mccord@protonmail.com>",
+  "bugs": {
+    "url": "https://github.com/sammccord/iceoh/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammccord/iceoh.git"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "clean": "rm -rf dist .rts2_*",
+    "prepublishOnly": "yarn clean && yarn build"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.0-next.9"
+  }
+}
