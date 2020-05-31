@@ -5,7 +5,7 @@
   "author": "Sam McCord",
   "license": "MIT",
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build example.html && cp -R docs/. ./dist/",
     "clean": "rm -rf dist .cache",
     "dev": "parcel index.html"
   },

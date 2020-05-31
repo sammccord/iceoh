@@ -1,20 +1,33 @@
-import { IPoint3, IPoint, IRectangle, IRectangle3 } from './interfaces'
-import { get, set, sum, CLASSIC, MIDDLE } from './utils'
+import { IPoint3, IPoint, IRectangle3 } from './interfaces'
+import { set, sum, CLASSIC } from './utils'
 import { Tilemap, ITilemapConfig } from './Tilemap'
 
-export interface IIsoTilemapConfig {
+/**
+ * Object extending `ITilemapConfig` with optional projectionAngle, defaulting to `CLASSIC`
+ */
+export interface IIsoTilemapConfig extends ITilemapConfig {
+  /** Isometric projection angle, defaults to `CLASSIC` */
   projectionAngle?: number
 }
 
+/**
+ * Class that extends basic 2D Tilemap functionality based on given projectionAngle.
+ * @param {T} - The type of sprite object to store
+ * @extends Tilemap
+ */
 export class IsoTilemap<T> extends Tilemap<T> {
 
   protected readonly transform: [number, number] = null
   protected readonly baseOrigin: IPoint
   protected readonly baseSurfaceHeight: number
   protected readonly baseSurfaceHalfHeight: number
-  readonly depthMap: { [layer: number]: { [row: number]: { [col: number]: number } } } = {}
+  readonly depthMap: { [z: number]: { [x: number]: { [y: number]: number } } } = {}
 
-  constructor({ projectionAngle = CLASSIC, ...config }: IIsoTilemapConfig & ITilemapConfig) {
+  /**
+  * Create an `IsoTilemap<T>` instance.
+  * @param {IIsoTilemapConfig} config - projectionAngle will default to CLASSIC
+  */
+  constructor({ projectionAngle = CLASSIC, ...config }: IIsoTilemapConfig) {
     super({ ...config })
     this.transform = [Math.cos(projectionAngle), Math.sin(projectionAngle)];
     this.baseOrigin = { x: this.baseTileDimensions.width * this.baseTileOrigin.x, y: this.baseTileDimensions.height * this.baseTileOrigin.y }
@@ -22,6 +35,19 @@ export class IsoTilemap<T> extends Tilemap<T> {
     this.baseSurfaceHalfHeight = this.baseSurfaceHeight / 2
   }
 
+  /**
+  * Add tile to the tilemap at given coordinate.
+  * If given tile is tall enough to occupy multiple z-layers at the base tile depth, it will add a reference at those z-layers in the map.
+  * @param {T} tile
+  * @param {IPoint3} point - The map coordinates at which to store this tile
+  * @param {IRectangle3=} dimensions - The dimensions of the tile, defaults to `this.baseTileDimensions`
+  * @param {IPoint=} origin - The origin point of the tile, defaults to `this.baseTileOrigin`
+  * @return {IPoint3} A 3D Point at which to place this tile in screen space
+  *
+  * @example
+  *
+  *    const position = isoTilemap.add({}, { x: 1, y: 1, z: 0 })
+  */
   public add(sprite: T, point: IPoint3, dimensions: IRectangle3 = this.baseTileDimensions, origin = this.baseTileOrigin): IPoint3 {
     this.tiles.push(sprite)
     const tile = this.tiles[this.tiles.indexOf(sprite)]
@@ -47,6 +73,16 @@ export class IsoTilemap<T> extends Tilemap<T> {
     )
   }
 
+  /**
+  * Remove a tile from the given point coordinates.
+  * If the tile exists at multiple z-layers, it'll remove references to the tile at those layers as well.
+  * @param {IPoint3} point - The map coordinates from which to remove a tile
+  * @return {[T]} The tile that existed at the given point, or null if there was no tile.
+  *
+  * @example
+  *
+  *    const removedTile = isoTilemap.remove({ x: 1, y: 1, z: 0 })
+  */
   public remove(point: IPoint3): T {
     const tile = this.get(point)
     if (!tile) return null
@@ -61,6 +97,17 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return this.tiles.splice(this.tiles.indexOf(tile), 1)[0]
   }
 
+  /**
+  * Project a screen point to tile point
+  * @param {IPoint3} point - The screen coordinates to project
+  * @param {IRectangle3=} dimensions - The dimensions of each tile on the map, defaults to `this.baseTileDimensions`
+  * @param {IPoint=} origin - The origin point of the tile
+  * @return {IPoint3} The tile coordinate in the map
+  *
+  * @example
+  *
+  *    const tilePosition = isoTilemap.toTile({ x: 400, y: 300 })
+  */
   public toTile(point: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin): IPoint3 {
     const p = this._unproject(point)
     const edge = { x: dimensions.width * origin.x, y: dimensions.width * origin.y }
@@ -70,7 +117,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return p
   }
 
-  _project(point3: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin, depth: number = 0): IPoint3 {
+  protected _project(point3: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin, depth: number = 0): IPoint3 {
     const out = {
       x: (point3.x - point3.y) * this.transform[0],
       y: (point3.x + point3.y) * this.transform[1],
@@ -93,7 +140,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return out;
   }
 
-  _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
+  protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
     const worldDimensions = this.getGlobalDimensions()
     const x = point.x - (worldDimensions.width * this.worldOrigin.x);
     const y = point.y - (worldDimensions.height * this.worldOrigin.y);
@@ -105,9 +152,9 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return out;
   }
 
-  _getAbsolutePosition(point: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin): IPoint3 {
+  protected _getAbsolutePosition(point: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin): IPoint3 {
     return {
-      x: (dimensions.width * origin.x) * point.x, // multiply by scale
+      x: (dimensions.width * origin.x) * point.x,
       y: (dimensions.width * origin.y) * point.y,
       z: point.z || 0
     }

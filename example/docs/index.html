@@ -1,0 +1,289 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>iceoh</title>
+	<meta name="description" content="Documentation for iceoh">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">iceoh</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>iceoh</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 align="center">
+					<img height="100px" src="icon.png"><br>
+					Iceoh
+				</h1>
+				<blockquote>
+					<p>A <strong>tiny</strong>, 0 dependency JS library for isometric and 2d tilemaps</p>
+				</blockquote>
+				<p><img src="https://img.badgesize.io/sammccord/iceoh/master/dist/index.umd.js.svg" alt="">
+				<img src="https://img.badgesize.io/sammccord/iceoh/master/dist/index.umd.js.svg?compression=gzip" alt=""></p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Small, flexible, and fast</li>
+					<li>Modern and fully typed</li>
+					<li>Supports stacking tiles at different sizes and depths</li>
+					<li>Unopinionated. Built with <code>pixi.js</code> in mind, should will work anywhere.</li>
+					<li>Good enough</li>
+				</ul>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh">yarn add iceoh</code></pre>
+				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+					<h2>Quick Start</h2>
+				</a>
+				<ul>
+					<li><a href="https://iceoh.netlify.app">Documentation</a></li>
+					<li><a href="https://iceoh.netlify.app/example.html">Examples</a></li>
+				</ul>
+				<p>For more complete examples that use <code>pixi.js</code>, see the <a href="./example/samples">examples&#39; source</a></p>
+				<p>The following example is a naive vanilla example with canvas, to illustrate core concepts.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Tilemap, IsoTilemap, TOP_LEFT, MIDDLE, CLASSIC, getDirection, DIRECTION, getDistance } <span class="hljs-keyword">from</span> <span class="hljs-string">'iceoh'</span>
+
+<span class="hljs-comment">// This can be anything, PIXI.Sprite, Phaser.Sprite, whatever your tile object is.</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sprite</span> </span>{
+  <span class="hljs-attr">width</span>: number
+  <span class="hljs-attr">height</span>: number
+  <span class="hljs-attr">image</span>: CanvasImageSource
+}
+
+<span class="hljs-keyword">const</span> canvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'canvas'</span>)
+<span class="hljs-keyword">const</span> ctx = canvas.getContext(<span class="hljs-string">'2d'</span>)
+
+<span class="hljs-comment">// 2d Tilemap</span>
+<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> Tilemap&lt;Sprite&gt;({
+  <span class="hljs-attr">getGlobalDimensions</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> canvas.getBoundingClientRect(),
+  <span class="hljs-attr">getWorldPosition</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({ <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> }),
+  <span class="hljs-attr">getWorldScale</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }),
+  <span class="hljs-attr">worldOrigin</span>: TOP_LEFT,
+  <span class="hljs-attr">baseOrigin</span>: MIDDLE,
+  <span class="hljs-attr">baseTileDimensions</span>: {
+    <span class="hljs-attr">width</span>: <span class="hljs-number">64</span>,
+    <span class="hljs-attr">height</span>: <span class="hljs-number">64</span>
+  }
+})
+
+<span class="hljs-keyword">const</span> map = <span class="hljs-keyword">new</span> IsoTilemap&lt;Sprite&gt;({
+  <span class="hljs-attr">getGlobalDimensions</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> canvas.getBoundingClientRect(),
+  <span class="hljs-attr">getWorldPosition</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({ <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> }),
+  <span class="hljs-attr">getWorldScale</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }),
+  <span class="hljs-attr">worldOrigin</span>: MIDDLE,
+  <span class="hljs-attr">baseOrigin</span>: MIDDLE,
+  <span class="hljs-attr">projectionAngle</span>: CLASSIC,
+  <span class="hljs-attr">baseTileDimensions</span>: {
+    <span class="hljs-attr">width</span>: <span class="hljs-number">64</span>,
+    <span class="hljs-attr">height</span>: <span class="hljs-number">64</span>,
+    <span class="hljs-attr">depth</span>: <span class="hljs-number">32</span> <span class="hljs-comment">// how many pixels tall is the front edge of the tile</span>
+  }
+})
+
+<span class="hljs-keyword">let</span> sprite = <span class="hljs-keyword">new</span> Sprite()
+
+<span class="hljs-comment">// takes grid coordinates and returns screen space coordinates to draw your sprite at</span>
+<span class="hljs-comment">// the returned z coordinate is helpful if you're using a library with depth sorting</span>
+<span class="hljs-keyword">let</span> { x, y, z } = map.add(sprite, { <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> })
+ctx.drawImage(sprite.image, x, y, sprite.width, sprite.height)
+
+<span class="hljs-comment">// Move existing sprite to a new spot in the map, then draw the sprite in the new location</span>
+ctx.clearRect(x, y, sprite.width, sprite.height)
+{ x, y, z } = map.move({ <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> }, { <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> })
+ctx.drawImage(sprite.image, x, y, sprite.width, sprite.height)
+
+<span class="hljs-comment">// Get a sprite at map coordinates</span>
+map.get({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> }) === sprite <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// Remove the tile at map coordinates and return it</span>
+map.remove({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> }) === sprite <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// Get an array of all tiles at a given x,y</span>
+map.add(z0Sprite, { <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> })
+map.add(z1Sprite, { <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">1</span> })
+map.add(z2Sprite, { <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">2</span> })
+<span class="hljs-keyword">const</span> [z0Sprite, z1Sprite, z2Sprite] = map.getColumn&lt;Sprite&gt;({ <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> })
+
+<span class="hljs-comment">// You can also get a column of tile depths if using IsoTilemap</span>
+<span class="hljs-keyword">const</span> [z0Depth, z1Depth, z2Depth] = map.getColumn&lt;number&gt;({ <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> }, map.depthMap)
+
+<span class="hljs-comment">// Get map coordinate from a screen point</span>
+{ x, y } = map.toTile({ <span class="hljs-attr">x</span>: mouse.x, <span class="hljs-attr">y</span>: mouse.y })
+<span class="hljs-comment">// and get world coordinates for an arbitrary map position</span>
+{ <span class="hljs-attr">x</span>: worldX, <span class="hljs-attr">y</span>: worldX } = map.toPoint({ x, y })
+
+<span class="hljs-comment">// Get a world position with a given map position at its center</span>
+{ <span class="hljs-attr">x</span>: worldX, <span class="hljs-attr">y</span>: worldX } = map.centerToTile({ x, y })
+
+<span class="hljs-comment">// Get the map dimensions, x/y being center tile coordinates</span>
+<span class="hljs-comment">// width being max X, and height being max Y tile values</span>
+<span class="hljs-keyword">const</span> { x, y, width, height, depth } = map.getBounds()
+
+<span class="hljs-comment">// Center viewport to center of map</span>
+{ <span class="hljs-attr">x</span>: worldX, <span class="hljs-attr">y</span>: worldX } = map.center()
+<span class="hljs-comment">// is the same as</span>
+{ <span class="hljs-attr">x</span>: worldX, <span class="hljs-attr">y</span>: worldX } = map.centerToTile(map.getBounds())
+
+<span class="hljs-comment">// Get the facing direction between two points</span>
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> }) === DIRECTION.N
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> }) === DIRECTION.NE
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }) === DIRECTION.E
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> }) === DIRECTION.SE
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> }) === DIRECTION.S
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">2</span> }) === DIRECTION.SW
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }) === DIRECTION.W
+getDirection({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span> }) === DIRECTION.NW
+
+<span class="hljs-comment">// get the distance between two points</span>
+<span class="hljs-keyword">const</span> num = getDistance({ <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">1</span> }, { <span class="hljs-attr">x</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">5</span>}) <span class="hljs-comment">// num = ~5</span>
+</code></pre>
+				<a href="#prior-art" id="prior-art" style="color: inherit; text-decoration: none;">
+					<h2>Prior Art</h2>
+				</a>
+				<p>This library could not exist without the following libraries, which were not quite in the Goldilocks zone of what I wanted. If <code>Iceoh</code> sucks, try one of these!</p>
+				<ul>
+					<li><a href="https://jsiso.com/">JSIso</a></li>
+					<li><a href="https://github.com/axaq/traviso.js">Traviso</a></li>
+					<li><a href="http://rotates.org/phaser/iso/">Phaser Isometric Plugin</a></li>
+				</ul>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.</p>
+				<p>Contributions are welcome.</p>
+				<a href="#developing" id="developing" style="color: inherit; text-decoration: none;">
+					<h2>Developing</h2>
+				</a>
+				<pre><code class="language-sh">git <span class="hljs-built_in">clone</span> https://github.com/sammccord/iceoh.git
+<span class="hljs-built_in">cd</span> iceoh
+
+<span class="hljs-comment"># deps</span>
+yarn
+
+<span class="hljs-comment"># build</span>
+yarn build
+
+<span class="hljs-comment"># develop</span>
+yarn dev
+
+<span class="hljs-comment"># To develop via examples</span>
+<span class="hljs-built_in">cd</span> example &amp;&amp; yarn dev
+open http://localhost:1234</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_isotilemap_.html">&quot;<wbr>Iso<wbr>Tilemap&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_tilemap_.html">&quot;<wbr>Tilemap&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_interfaces_.html">&quot;interfaces&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_.html">&quot;utils&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "name": "iceoh",
-  "version": "0.0.0-canary",
+  "version": "0.0.0-beta",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.umd.js",
@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "microbundle",
+    "docs": "typedoc --out example/docs src",
     "dev": "microbundle watch",
     "clean": "rm -rf dist .rts2_*",
     "prepublishOnly": "yarn clean && yarn build"

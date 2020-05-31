@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img height="100px" src="example/public/brand.png"><br>
+  <img height="100px" src="icon.png"><br>
   Iceoh
 </h1>
 
@@ -12,6 +12,7 @@
 
 - Small, flexible, and fast
 - Modern and fully typed
+- Supports stacking tiles at different sizes and depths
 - Unopinionated. Built with `pixi.js` in mind, should will work anywhere.
 - Good enough
 
@@ -23,7 +24,8 @@ yarn add iceoh
 
 ## Quick Start
 
-- [Examples](https://iceoh.netlify.app)
+- [Documentation](https://iceoh.netlify.app)
+- [Examples](https://iceoh.netlify.app/example.html)
 
 For more complete examples that use `pixi.js`, see the [examples' source](./example/samples)
 
