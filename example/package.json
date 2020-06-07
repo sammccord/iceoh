@@ -7,7 +7,7 @@
   "scripts": {
     "build": "parcel build example.html && cp -R docs/. ./dist/",
     "clean": "rm -rf dist .cache",
-    "dev": "parcel index.html"
+    "dev": "parcel example.html"
   },
   "staticFiles": {
     "staticPath": "public",

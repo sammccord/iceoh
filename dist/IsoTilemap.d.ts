@@ -5,7 +5,11 @@ import { Tilemap, ITilemapConfig } from './Tilemap';
  */
 export interface IIsoTilemapConfig extends ITilemapConfig {
     /** Isometric projection angle, defaults to `CLASSIC` */
-    projectionAngle?: number;
+    angle?: number;
+    /**
+     * It's a good idea to clamp your values to aid performance. In general having values aligned around the 0.5 value will produce a well performing and visually appealing display.
+     */
+    clamp?: boolean;
 }
 /**
  * Class that extends basic 2D Tilemap functionality based on given projectionAngle.
@@ -13,7 +17,10 @@ export interface IIsoTilemapConfig extends ITilemapConfig {
  * @extends Tilemap
  */
 export declare class IsoTilemap<T> extends Tilemap<T> {
-    protected readonly transform: [number, number];
+    protected readonly angle: number;
+    protected readonly angleCos: number;
+    protected readonly angleSin: number;
+    protected readonly clamp: boolean;
     protected readonly baseOrigin: IPoint;
     protected readonly baseSurfaceHeight: number;
     protected readonly baseSurfaceHalfHeight: number;
@@ -28,7 +35,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
     * Create an `IsoTilemap<T>` instance.
     * @param {IIsoTilemapConfig} config - projectionAngle will default to CLASSIC
     */
-    constructor({ projectionAngle, ...config }: IIsoTilemapConfig);
+    constructor({ angle, clamp, ...config }: IIsoTilemapConfig);
     /**
     * Add tile to the tilemap at given coordinate.
     * If given tile is tall enough to occupy multiple z-layers at the base tile depth, it will add a reference at those z-layers in the map.
@@ -66,7 +73,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
     *    const tilePosition = isoTilemap.toTile({ x: 400, y: 300 })
     */
     toTile(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
-    protected _project(point3: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
+    protected _project(p: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
     protected _unproject(point: IPoint3, out?: IPoint3): IPoint3;
     protected _getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
 }

@@ -7,7 +7,11 @@ import { Tilemap, ITilemapConfig } from './Tilemap'
  */
 export interface IIsoTilemapConfig extends ITilemapConfig {
   /** Isometric projection angle, defaults to `CLASSIC` */
-  projectionAngle?: number
+  angle?: number
+  /**
+   * It's a good idea to clamp your values to aid performance. In general having values aligned around the 0.5 value will produce a well performing and visually appealing display.
+   */
+  clamp?: boolean
 }
 
 /**
@@ -17,7 +21,11 @@ export interface IIsoTilemapConfig extends ITilemapConfig {
  */
 export class IsoTilemap<T> extends Tilemap<T> {
 
-  protected readonly transform: [number, number] = null
+  protected readonly angle: number;
+  protected readonly angleCos: number;
+  protected readonly angleSin: number
+  protected readonly clamp: boolean
+
   protected readonly baseOrigin: IPoint
   protected readonly baseSurfaceHeight: number
   protected readonly baseSurfaceHalfHeight: number
@@ -27,9 +35,12 @@ export class IsoTilemap<T> extends Tilemap<T> {
   * Create an `IsoTilemap<T>` instance.
   * @param {IIsoTilemapConfig} config - projectionAngle will default to CLASSIC
   */
-  constructor({ projectionAngle = CLASSIC, ...config }: IIsoTilemapConfig) {
+  constructor({ angle = CLASSIC, clamp = true, ...config }: IIsoTilemapConfig) {
     super({ ...config })
-    this.transform = [Math.cos(projectionAngle), Math.sin(projectionAngle)];
+    this.angle = angle;
+    this.angleCos = Math.cos(this.angle);
+    this.angleSin = Math.sin(this.angle);
+    this.clamp = clamp
     this.baseOrigin = { x: this.baseTileDimensions.width * this.baseTileOrigin.x, y: this.baseTileDimensions.height * this.baseTileOrigin.y }
     this.baseSurfaceHeight = (this.baseTileDimensions.height - this.baseTileDimensions.depth)
     this.baseSurfaceHalfHeight = this.baseSurfaceHeight / 2
@@ -117,27 +128,28 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return p
   }
 
-  protected _project(point3: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin, depth: number = 0): IPoint3 {
-    const out = {
-      x: (point3.x - point3.y) * this.transform[0],
-      y: (point3.x + point3.y) * this.transform[1],
-      z: point3.z || 0
-    }
-
+  protected _project(p: IPoint3, dimensions = this.baseTileDimensions, origin = this.baseTileOrigin, depth: number = 0): IPoint3 {
+    // calculate the cartesion coordinates
     const { width, height } = this.getGlobalDimensions()
-    out.x += width * this.worldOrigin.x
-    out.y += + height * this.worldOrigin.y
-    out.z = (point3.x + point3.y) * (point3.z + 1 || 1)
-
+    const out = {
+      x: ((p.x - p.y) * this.angleCos) + (width * this.worldOrigin.x),
+      y: ((p.x + p.y) * this.angleSin) + (height * this.worldOrigin.y),
+      z: (p.x + p.y) * (p.z + 1 || 1)
+    }
     if (dimensions !== this.baseTileDimensions) {
       out.y -= (this.baseSurfaceHalfHeight + 0) - this.baseTileOrigin.y // + (this.baseTileDimensions.depth * point3.z)) - this.baseTileOrigin.y
       out.y += (dimensions.height * origin.y) - (dimensions.height - ((dimensions.height - dimensions.depth) / 2))
       out.y -= depth
     } else {
-      out.y -= (this.baseTileDimensions.depth * point3.z)
+      out.y -= (this.baseTileDimensions.depth * p.z)
     }
-
-    return out;
+    // if we are clamping, then clamp the values
+    // clamp using the fastest proper rounding: http://jsperf.com/math-round-vs-hack/3
+    if (this.clamp) {
+      out.x = ~~(out.x + (out.x > 0 ? 0.5 : -0.5))
+      out.y = ~~(out.y + (out.y > 0 ? 0.5 : -0.5))
+    }
+    return out
   }
 
   protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
@@ -145,8 +157,8 @@ export class IsoTilemap<T> extends Tilemap<T> {
     const x = point.x - (worldDimensions.width * this.worldOrigin.x);
     const y = point.y - (worldDimensions.height * this.worldOrigin.y);
 
-    out.x = x / (2 * this.transform[0]) + y / (2 * this.transform[1]);
-    out.y = -(x / (2 * this.transform[0])) + y / (2 * this.transform[1]);
+    out.x = x / (2 * this.angleCos) + y / (2 * this.angleSin);
+    out.y = -(x / (2 * this.angleCos)) + y / (2 * this.angleSin);
     out.z = point.z || 0;
 
     return out;

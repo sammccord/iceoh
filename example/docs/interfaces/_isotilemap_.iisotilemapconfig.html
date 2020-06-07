@@ -96,12 +96,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_isotilemap_.iisotilemapconfig.html#angle" class="tsd-kind-icon">angle</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#basetiledimensions" class="tsd-kind-icon">base<wbr>Tile<wbr>Dimensions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#basetileorigin" class="tsd-kind-icon">base<wbr>Tile<wbr>Origin</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_isotilemap_.iisotilemapconfig.html#clamp" class="tsd-kind-icon">clamp</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#getglobaldimensions" class="tsd-kind-icon">get<wbr>Global<wbr>Dimensions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#getworldposition" class="tsd-kind-icon">get<wbr>World<wbr>Position</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#getworldscale" class="tsd-kind-icon">get<wbr>World<wbr>Scale</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_isotilemap_.iisotilemapconfig.html#projectionangle" class="tsd-kind-icon">projection<wbr>Angle</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_isotilemap_.iisotilemapconfig.html#worldorigin" class="tsd-kind-icon">world<wbr>Origin</a></li>
 							</ul>
 						</section>
@@ -110,6 +111,21 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="angle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> angle</h3>
+					<div class="tsd-signature tsd-kind-icon">angle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/IsoTilemap.ts#L10">IsoTilemap.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Isometric projection angle, defaults to <code>CLASSIC</code></p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="basetiledimensions" class="tsd-anchor"></a>
 					<h3>base<wbr>Tile<wbr>Dimensions</h3>
@@ -117,7 +133,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#basetiledimensions">baseTileDimensions</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L17">Tilemap.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L17">Tilemap.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -135,12 +151,27 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#basetileorigin">baseTileOrigin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L11">Tilemap.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L11">Tilemap.ts:11</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The anchor point at which tiles are expected to be drawn to screen, defaults to <code>MIDDLE</code></p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="clamp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> clamp</h3>
+					<div class="tsd-signature tsd-kind-icon">clamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/IsoTilemap.ts#L14">IsoTilemap.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>It&#39;s a good idea to clamp your values to aid performance. In general having values aligned around the 0.5 value will produce a well performing and visually appealing display.</p>
 						</div>
 					</div>
 				</section>
@@ -151,7 +182,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#getglobaldimensions">getGlobalDimensions</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L19">Tilemap.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L19">Tilemap.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -182,7 +213,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#getworldposition">getWorldPosition</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L21">Tilemap.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L21">Tilemap.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -213,7 +244,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#getworldscale">getWorldScale</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L23">Tilemap.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L23">Tilemap.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -237,21 +268,6 @@
 						</ul>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="projectionangle" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> projection<wbr>Angle</h3>
-					<div class="tsd-signature tsd-kind-icon">projection<wbr>Angle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/IsoTilemap.ts#L10">IsoTilemap.ts:10</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Isometric projection angle, defaults to <code>CLASSIC</code></p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="worldorigin" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> world<wbr>Origin</h3>
@@ -259,7 +275,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_tilemap_.itilemapconfig.html">ITilemapConfig</a>.<a href="_tilemap_.itilemapconfig.html#worldorigin">worldOrigin</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/62fb8c1/src/Tilemap.ts#L9">Tilemap.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/35114e1/src/Tilemap.ts#L9">Tilemap.ts:9</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -303,11 +319,17 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="_isotilemap_.iisotilemapconfig.html" class="tsd-kind-icon">IIso<wbr>Tilemap<wbr>Config</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_isotilemap_.iisotilemapconfig.html#angle" class="tsd-kind-icon">angle</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_isotilemap_.iisotilemapconfig.html#basetiledimensions" class="tsd-kind-icon">base<wbr>Tile<wbr>Dimensions</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_isotilemap_.iisotilemapconfig.html#basetileorigin" class="tsd-kind-icon">base<wbr>Tile<wbr>Origin</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_isotilemap_.iisotilemapconfig.html#clamp" class="tsd-kind-icon">clamp</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_isotilemap_.iisotilemapconfig.html#getglobaldimensions" class="tsd-kind-icon">get<wbr>Global<wbr>Dimensions</a>
@@ -317,9 +339,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_isotilemap_.iisotilemapconfig.html#getworldscale" class="tsd-kind-icon">get<wbr>World<wbr>Scale</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_isotilemap_.iisotilemapconfig.html#projectionangle" class="tsd-kind-icon">projection<wbr>Angle</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_isotilemap_.iisotilemapconfig.html#worldorigin" class="tsd-kind-icon">world<wbr>Origin</a>
