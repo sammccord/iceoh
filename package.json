@@ -1,12 +1,14 @@
 {
   "name": "iceoh",
-  "version": "0.0.0-alpha",
+  "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "source": "src/index.ts",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.modern.js",
-  "unpkg": "dist/index.umd.js",
-  "types": "dist/index.d.ts",
+  "exports": "./dist/index.modern.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
   "keywords": [
     "pixi",
     "pixi.js",
@@ -31,9 +33,9 @@
     "docs": "typedoc --out example/docs src",
     "dev": "microbundle watch",
     "clean": "rm -rf dist .rts2_*",
-    "prepublishOnly": "yarn clean && yarn build"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
-    "microbundle": "^0.12.0-next.9"
+    "microbundle": "^0.14.1"
   }
 }
