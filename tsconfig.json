@@ -1,16 +1,21 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 18",
+
   "compilerOptions": {
-    "target": "es5",
-    "outDir": "dist",
+    "composite": true,
+    "lib": ["es2022"],
+    "module": "commonjs",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "lib": [
-      "esnext.array"
-    ]
+    "paths": {
+      "iceoh": ["./packages/iceoh/src/index.ts"]
+    }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-  ]
+  "include": ["packages/iceoh/src"],
+  "exclude": ["node_modules"]
 }

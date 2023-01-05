@@ -1,0 +1,45 @@
+{
+  "name": "iceoh",
+  "version": "2.0.0-canary",
+  "license": "MIT",
+  "type": "module",
+  "source": "src/index.ts",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/iceoh.umd.cjs",
+  "module": "./dist/iceoh.js",
+  "exports": {
+    ".": {
+      "import": "./dist/iceoh.js",
+      "require": "./dist/iceoh.umd.cjs"
+    }
+  },
+  "keywords": [
+    "pixi",
+    "pixi.js",
+    "phaser",
+    "isometric",
+    "minimalist",
+    "small",
+    "game",
+    "gamedev",
+    "tilemap"
+  ],
+  "author": "Sam McCord <sam.mccord@protonmail.com>",
+  "bugs": {
+    "url": "https://github.com/sammccord/iceoh/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammccord/iceoh.git"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "NODE_ENV=production vite build && tsc --emitDeclarationOnly --declaration",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {}
+}

@@ -1,14 +1,8 @@
 {
   "name": "iceoh",
-  "version": "1.0.0",
+  "version": "2.0.0-canary",
   "license": "MIT",
   "type": "module",
-  "source": "src/index.ts",
-  "exports": "./dist/index.modern.js",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
-  "unpkg": "./dist/index.umd.js",
-  "types": "./dist/index.d.ts",
   "keywords": [
     "pixi",
     "pixi.js",
@@ -20,22 +14,26 @@
     "gamedev",
     "tilemap"
   ],
-  "author": "Sam McCord <sam.mccord@protonmail.com>",
-  "bugs": {
-    "url": "https://github.com/sammccord/iceoh/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sammccord/iceoh.git"
+    "url": "git+https://github.com/sammccord/solid-pixi.git"
   },
+  "author": "Sam McCord <sam.mccord@protonmail.com>",
+  "bugs": {
+    "url": "https://github.com/sammccord/solid-pixi/issues"
+  },
+  "homepage": "https://github.com/sammccord/solid-pixi#readme",
   "scripts": {
-    "build": "microbundle",
-    "docs": "typedoc --out example/docs src",
-    "dev": "microbundle watch",
-    "clean": "rm -rf dist .rts2_*",
-    "prepublishOnly": "npm run clean && npm run build"
+    "build": "typedoc --out packages/example/docs packages/iceoh/src && turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev",
+    "test": "turbo run test"
   },
   "devDependencies": {
-    "microbundle": "^0.14.1"
+    "turbo": "^1.6.3",
+    "typedoc": "^0.23.23",
+    "typescript": "^4.6.3",
+    "vite": "^3.2.3",
+    "vitest": "^0.25.3"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "iceoh-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sam McCord",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && mv dist/index.html dist/example.html && cp -R docs/. dist/",
+    "clean": "rm -rf dist",
+    "serve": "vite preview"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
+  },
+  "dependencies": {
+    "iceoh": "workspace:*",
+    "animejs": "^3.2.0",
+    "pixi.js": "^7.0.0"
+  }
+}
