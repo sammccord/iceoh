@@ -1,5 +1,5 @@
-import { IPoint3, IPoint, IRectangle3 } from "./interfaces";
-import { set, sum, CLASSIC } from "./utils";
+import { IPoint3, IPoint, IRectangle3, MapThree } from "./interfaces";
+import { set, sum, CLASSIC, get, remove } from "./utils";
 import { Tilemap, ITilemapConfig } from "./Tilemap";
 
 /**
@@ -28,7 +28,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
   protected readonly baseOrigin: IPoint;
   protected readonly baseSurfaceHeight: number;
   protected readonly baseSurfaceHalfHeight: number;
-  readonly depthMap: Map<number, Map<number, Map<number, T>>> = new Map();
+  readonly depthMap: MapThree<T> = new Map();
 
   /**
    * Create an `IsoTilemap<T>` instance.
@@ -96,6 +96,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
       );
       set(this.map, [point.z, point.x, point.y], tile);
     }
+    this.recalculateBounds(point);
     return this._project(
       this._getAbsolutePosition(point),
       dimensions,
@@ -119,20 +120,13 @@ export class IsoTilemap<T> extends Tilemap<T> {
     if (!tile) return null;
     for (const [z, grid] of this.map) {
       try {
-        if (grid[point.x][point.y] === tile) {
-          delete this.depthMap[z][point.x][point.y];
-          delete this.map[z][point.x][point.y];
+        if (get(grid, [point.x, point.y]) === tile) {
+          remove(this.depthMap, [z, point.x, point.y]);
+          remove(this.map, [z, point.x, point.y]);
         }
       } catch {}
     }
-    Object.entries(this.map).forEach(([z, grid]) => {
-      try {
-        if (grid[point.x][point.y] === tile) {
-          delete this.depthMap[z][point.x][point.y];
-          delete this.map[z][point.x][point.y];
-        }
-      } catch {}
-    });
+    this.recalculateBounds(point);
     return this.tiles.splice(this.tiles.indexOf(tile), 1)[0];
   }
 

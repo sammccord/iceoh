@@ -1,3 +1,5 @@
+export type MapThree<T> = Map<number, Map<number, Map<number, T>>>;
+
 /**
  * 2D Point
  */

@@ -4,7 +4,8 @@
     "target": "es6",
     "outDir": "dist",
     "moduleResolution": "node",
-    "lib": ["es2015", "esnext.array"]
+    "lib": ["es2015", "esnext.array"],
+    "rootDir": "src"
   },
   "include": ["src"],
   "exclude": ["node_modules"]

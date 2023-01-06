@@ -38,7 +38,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "NODE_ENV=production vite build && tsc --emitDeclarationOnly --declaration",
+    "build": "NODE_ENV=production vite build && tsc --emitDeclarationOnly --declaration --project ./tsconfig.json",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {}

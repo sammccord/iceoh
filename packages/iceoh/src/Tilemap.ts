@@ -1,4 +1,11 @@
-import { IPoint3, IPoint, IRectangle, IRectangle3, IBox } from "./interfaces";
+import {
+  IPoint3,
+  IPoint,
+  IRectangle,
+  IRectangle3,
+  IBox,
+  MapThree,
+} from "./interfaces";
 import { get, set, MIDDLE, FULL, TOP_LEFT, remove } from "./utils";
 
 /**
@@ -32,7 +39,12 @@ export class Tilemap<T> {
   protected readonly worldOrigin: IPoint = MIDDLE;
   protected readonly baseTileOrigin: IPoint = MIDDLE;
   protected readonly tiles: T[] = [];
-  protected readonly map: Map<number, Map<number, Map<number, T>>> = new Map();
+  protected readonly map: MapThree<T> = new Map();
+  protected readonly bounds = {
+    x: { min: 0, max: 0 },
+    y: { min: 0, max: 0 },
+    z: { min: 0, max: 0 },
+  };
 
   /**
    * Create a `Tilemap<T>` instance.
@@ -74,7 +86,8 @@ export class Tilemap<T> {
   ): IPoint3 {
     this.tiles.push(sprite);
     const tile = this.tiles[this.tiles.indexOf(sprite)];
-    set(this.map, [point.z, point.x, point.y], tile);
+    set(this.map, [point.z || 0, point.x, point.y], tile);
+    this.recalculateBounds(point);
     return this._project(this._getAbsolutePosition(point), dimensions, origin);
   }
 
@@ -104,11 +117,12 @@ export class Tilemap<T> {
    *    const tiles = tilemap.getColumn({ x: 1, y: 1 })
    *    const depths = tilemap.getColumn({ x: 1, y: 1 }, tilemap.depthMap)
    */
-  public getColumn<C>(point: IPoint, map?: typeof this.map): C[] {
-    return Object.entries(map || this.map).map(([_, grid]) =>
-      get(grid, [point.x, point.y])
-    );
-    // (map || this.map)
+  public getColumn<C>(point: IPoint, map?: MapThree<T>): C[] {
+    const column = [];
+    for (const [z, grid] of map || this.map) {
+      column[z] = get(grid, [point.x, point.y]);
+    }
+    return column;
   }
 
   /**
@@ -144,10 +158,11 @@ export class Tilemap<T> {
    *
    *    const tile = tilemap.remove({ x: 1, y: 1 })
    */
-  public remove(point: IPoint3) {
+  public remove(point: IPoint3): T {
     const tile = this.get(point);
     if (!tile) return;
     remove(this.map, [point.z || 0, point.x, point.y]);
+    this.recalculateBounds(point);
     return this.tiles.splice(this.tiles.indexOf(tile), 1)[0];
   }
 
@@ -265,31 +280,39 @@ export class Tilemap<T> {
    *    const { x, y, width, height, depth } = tilemap.getBounds()
    */
   public getBounds(): IBox {
-    const grids = Object.values(this.map);
-    const xes = grids.map((o) => Object.keys(o).map(Number)).flat();
-    const yes = grids
-      .map(Object.values)
-      .flat()
-      .map((o) => Object.keys(o).map(Number))
-      .flat();
-
-    const minX = Math.min(...xes),
-      maxX = Math.max(...xes),
-      minY = Math.min(...yes),
-      maxY = Math.max(...yes);
-
     const rect = {
       x: 0,
       y: 0,
-      width: maxX - minY,
-      height: maxY - minY,
-      depth: grids.length,
+      width: this.bounds.x.max - this.bounds.x.min,
+      height: this.bounds.y.max - this.bounds.y.min,
+      depth: this.bounds.z.max - this.bounds.z.min,
     };
 
-    rect.x = Math.round(minX + rect.width / 2);
-    rect.y = Math.round(minY + rect.height / 2);
+    rect.x = Math.round(this.bounds.x.min + rect.width / 2);
+    rect.y = Math.round(this.bounds.y.min + rect.height / 2);
 
     return rect;
+  }
+
+  /**
+   * Recalculate bounds
+   *
+   * @param {IPoint3} point - Map coordinates to remove
+   * @return {[T][]} An array containing the elements that were deleted.
+   *
+   * @example
+   *
+   *    tilemap.recalculateBounds({ x: 1, y: 1, z: -1 })
+   */
+  protected recalculateBounds(point: IPoint3) {
+    if (point.x < this.bounds.x.min) this.bounds.x.min = point.x;
+    if (point.x > this.bounds.x.max) this.bounds.x.max = point.x;
+    if (point.y < this.bounds.y.min) this.bounds.y.min = point.y;
+    if (point.y > this.bounds.y.max) this.bounds.y.max = point.y;
+    if (point.z !== undefined) {
+      if (point.z < this.bounds.z.min) this.bounds.z.min = point.z;
+      if (point.z > this.bounds.z.max) this.bounds.z.max = point.z;
+    }
   }
 
   protected _project(

@@ -13,11 +13,11 @@ describe("IsoTilemap", () => {
     });
   });
 
-  test("get", () => {
-    const sprite = {};
+  test("add with no z", () => {
+    const sprite = { foo: "bar" };
     tilemap.add(sprite, { x: 0, y: 0 });
     const t = tilemap.get({ x: 0, y: 0 });
-    expect(t).toEqual(sprite);
+    expect(t).toBe(sprite);
   });
 
   // test("renders children", () => {
