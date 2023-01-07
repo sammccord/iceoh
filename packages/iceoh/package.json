@@ -1,10 +1,10 @@
 {
   "name": "iceoh",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0",
   "license": "MIT",
   "type": "module",
   "source": "src/index.ts",
-  "unpkg": "./dist/index.umd.js",
+  "unpkg": "./dist/index.umd.cjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
