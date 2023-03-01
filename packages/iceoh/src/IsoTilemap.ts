@@ -68,11 +68,10 @@ export class IsoTilemap<T> extends Tilemap<T> {
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.push(sprite);
-    const tile = this.tiles[this.tiles.indexOf(sprite)];
+    this.tiles.add(sprite);
     if (dimensions !== this.baseTileDimensions) {
       let d = dimensions.depth / this.baseTileDimensions.depth;
-      for (let i = d, z = point.z; i > 0; i--, z++) {
+      for (let i = d, z = point.z || 0; i > 0; i--, z++) {
         if (i > 1) {
           set(
             this.depthMap,
@@ -86,22 +85,22 @@ export class IsoTilemap<T> extends Tilemap<T> {
             this.baseTileDimensions.depth * i
           );
         }
-        set(this.map, [z, point.x, point.y], tile);
+        set(this.map, [z, point.x, point.y], sprite);
       }
     } else {
       set(
         this.depthMap,
-        [point.z, point.x, point.y],
+        [point.z || 0, point.x, point.y],
         this.baseTileDimensions.depth
       );
-      set(this.map, [point.z, point.x, point.y], tile);
+      set(this.map, [point.z || 0, point.x, point.y], sprite);
     }
     this.recalculateBounds(point);
     return this._project(
       this._getAbsolutePosition(point),
       dimensions,
       origin,
-      sum(this.getColumn<number>(point, this.depthMap).slice(1, point.z))
+      sum(this.getColumn<number>(point, this.depthMap).slice(1, point.z || 0))
     );
   }
 
@@ -127,7 +126,8 @@ export class IsoTilemap<T> extends Tilemap<T> {
       } catch {}
     }
     this.recalculateBounds(point);
-    return this.tiles.splice(this.tiles.indexOf(tile), 1)[0];
+    this.tiles.delete(tile);
+    return tile;
   }
 
   /**

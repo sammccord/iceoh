@@ -38,7 +38,7 @@ export class Tilemap<T> {
 
   protected readonly worldOrigin: IPoint = MIDDLE;
   protected readonly baseTileOrigin: IPoint = MIDDLE;
-  protected readonly tiles: T[] = [];
+  protected readonly tiles: Set<T> = new Set();
   protected readonly map: MapThree<T> = new Map();
   protected readonly bounds = {
     x: { min: 0, max: 0 },
@@ -84,9 +84,8 @@ export class Tilemap<T> {
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.push(sprite);
-    const tile = this.tiles[this.tiles.indexOf(sprite)];
-    set(this.map, [point.z || 0, point.x, point.y], tile);
+    this.tiles.add(sprite);
+    set(this.map, [point.z || 0, point.x, point.y], sprite);
     this.recalculateBounds(point);
     return this._project(this._getAbsolutePosition(point), dimensions, origin);
   }
@@ -159,11 +158,13 @@ export class Tilemap<T> {
    *    const tile = tilemap.remove({ x: 1, y: 1 })
    */
   public remove(point: IPoint3): T {
+    if (point.z === undefined) point.z = 0;
     const tile = this.get(point);
     if (!tile) return;
     remove(this.map, [point.z || 0, point.x, point.y]);
     this.recalculateBounds(point);
-    return this.tiles.splice(this.tiles.indexOf(tile), 1)[0];
+    this.tiles.delete(tile);
+    return tile;
   }
 
   /**
