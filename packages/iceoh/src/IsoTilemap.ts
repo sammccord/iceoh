@@ -57,7 +57,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
   }
 
   /**
-   * Add tile to the tilemap at given coordinate.
+   * Add tile to the tilemap at given coordinate relative to the world
    * If given tile is tall enough to occupy multiple z-layers at the base tile depth, it will add a reference at those z-layers in the map.
    * @param {T} tile
    * @param {IPoint3} point - The map coordinates at which to store this tile
@@ -70,50 +70,53 @@ export class IsoTilemap<T> extends Tilemap<T> {
    *    const position = isoTilemap.add({}, { x: 1, y: 1, z: 0 })
    */
   public add(
-    tile: T,
-    point: IPoint3,
+    v: T,
+    tile: IPoint3,
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.add(tile);
-    const position = this._toPoint(point, dimensions, origin);
+    this.tiles.add(v);
+    const position = this.toWorldPoint(tile, dimensions, origin);
     if (dimensions !== this.baseTileDimensions) {
       let d =
         (dimensions.depth || this.baseTileDimensions.depth) /
         this.baseTileDimensions.depth;
-      for (let i = d, z = point.z || 0; i > 0; i--, z++) {
+      for (let i = d, z = tile.z || 0; i > 0; i--, z++) {
         if (i > 1) {
-          set(this.tileDimensions, [z, point.x, point.y], {
+          set(this.tileDimensions, [z, tile.x, tile.y], {
             ...dimensions,
             origin,
             depth: this.baseTileDimensions.depth,
+            z,
             x: position.x,
             y: position.y,
-            tile,
-          } as ExtendedBox<T>);
+            value: tile,
+          });
         } else {
-          set(this.tileDimensions, [z, point.x, point.y], {
+          set(this.tileDimensions, [z, tile.x, tile.y], {
             ...dimensions,
             origin,
             depth: this.baseTileDimensions.depth * i,
+            z,
             x: position.x,
             y: position.y,
-            tile,
-          } as ExtendedBox<T>);
+            value: tile,
+          });
         }
-        set(this.map, [z, point.x, point.y], tile);
+        set(this.map, [z, tile.x, tile.y], tile);
       }
     } else {
-      set(this.tileDimensions, [point.z || 0, point.x, point.y], {
+      set(this.tileDimensions, [tile.z || 0, tile.x, tile.y], {
         ...dimensions,
         origin,
+        z: tile.z || 0,
         x: position.x,
         y: position.y,
-        tile,
-      } as ExtendedBox<T>);
-      set(this.map, [point.z || 0, point.x, point.y], tile);
+        value: tile,
+      });
+      set(this.map, [tile.z || 0, tile.x, tile.y], tile);
     }
-    this.recalculateBounds(point);
+    this.recalculateBounds(tile);
     return position;
   }
 
@@ -170,7 +173,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return p;
   }
 
-  private _toPoint(
+  public toWorldPoint(
     tile: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
@@ -187,30 +190,6 @@ export class IsoTilemap<T> extends Tilemap<T> {
     );
   }
 
-  /**
-   * Project a tile coordinate to screen space coordinate
-   * @param {IPoint3} point - The tile coordinates
-   * @param {IRectangle3=} dimensions - The dimensions of the tile, defaults to `this.baseTileDimensions`
-   * @param {IPoint=} origin - The origin point of the tile, defaults to `this.baseTileOrigin`
-   * @return {IPoint3} Screen space point
-   *
-   * @example
-   *
-   *    const position = tilemap.toPoint({ x: 1, y: 1, z: 0 })
-   */
-  public toPoint(
-    tile: IPoint3,
-    dimensions = this.baseTileDimensions,
-    origin = this.baseTileOrigin
-  ): IPoint3 {
-    const p = this._toPoint(tile, dimensions, origin);
-    const worldPosition = this.getWorldPosition();
-    const scale = this.getWorldScale();
-    p.x = p.x * scale.x + worldPosition.x;
-    p.y = p.y * scale.y + worldPosition.y;
-    return p;
-  }
-
   public getDimensionsColumn(tile: IPoint): ExtendedBox<T>[] {
     const column = [];
     for (const [z, grid] of this.tileDimensions) {
@@ -219,23 +198,20 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return column;
   }
 
-  // Takes a world point and get a matrix of all tiles
+  // Takes a world point and get a matrix of all tiles, returning Map(z, Map(x, Map(y)))
   public castRay(point: IPoint): MapThree<T> {
     const ray: MapThree<T> = new Map();
     const tile = this.toTile(point);
-    for (let z = this.bounds.z.min; z < this.bounds.z.max; z++) {
+    for (let z = this.bounds.z.min; z <= this.bounds.z.max; z++) {
       let hasColHit = false;
-      for (let {
-        x,
-        y,
-        tile: t,
-        origin,
-        width,
-        height,
-      } of this.getDimensionsColumn({
-        x: tile.x + z,
-        y: tile.y + z,
+      const colX = tile.x + z;
+      const colY = tile.y + z;
+      for (let box of this.getDimensionsColumn({
+        x: colX,
+        y: colY,
       })) {
+        if (!box) continue;
+        const { x, y, value, z: level, origin, width, height } = box;
         if (
           point.x >= x - width * origin.x &&
           point.x <= x + width * origin.x &&
@@ -244,7 +220,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
         ) {
           // we've hit a tile
           hasColHit = true;
-          set(ray, [x, y, z], t);
+          set(ray, [level, colX, colY], value);
         } else if (hasColHit) {
           // if we've hit tiles and aren't anymore, break early
           break;
@@ -261,7 +237,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     depth: number = 0
   ): IPoint3 {
     // calculate the cartesion coordinates
-    const { width, height } = this.getGlobalDimensions();
+    const { width, height } = this.getScreenDimensions();
     const out = {
       x: (p.x - p.y) * this.angleCos + width * this.worldOrigin.x,
       y: (p.x + p.y) * this.angleSin + height * this.worldOrigin.y,
@@ -286,7 +262,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
   }
 
   protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
-    const worldDimensions = this.getGlobalDimensions();
+    const worldDimensions = this.getScreenDimensions();
     const x = point.x - worldDimensions.width * this.worldOrigin.x;
     const y = point.y - worldDimensions.height * this.worldOrigin.y;
 

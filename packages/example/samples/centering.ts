@@ -1,6 +1,6 @@
 import { Application, Container, Sprite, Graphics, Assets } from "pixi.js";
 import anime from "animejs";
-import { IsoTilemap } from "iceoh";
+import { IsoTilemap } from "../../iceoh/src";
 
 export default function basicIso() {
   const app = new Application({
@@ -16,7 +16,7 @@ export default function basicIso() {
   app.stage.addChild(debugGraphics);
 
   const map = new IsoTilemap({
-    getGlobalDimensions: () => app.view,
+    getScreenDimensions: () => app.view,
     getWorldPosition: () => mapContainer.position,
     getWorldScale: () => mapContainer.scale,
     worldOrigin: { x: 0.5, y: 0.5 },
@@ -69,7 +69,7 @@ export default function basicIso() {
     }
     // draw debug graphics
     const tile = map.toTile(mapContainer.toLocal(e.data.global));
-    const { x, y } = map.toPoint(tile);
+    const { x, y } = map.toScreenPoint(tile);
     debugGraphics.clear();
     debugGraphics.lineStyle(2, 0xff00ff, 1);
     debugGraphics.drawRect(

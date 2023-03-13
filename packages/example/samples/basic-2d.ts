@@ -1,5 +1,5 @@
 import { Application, Container, Sprite, Assets } from "pixi.js";
-import { Tilemap } from "iceoh";
+import { Tilemap } from "../../iceoh/src";
 
 let sheet;
 const columns = 34;
@@ -97,7 +97,7 @@ export default function basic2d() {
   mapContainer.scale.y = 1.5;
 
   const map = new Tilemap({
-    getGlobalDimensions: () => app.view,
+    getScreenDimensions: () => app.view,
     getWorldPosition: () => mapContainer.position,
     getWorldScale: () => mapContainer.scale,
     worldOrigin: { x: 0, y: 0 },
@@ -157,7 +157,7 @@ export default function basic2d() {
 
       setTimeout(() => {
         const tile = map.toTile(mapContainer.toLocal(e.data.global));
-        const { x, y } = map.toPoint(tile);
+        const { x, y } = map.toWorldPoint(tile);
         console.log(tile, x, y);
         const sprite = new Sprite(sheet.textures[`sprite-${20}.png`]);
         sprite.anchor.set(0.5);

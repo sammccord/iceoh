@@ -16,8 +16,12 @@
     "watcherGlob": "**"
   },
   "dependencies": {
-    "iceoh": "workspace:*",
     "animejs": "^3.2.0",
+    "dat.gui": "^0.7.9",
+    "iceoh": "workspace:*",
     "pixi.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.7"
   }
 }

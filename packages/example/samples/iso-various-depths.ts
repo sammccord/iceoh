@@ -1,5 +1,5 @@
 import { Application, Container, Sprite, Graphics, Assets } from "pixi.js";
-import { IsoTilemap } from "iceoh";
+import { IsoTilemap, collect, get } from "../../iceoh/src";
 
 export default function basicIso() {
   const app = new Application({
@@ -15,7 +15,7 @@ export default function basicIso() {
   app.stage.addChild(debugGraphics);
 
   const map = new IsoTilemap({
-    getGlobalDimensions: () => app.view,
+    getScreenDimensions: () => app.view,
     getWorldPosition: () => mapContainer.position,
     getWorldScale: () => mapContainer.scale,
     worldOrigin: { x: 0.5, y: 0.5 },
@@ -26,9 +26,9 @@ export default function basicIso() {
     },
   });
 
-  mapContainer.scale = { x: 1.5, y: 1.5 };
-  mapContainer.position.x += 64;
-  mapContainer.position.y += 64;
+  // mapContainer.scale = { x: 1.5, y: 1.5 };
+  // mapContainer.position.x += 64;
+  // mapContainer.position.y += 64;
 
   Assets.load("mushy.json").then((_sheet) => {
     sheet = _sheet;
@@ -68,19 +68,17 @@ export default function basicIso() {
       dragPrevStartingY = e.data.global.y;
     }
     // draw debug graphics
-    const local = mapContainer.toLocal(e.data.global);
-    console.log("global", e.data.global, "local", local);
-    const tile = map.toTile(local);
-    console.log(tile, map.get(tile));
-    const { x, y } = map.toPoint(tile);
-    debugGraphics.clear();
-    debugGraphics.lineStyle(2, 0xff00ff, 1);
-    debugGraphics.drawRect(
-      x - 32 * mapContainer.scale.x,
-      y - 32 * mapContainer.scale.y,
-      64 * mapContainer.scale.x,
-      32 * mapContainer.scale.y
-    );
+    // const local = mapContainer.toLocal(e.data.global);
+    // const tile = map.toTile(local);
+    // const { x, y } = map.toScreenPoint(tile);
+    // debugGraphics.clear();
+    // debugGraphics.lineStyle(2, 0xff00ff, 1);
+    // debugGraphics.drawRect(
+    //   x - 32 * mapContainer.scale.x,
+    //   y - 32 * mapContainer.scale.y,
+    //   64 * mapContainer.scale.x,
+    //   32 * mapContainer.scale.y
+    // );
   }
 
   function onMouseUp(e) {
@@ -94,19 +92,11 @@ export default function basicIso() {
       dragPrevStartingY = e.data.global.y;
     }
     // draw debug graphics
-    const tile = map.toTile(mapContainer.toLocal(e.data.global));
-    const { x, y } = map.toPoint(tile);
-
-    console.log(map.castRay(tile));
-
-    debugGraphics.clear();
-    debugGraphics.lineStyle(2, 0xff00ff, 1);
-    debugGraphics.drawRect(
-      x - 32 * mapContainer.scale.x,
-      y - 32 * mapContainer.scale.y,
-      64 * mapContainer.scale.x,
-      32 * mapContainer.scale.y
-    );
+    const local = mapContainer.toLocal(e.data.global);
+    const tile = map.toTile(local);
+    const ray = map.castRay(local);
+    console.log(ray);
+    console.log(collect(ray));
 
     const column = map.getColumn(tile).filter((n) => !!n);
     if (column.length === 1) {

@@ -33,9 +33,9 @@ export interface IRectangle3 extends IRectangle {
 /**
  * Extends IRectangle3 with a 2D coordinate
  */
-export type IBox = IRectangle3 & IPoint;
+export type IBox = IRectangle3 & IPoint3;
 
 export type ExtendedBox<T> = IBox & {
-  tile: T;
+  value: T;
   origin: IPoint;
 };

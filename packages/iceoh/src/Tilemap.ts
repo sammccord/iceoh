@@ -23,7 +23,7 @@ export interface ITilemapConfig {
    */
   baseTileDimensions: IRectangle3;
   /** A getter function that retuns the dimensions of the canvas */
-  getGlobalDimensions: () => IRectangle;
+  getScreenDimensions: () => IRectangle;
   /** A getter function that returns the world offset, this defaults to `() => { x: 0, y: 0 }` */
   getWorldPosition?: () => IPoint;
   /** A getter function that returns the world scale, this defaults to `() => { x: 1, y: 1 }` */
@@ -31,7 +31,7 @@ export interface ITilemapConfig {
 }
 
 export class Tilemap<T> {
-  protected getGlobalDimensions: () => IRectangle;
+  protected getScreenDimensions: () => IRectangle;
   protected getWorldPosition: () => IPoint;
   protected getWorldScale: () => IPoint;
   protected baseTileDimensions: IRectangle3;
@@ -54,14 +54,14 @@ export class Tilemap<T> {
     worldOrigin,
     baseTileOrigin,
     baseTileDimensions,
-    getGlobalDimensions,
+    getScreenDimensions,
     getWorldPosition,
     getWorldScale,
   }: ITilemapConfig) {
     this.worldOrigin = worldOrigin || MIDDLE;
     this.baseTileOrigin = baseTileOrigin || MIDDLE;
     this.baseTileDimensions = baseTileDimensions;
-    this.getGlobalDimensions = getGlobalDimensions;
+    this.getScreenDimensions = getScreenDimensions;
     this.getWorldPosition = getWorldPosition || (() => TOP_LEFT);
     this.getWorldScale = getWorldScale || (() => FULL);
   }
@@ -87,7 +87,7 @@ export class Tilemap<T> {
     this.tiles.add(sprite);
     set(this.map, [tile.z || 0, tile.x, tile.y], sprite);
     this.recalculateBounds(tile);
-    return this.toPoint(tile, dimensions, origin);
+    return this.toWorldPoint(tile, dimensions, origin);
   }
 
   /**
@@ -178,20 +178,34 @@ export class Tilemap<T> {
    *
    *    const position = tilemap.toPoint({ x: 1, y: 1, z: 0 })
    */
-  public toPoint(
-    point: IPoint3,
+  public toScreenPoint(
+    tile: IPoint3,
+    dimensions = this.baseTileDimensions,
+    origin = this.baseTileOrigin
+  ): IPoint3 {
+    const position = this.toWorldPoint(tile, dimensions, origin);
+    const scale = this.getWorldScale();
+    const worldPosition = this.getWorldPosition();
+    position.x = position.x * scale.x + worldPosition.x;
+    position.y = position.y * scale.y + worldPosition.y;
+    return position;
+  }
+
+  // Project a tile coordinate to a coordinate relative to the world origin
+  public toWorldPoint(
+    tile: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
     return this._project(
-      this._getAbsolutePosition(point, dimensions, origin),
+      this._getAbsolutePosition(tile, dimensions, origin),
       dimensions,
       origin
     );
   }
 
   /**
-   * Project a screen point to tile point
+   * Project a world point to tile point
    * @param {IPoint3} point - The screen coordinates to project
    * @param {IRectangle3=} dimensions - The dimensions of each tile on the map, defaults to `this.baseTileDimensions`
    * @param {IPoint=} origin - The origin point of the tile
@@ -201,7 +215,7 @@ export class Tilemap<T> {
    *
    *    const tilePosition = tileMap.toTile({ x: 400, y: 300 })
    */
-  public toTile(
+  public worldToTile(
     point: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
@@ -223,12 +237,12 @@ export class Tilemap<T> {
    *
    *    const worldPosition = tilemap.centerToTile({ x: 1, y: 1, z: 0 })
    */
-  public centerToTile(point: IPoint3): IPoint {
-    return this.centerToPoint(this.toPoint(point));
+  public centerToTile(tile: IPoint3): IPoint {
+    return this.centerToPoint(this.toScreenPoint(tile));
   }
 
   /**
-   * Returns the new position of the tiles' parent container where the given screen point is in the center of the viewport.
+   * Returns the new position of the world container where the given screen point is in the center of the viewport.
    * @param {IPoint3} point - The screen coordinates to center
    * @return {IPoint}
    *
@@ -237,7 +251,7 @@ export class Tilemap<T> {
    *    const worldPosition = tilemap.centerToPoint({ x: 500, y: 200 })
    */
   public centerToPoint(point: IPoint): IPoint {
-    const globalDimensions = this.getGlobalDimensions();
+    const globalDimensions = this.getScreenDimensions();
     const worldPosition = this.getWorldPosition();
     return {
       x: worldPosition.x + globalDimensions.width / 2 - point.x,
@@ -316,9 +330,10 @@ export class Tilemap<T> {
   protected _project(
     point3: IPoint3,
     dimensions = this.baseTileDimensions,
-    origin = this.baseTileOrigin
+    origin = this.baseTileOrigin,
+    depth = 0
   ): IPoint3 {
-    const { width, height } = this.getGlobalDimensions();
+    const { width, height } = this.getScreenDimensions();
     return {
       x: point3.x + width * this.worldOrigin.x,
       y: point3.y + height * this.worldOrigin.y,
@@ -327,7 +342,7 @@ export class Tilemap<T> {
   }
 
   protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
-    const { width, height } = this.getGlobalDimensions();
+    const { width, height } = this.getScreenDimensions();
     out.x = point.x - width * this.worldOrigin.x;
     out.y = point.y - height * this.worldOrigin.y + (point.z || 0);
     out.z = point.z || 0;
@@ -340,8 +355,8 @@ export class Tilemap<T> {
     origin = this.baseTileOrigin
   ): IPoint3 {
     return {
-      x: this.baseTileDimensions.width * point.x,
-      y: this.baseTileDimensions.height * point.y,
+      x: dimensions.width * point.x,
+      y: dimensions.height * point.y,
       z: point.z || 0,
     };
   }

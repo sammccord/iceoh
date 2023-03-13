@@ -1,5 +1,5 @@
 import { Application, Container, Sprite, Assets, Graphics } from "pixi.js";
-import { IsoTilemap } from "iceoh";
+import { IsoTilemap } from "../../iceoh/src";
 
 export default function basicIso() {
   const app = new Application({
@@ -10,15 +10,12 @@ export default function basicIso() {
   mapContainer.sortableChildren = true;
   app.stage.addChild(mapContainer);
 
-  // mapContainer.position.x = 100;
-  // mapContainer.position.y = 100;
-
   const debugGraphics = new Graphics();
   debugGraphics.lineStyle(2, 0xffffff, 1.0);
   app.stage.addChild(debugGraphics);
 
   const map = new IsoTilemap({
-    getGlobalDimensions: () => app.view,
+    getScreenDimensions: () => app.view,
     getWorldPosition: () => mapContainer.position,
     getWorldScale: () => mapContainer.scale,
     worldOrigin: { x: 0.5, y: 0.5 },
@@ -41,6 +38,7 @@ export default function basicIso() {
       }
     }
   });
+
   // .add("mushy.json")
   // .load((loader, resources) => {
   //   sheet = resources["mushy.json"];
@@ -75,8 +73,7 @@ export default function basicIso() {
     }
     // draw debug graphics
     const tile = map.toTile(mapContainer.toLocal(e.data.global));
-    const { x, y } = map.toPoint(tile);
-    console.log(tile, map.get(tile));
+    const { x, y } = map.toScreenPoint(tile);
     debugGraphics.clear();
     debugGraphics.lineStyle(2, 0xff00ff, 1);
     debugGraphics.drawRect(
@@ -103,17 +100,6 @@ export default function basicIso() {
       var distY = global - dragInitStartingY;
 
       if (Math.abs(distX) > 5 && Math.abs(distY) > 5) return;
-      // setTimeout(() => {
-      //   const tile = map.toTile(mapContainer.toLocal(e.data.global));
-      //   const sprite = new Sprite(sheet.textures["train_459_0001-30.png"]);
-      //   sprite.anchor.set(0.5);
-      //   const position = map.toPoint({ x: 3, y: 3, z: 1 });
-      //   console.log(position, map.add(sprite, { x: 3, y: 3, z: 1 }));
-      //   // console.log(p1.z)
-      //   sprite.zIndex = position.z;
-      //   sprite.position.set(position.x, position.y);
-      //   mapContainer.addChild(sprite);
-      // }, 1000);
     }
   }
 

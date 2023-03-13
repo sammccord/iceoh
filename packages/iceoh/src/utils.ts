@@ -1,4 +1,4 @@
-import { IPoint, IPoint3 } from "./interfaces";
+import { IPoint, IPoint3, MapThree } from "./interfaces";
 
 /**
  * Classic 2:1 projection angle found in most isometric games
@@ -55,6 +55,19 @@ export enum DIRECTION {
   SW = "SW",
   W = "W",
   NW = "NW",
+}
+
+export function collect<T>(grids: MapThree<T>): T[][] {
+  const entries: T[][] = [];
+  for (const [z, xGrid] of grids) {
+    for (const [, yGrid] of xGrid) {
+      for (const [, item] of yGrid) {
+        if (!entries[z]) entries[z] = [];
+        entries[z].push(item);
+      }
+    }
+  }
+  return entries;
 }
 
 /**
@@ -135,7 +148,7 @@ export function get<T>(
  *
  *    const removed = remove(new Map(), [0, 1, 2])
  */
-export function remove<T>(obj: Map<number, any>, indices: number[]): boolean {
+export function remove(obj: Map<number, any>, indices: number[]): boolean {
   let o = obj;
   while (indices.length - 1) {
     var n = indices.shift();
