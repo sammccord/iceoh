@@ -80,14 +80,14 @@ export class Tilemap<T> {
    */
   public add(
     sprite: T,
-    point: IPoint3,
+    tile: IPoint3,
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
     this.tiles.add(sprite);
-    set(this.map, [point.z || 0, point.x, point.y], sprite);
-    this.recalculateBounds(point);
-    return this._project(this._getAbsolutePosition(point), dimensions, origin);
+    set(this.map, [tile.z || 0, tile.x, tile.y], sprite);
+    this.recalculateBounds(tile);
+    return this.toPoint(tile, dimensions, origin);
   }
 
   /**
@@ -183,14 +183,11 @@ export class Tilemap<T> {
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    const scale = this.getWorldScale();
-    const worldPosition = this.getWorldPosition();
-    const p = this._project(
-      this._getAbsolutePosition(point, dimensions, origin)
+    return this._project(
+      this._getAbsolutePosition(point, dimensions, origin),
+      dimensions,
+      origin
     );
-    p.x += p.x * (scale.x - 1) + worldPosition.x;
-    p.y += p.y * (scale.y - 1) + worldPosition.y;
-    return p;
   }
 
   /**

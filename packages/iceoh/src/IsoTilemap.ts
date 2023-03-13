@@ -1,4 +1,11 @@
-import { IPoint3, IPoint, IRectangle3, MapThree } from "./interfaces";
+import {
+  IPoint3,
+  IPoint,
+  IRectangle3,
+  MapThree,
+  ExtendedBox,
+  IRectangle,
+} from "./interfaces";
 import { set, sum, CLASSIC, get, remove } from "./utils";
 import { Tilemap, ITilemapConfig } from "./Tilemap";
 
@@ -28,7 +35,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
   protected readonly baseOrigin: IPoint;
   protected readonly baseSurfaceHeight: number;
   protected readonly baseSurfaceHalfHeight: number;
-  readonly depthMap: MapThree<T> = new Map();
+  readonly tileDimensions: MapThree<ExtendedBox<T>> = new Map();
 
   /**
    * Create an `IsoTilemap<T>` instance.
@@ -63,45 +70,51 @@ export class IsoTilemap<T> extends Tilemap<T> {
    *    const position = isoTilemap.add({}, { x: 1, y: 1, z: 0 })
    */
   public add(
-    sprite: T,
+    tile: T,
     point: IPoint3,
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.add(sprite);
+    this.tiles.add(tile);
+    const position = this._toPoint(point, dimensions, origin);
     if (dimensions !== this.baseTileDimensions) {
-      let d = dimensions.depth / this.baseTileDimensions.depth;
+      let d =
+        (dimensions.depth || this.baseTileDimensions.depth) /
+        this.baseTileDimensions.depth;
       for (let i = d, z = point.z || 0; i > 0; i--, z++) {
         if (i > 1) {
-          set(
-            this.depthMap,
-            [z, point.x, point.y],
-            this.baseTileDimensions.depth
-          );
+          set(this.tileDimensions, [z, point.x, point.y], {
+            ...dimensions,
+            origin,
+            depth: this.baseTileDimensions.depth,
+            x: position.x,
+            y: position.y,
+            tile,
+          } as ExtendedBox<T>);
         } else {
-          set(
-            this.depthMap,
-            [z, point.x, point.y],
-            this.baseTileDimensions.depth * i
-          );
+          set(this.tileDimensions, [z, point.x, point.y], {
+            ...dimensions,
+            origin,
+            depth: this.baseTileDimensions.depth * i,
+            x: position.x,
+            y: position.y,
+            tile,
+          } as ExtendedBox<T>);
         }
-        set(this.map, [z, point.x, point.y], sprite);
+        set(this.map, [z, point.x, point.y], tile);
       }
     } else {
-      set(
-        this.depthMap,
-        [point.z || 0, point.x, point.y],
-        this.baseTileDimensions.depth
-      );
-      set(this.map, [point.z || 0, point.x, point.y], sprite);
+      set(this.tileDimensions, [point.z || 0, point.x, point.y], {
+        ...dimensions,
+        origin,
+        x: position.x,
+        y: position.y,
+        tile,
+      } as ExtendedBox<T>);
+      set(this.map, [point.z || 0, point.x, point.y], tile);
     }
     this.recalculateBounds(point);
-    return this._project(
-      this._getAbsolutePosition(point),
-      dimensions,
-      origin,
-      sum(this.getColumn<number>(point, this.depthMap).slice(1, point.z || 0))
-    );
+    return position;
   }
 
   /**
@@ -120,7 +133,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     for (const [z, grid] of this.map) {
       try {
         if (get(grid, [point.x, point.y]) === tile) {
-          remove(this.depthMap, [z, point.x, point.y]);
+          remove(this.tileDimensions, [z, point.x, point.y]);
           remove(this.map, [z, point.x, point.y]);
         }
       } catch {}
@@ -155,6 +168,90 @@ export class IsoTilemap<T> extends Tilemap<T> {
     p.y = Math.floor((p.y + edge.y) / edge.y);
     p.z = p.z || 0;
     return p;
+  }
+
+  private _toPoint(
+    tile: IPoint3,
+    dimensions = this.baseTileDimensions,
+    origin = this.baseTileOrigin
+  ): IPoint3 {
+    return this._project(
+      this._getAbsolutePosition(tile),
+      dimensions,
+      origin,
+      sum(
+        this.getDimensionsColumn(tile)
+          .map((b) => b?.depth || this.baseTileDimensions.depth)
+          .slice(1, tile.z || 0)
+      )
+    );
+  }
+
+  /**
+   * Project a tile coordinate to screen space coordinate
+   * @param {IPoint3} point - The tile coordinates
+   * @param {IRectangle3=} dimensions - The dimensions of the tile, defaults to `this.baseTileDimensions`
+   * @param {IPoint=} origin - The origin point of the tile, defaults to `this.baseTileOrigin`
+   * @return {IPoint3} Screen space point
+   *
+   * @example
+   *
+   *    const position = tilemap.toPoint({ x: 1, y: 1, z: 0 })
+   */
+  public toPoint(
+    tile: IPoint3,
+    dimensions = this.baseTileDimensions,
+    origin = this.baseTileOrigin
+  ): IPoint3 {
+    const p = this._toPoint(tile, dimensions, origin);
+    const worldPosition = this.getWorldPosition();
+    const scale = this.getWorldScale();
+    p.x = p.x * scale.x + worldPosition.x;
+    p.y = p.y * scale.y + worldPosition.y;
+    return p;
+  }
+
+  public getDimensionsColumn(tile: IPoint): ExtendedBox<T>[] {
+    const column = [];
+    for (const [z, grid] of this.tileDimensions) {
+      column[z] = get(grid, [tile.x, tile.y]);
+    }
+    return column;
+  }
+
+  // Takes a world point and get a matrix of all tiles
+  public castRay(point: IPoint): MapThree<T> {
+    const ray: MapThree<T> = new Map();
+    const tile = this.toTile(point);
+    for (let z = this.bounds.z.min; z < this.bounds.z.max; z++) {
+      let hasColHit = false;
+      for (let {
+        x,
+        y,
+        tile: t,
+        origin,
+        width,
+        height,
+      } of this.getDimensionsColumn({
+        x: tile.x + z,
+        y: tile.y + z,
+      })) {
+        if (
+          point.x >= x - width * origin.x &&
+          point.x <= x + width * origin.x &&
+          point.y >= y - height * origin.y &&
+          point.y <= y + height * origin.y
+        ) {
+          // we've hit a tile
+          hasColHit = true;
+          set(ray, [x, y, z], t);
+        } else if (hasColHit) {
+          // if we've hit tiles and aren't anymore, break early
+          break;
+        }
+      }
+    }
+    return ray;
   }
 
   protected _project(
@@ -207,7 +304,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
   ): IPoint3 {
     return {
       x: dimensions.width * origin.x * point.x,
-      y: dimensions.width * origin.y * point.y,
+      y: dimensions.height * origin.y * point.y,
       z: point.z || 0,
     };
   }

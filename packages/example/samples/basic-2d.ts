@@ -1,6 +1,7 @@
 import { Application, Container, Sprite, Assets } from "pixi.js";
 import { Tilemap } from "iceoh";
 
+let sheet;
 const columns = 34;
 const tilemap = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -92,6 +93,9 @@ export default function basic2d() {
   mapContainer.sortableChildren = true;
   app.stage.addChild(mapContainer);
 
+  mapContainer.scale.x = 1.5;
+  mapContainer.scale.y = 1.5;
+
   const map = new Tilemap({
     getGlobalDimensions: () => app.view,
     getWorldPosition: () => mapContainer.position,
@@ -102,7 +106,8 @@ export default function basic2d() {
       height: 64,
     },
   });
-  Assets.load("scut.json").then((sheet) => {
+  Assets.load("scut.json").then((_sheet) => {
+    sheet = _sheet;
     tilemap.forEach((num, i) => {
       const sprite = new Sprite(sheet.textures[`sprite-${num}.png`]);
       sprite.anchor.set(0.5);
@@ -149,6 +154,16 @@ export default function basic2d() {
       var distY = global - dragInitStartingY;
 
       if (Math.abs(distX) > 5 && Math.abs(distY) > 5) return;
+
+      setTimeout(() => {
+        const tile = map.toTile(mapContainer.toLocal(e.data.global));
+        const { x, y } = map.toPoint(tile);
+        console.log(tile, x, y);
+        const sprite = new Sprite(sheet.textures[`sprite-${20}.png`]);
+        sprite.anchor.set(0.5);
+        sprite.position.set(x, y);
+        mapContainer.addChild(sprite);
+      }, 1000);
     }
   }
 

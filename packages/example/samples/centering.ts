@@ -52,7 +52,22 @@ export default function basicIso() {
     mapContainer.addChild(player);
   });
 
+  let dragging = false;
+  let dragInitStartingX = 0;
+  let dragInitStartingY = 0;
+  let dragPrevStartingX = 0;
+  let dragPrevStartingY = 0;
+
   function onMouseMove(e) {
+    if (dragging) {
+      mapContainer.position.set(
+        mapContainer.position.x + e.data.global.x - dragPrevStartingX,
+        mapContainer.position.y + e.data.global.y - dragPrevStartingY
+      );
+      dragPrevStartingX = e.data.global.x;
+      dragPrevStartingY = e.data.global.y;
+    }
+    // draw debug graphics
     const tile = map.toTile(mapContainer.toLocal(e.data.global));
     const { x, y } = map.toPoint(tile);
     debugGraphics.clear();
@@ -65,7 +80,24 @@ export default function basicIso() {
     );
   }
 
+  function onMouseDown(e) {
+    if (!dragging) {
+      dragInitStartingX = dragPrevStartingX = e.data.global.x;
+      dragInitStartingY = dragPrevStartingY = e.data.global.y;
+    }
+    dragging = true;
+  }
+
   function onMouseUp(e) {
+    if (dragging) {
+      dragging = false;
+      mapContainer.position.set(
+        mapContainer.position.x + e.data.global.x - dragPrevStartingX,
+        mapContainer.position.y + e.data.global.y - dragPrevStartingY
+      );
+      dragPrevStartingX = e.data.global.x;
+      dragPrevStartingY = e.data.global.y;
+    }
     const tile = map.toTile(mapContainer.toLocal(e.data.global));
     if (!map.get(tile)) return;
     anime({
@@ -88,6 +120,7 @@ export default function basicIso() {
 
   mapContainer.interactive = true;
   mapContainer
+    .on("pointerdown", onMouseDown)
     .on("pointerup", onMouseUp)
     .on("pointerupoutside", onMouseUp)
     .on("pointermove", onMouseMove);

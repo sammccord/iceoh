@@ -26,6 +26,10 @@ export default function basicIso() {
     },
   });
 
+  mapContainer.scale = { x: 1.5, y: 1.5 };
+  mapContainer.position.x += 64;
+  mapContainer.position.y += 64;
+
   Assets.load("mushy.json").then((_sheet) => {
     sheet = _sheet;
     for (let y = 0; y < 5; y++) {
@@ -40,8 +44,34 @@ export default function basicIso() {
     }
   });
 
+  let dragging = false;
+  let dragInitStartingX = 0;
+  let dragInitStartingY = 0;
+  let dragPrevStartingX = 0;
+  let dragPrevStartingY = 0;
+
+  function onMouseDown(e) {
+    if (!dragging) {
+      dragInitStartingX = dragPrevStartingX = e.data.global.x;
+      dragInitStartingY = dragPrevStartingY = e.data.global.y;
+    }
+    dragging = true;
+  }
+
   function onMouseMove(e) {
-    const tile = map.toTile(mapContainer.toLocal(e.data.global));
+    if (dragging) {
+      mapContainer.position.set(
+        mapContainer.position.x + e.data.global.x - dragPrevStartingX,
+        mapContainer.position.y + e.data.global.y - dragPrevStartingY
+      );
+      dragPrevStartingX = e.data.global.x;
+      dragPrevStartingY = e.data.global.y;
+    }
+    // draw debug graphics
+    const local = mapContainer.toLocal(e.data.global);
+    console.log("global", e.data.global, "local", local);
+    const tile = map.toTile(local);
+    console.log(tile, map.get(tile));
     const { x, y } = map.toPoint(tile);
     debugGraphics.clear();
     debugGraphics.lineStyle(2, 0xff00ff, 1);
@@ -54,7 +84,30 @@ export default function basicIso() {
   }
 
   function onMouseUp(e) {
+    if (dragging) {
+      dragging = false;
+      mapContainer.position.set(
+        mapContainer.position.x + e.data.global.x - dragPrevStartingX,
+        mapContainer.position.y + e.data.global.y - dragPrevStartingY
+      );
+      dragPrevStartingX = e.data.global.x;
+      dragPrevStartingY = e.data.global.y;
+    }
+    // draw debug graphics
     const tile = map.toTile(mapContainer.toLocal(e.data.global));
+    const { x, y } = map.toPoint(tile);
+
+    console.log(map.castRay(tile));
+
+    debugGraphics.clear();
+    debugGraphics.lineStyle(2, 0xff00ff, 1);
+    debugGraphics.drawRect(
+      x - 32 * mapContainer.scale.x,
+      y - 32 * mapContainer.scale.y,
+      64 * mapContainer.scale.x,
+      32 * mapContainer.scale.y
+    );
+
     const column = map.getColumn(tile).filter((n) => !!n);
     if (column.length === 1) {
       const sprite = Sprite.from("tile2x.png");
@@ -96,6 +149,7 @@ export default function basicIso() {
 
   mapContainer.interactive = true;
   mapContainer
+    .on("pointerdown", onMouseDown)
     .on("pointerup", onMouseUp)
     .on("pointerupoutside", onMouseUp)
     .on("pointermove", onMouseMove);
