@@ -3,3 +3,4 @@ dist
 node_modules
 .turbo
 tsconfig.tsbuildinfo
+!packages/iceoh/dist

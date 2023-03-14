@@ -71,7 +71,7 @@ export default function basicIso() {
       dragPrevStartingY = e.data.global.y;
     }
     // draw debug graphics
-    const tile = map.toTile(mapContainer.toLocal(e.data.global));
+    const tile = map.worldToTile(mapContainer.toLocal(e.data.global));
     const { x, y } = map.toScreenPoint(tile);
     debugGraphics.clear();
     debugGraphics.lineStyle(2, 0xff00ff, 1);
@@ -101,7 +101,7 @@ export default function basicIso() {
       dragPrevStartingX = e.data.global.x;
       dragPrevStartingY = e.data.global.y;
     }
-    const tile = map.toTile(mapContainer.toLocal(e.data.global));
+    const tile = map.worldToTile(mapContainer.toLocal(e.data.global));
     if (!map.get(tile)) return;
     anime({
       targets: mapContainer.position,

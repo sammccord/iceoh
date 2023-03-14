@@ -3,10 +3,10 @@
   Iceoh
 </h1>
 
-> A **tiny**, 0 dependency JS library for isometric and 2d tilemaps
+> A small, simple, 0 dependency JS library for isometric and 2d tilemaps
 
-![](https://img.badgesize.io/sammccord/iceoh/master/dist/index.umd.js.svg)
-![](https://img.badgesize.io/sammccord/iceoh/master/dist/index.umd.js.svg?compression=gzip)
+![](https://img.badgesize.io/sammccord/iceoh/master/packages/iceoh/dist/index.umd.js.svg)
+![](https://img.badgesize.io/sammccord/iceoh/master/packages/iceoh/dist/index.umd.js.svg?compression=gzip)
 
 ## Features
 
@@ -19,7 +19,7 @@
 ## Installation
 
 ```sh
-yarn add iceoh
+npm install --save iceoh
 ```
 
 ## Quick Start
@@ -27,7 +27,7 @@ yarn add iceoh
 - [Documentation](https://iceoh.netlify.app)
 - [Examples](https://iceoh.netlify.app/example.html)
 
-For more complete examples that use `pixi.js`, see the [examples' source](./example/samples)
+For some quick and dirty examples that use `pixi.js`, see the [examples' source](./example/samples)
 
 The following example is a naive vanilla example with canvas, to illustrate core concepts.
 ```js
@@ -45,7 +45,7 @@ const ctx = canvas.getContext('2d')
 
 // 2d Tilemap
 const map = new Tilemap<Sprite>({
-  getGlobalDimensions: () => canvas.getBoundingClientRect(),
+  getScreenDimensions: () => canvas.getBoundingClientRect(),
   getWorldPosition: () => ({ x: 0, y: 0 }),
   getWorldScale: () => ({ x: 1, y: 1 }),
   worldOrigin: TOP_LEFT,
@@ -57,7 +57,7 @@ const map = new Tilemap<Sprite>({
 })
 
 const map = new IsoTilemap<Sprite>({
-  getGlobalDimensions: () => canvas.getBoundingClientRect(),
+  getScreenDimensions: () => canvas.getBoundingClientRect(),
   getWorldPosition: () => ({ x: 0, y: 0 }),
   getWorldScale: () => ({ x: 1, y: 1 }),
   worldOrigin: MIDDLE,
@@ -93,9 +93,6 @@ map.add(z0Sprite, { x: 2, y: 2, z: 0 })
 map.add(z1Sprite, { x: 2, y: 2, z: 1 })
 map.add(z2Sprite, { x: 2, y: 2, z: 2 })
 const [z0Sprite, z1Sprite, z2Sprite] = map.getColumn<Sprite>({ x: 2, y: 2 })
-
-// You can also get a column of tile depths if using IsoTilemap
-const [z0Depth, z1Depth, z2Depth] = map.getColumn<number>({ x: 2, y: 2 }, map.depthMap)
 
 // Get map coordinate from a screen point
 { x, y } = map.toTile({ x: mouse.x, y: mouse.y })
@@ -150,15 +147,12 @@ git clone https://github.com/sammccord/iceoh.git
 cd iceoh
 
 # deps
-yarn
+pnpm install
 
 # build
-yarn build
-
-# develop
-yarn dev
+turbo run build
 
 # To develop via examples
-cd example && yarn dev
-open http://localhost:1234
+cd packages/example && npm run dev
+open http://localhost:5173
 ```

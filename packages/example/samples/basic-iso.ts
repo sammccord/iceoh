@@ -55,7 +55,7 @@ export default function basicIso() {
       dragPrevStartingY = e.data.global.y;
     }
     // draw debug graphics
-    const tile = map.toTile(mapContainer.toLocal(e.data.global));
+    const tile = map.worldToTile(mapContainer.toLocal(e.data.global));
     const { x, y } = map.toScreenPoint(tile);
     debugGraphics.clear();
     debugGraphics.lineStyle(2, 0xff00ff, 1);

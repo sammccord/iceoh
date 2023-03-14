@@ -68,17 +68,17 @@ export default function basicIso() {
       dragPrevStartingY = e.data.global.y;
     }
     // draw debug graphics
-    // const local = mapContainer.toLocal(e.data.global);
-    // const tile = map.toTile(local);
-    // const { x, y } = map.toScreenPoint(tile);
-    // debugGraphics.clear();
-    // debugGraphics.lineStyle(2, 0xff00ff, 1);
-    // debugGraphics.drawRect(
-    //   x - 32 * mapContainer.scale.x,
-    //   y - 32 * mapContainer.scale.y,
-    //   64 * mapContainer.scale.x,
-    //   32 * mapContainer.scale.y
-    // );
+    const local = mapContainer.toLocal(e.data.global);
+    const tile = map.worldToTile(local);
+    const { x, y } = map.toScreenPoint(tile);
+    debugGraphics.clear();
+    debugGraphics.lineStyle(2, 0xff00ff, 1);
+    debugGraphics.drawRect(
+      x - 32 * mapContainer.scale.x,
+      y - 32 * mapContainer.scale.y,
+      64 * mapContainer.scale.x,
+      32 * mapContainer.scale.y
+    );
   }
 
   function onMouseUp(e) {
@@ -91,16 +91,16 @@ export default function basicIso() {
       dragPrevStartingX = e.data.global.x;
       dragPrevStartingY = e.data.global.y;
     }
-    // draw debug graphics
+    // Test ray casting
     const local = mapContainer.toLocal(e.data.global);
-    const tile = map.toTile(local);
-    const hits = map.hits(local);
-    console.log(hits);
+    const tile = map.worldToTile(local);
+    const hits = map.collisionMap(local);
+    console.log("collisionMap", hits);
     const n = performance.now();
     const ray = collectRay(hits);
-    console.log(performance.now() - n);
-    console.log(ray);
-    console.log(map.castRay(local));
+    console.log("collectRay ms", performance.now() - n);
+    console.log("collectRay", ray);
+    console.log("castRay", map.castRay(local));
 
     const column = map.getColumn(tile).filter((n) => !!n);
     if (column.length === 1) {

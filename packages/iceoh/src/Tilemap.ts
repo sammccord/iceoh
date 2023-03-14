@@ -253,7 +253,7 @@ export class Tilemap<T> {
    *
    * @example
    *
-   *    const tile = tilemap.getColumn({ x: 1, y: 1, z: 1 })
+   *    const [z0Tile, z1Tile, z2Tile] = tilemap.getColumn({ x: 1, y: 1, z: 1 })
    */
   public getColumn<C = T>(point: IPoint, map?: MapThree<C>): C[] {
     const column = [];
