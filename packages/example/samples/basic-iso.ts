@@ -39,23 +39,6 @@ export default function basicIso() {
     }
   });
 
-  // .add("mushy.json")
-  // .load((loader, resources) => {
-  //   sheet = resources["mushy.json"];
-  //   for (let y = 0; y < 5; y++) {
-  //     for (let x = 0; x < 5; x++) {
-  //       const sprite = new Sprite(
-  //         sheet.spritesheet.textures["train_459_0001-30.png"]
-  //       );
-  //       sprite.anchor.set(0.5);
-  //       const position = map.add(sprite, { x, y, z: 0 });
-  //       sprite.zIndex = position.z;
-  //       sprite.position.set(position.x, position.y);
-  //       mapContainer.addChild(sprite);
-  //     }
-  //   }
-  // });
-
   let dragging = false;
   let dragInitStartingX = 0;
   let dragInitStartingY = 0;

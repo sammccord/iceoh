@@ -1,5 +1,5 @@
 import { Application, Container, Sprite, Graphics, Assets } from "pixi.js";
-import { IsoTilemap, collect, get } from "../../iceoh/src";
+import { IsoTilemap, collectRay } from "../../iceoh/src";
 
 export default function basicIso() {
   const app = new Application({
@@ -36,7 +36,7 @@ export default function basicIso() {
       for (let x = 0; x < 5; x++) {
         const sprite = new Sprite(sheet.textures["train_459_0001-30.png"]);
         sprite.anchor.set(0.5);
-        const position = map.add(sprite, { x, y, z: 0 });
+        const position = map.add({ x, y, z: 0 }, { x, y, z: 0 });
         sprite.zIndex = position.z;
         sprite.position.set(position.x, position.y);
         mapContainer.addChild(sprite);
@@ -94,16 +94,20 @@ export default function basicIso() {
     // draw debug graphics
     const local = mapContainer.toLocal(e.data.global);
     const tile = map.toTile(local);
-    const ray = map.castRay(local);
+    const hits = map.hits(local);
+    console.log(hits);
+    const n = performance.now();
+    const ray = collectRay(hits);
+    console.log(performance.now() - n);
     console.log(ray);
-    console.log(collect(ray));
+    console.log(map.castRay(local));
 
     const column = map.getColumn(tile).filter((n) => !!n);
     if (column.length === 1) {
       const sprite = Sprite.from("tile2x.png");
       sprite.anchor.set(0.5);
       const position = map.add(
-        sprite,
+        { x: tile.x, y: tile.y, z: 1 },
         { x: tile.x, y: tile.y, z: 1 },
         { width: 140, height: 80, depth: 10 }
       );
@@ -115,7 +119,7 @@ export default function basicIso() {
       const sprite = Sprite.from("twostack.png");
       sprite.anchor.set(0.5);
       const position = map.add(
-        sprite,
+        { x: tile.x, y: tile.y, z: 2 },
         { x: tile.x, y: tile.y, z: 2 },
         { width: 64, height: 96, depth: 64 }
       );
@@ -126,7 +130,7 @@ export default function basicIso() {
       const sprite = Sprite.from("tile.png");
       sprite.anchor.set(0.5);
       const position = map.add(
-        sprite,
+        { x: tile.x, y: tile.y, z: column.length + 1 },
         { x: tile.x, y: tile.y, z: column.length + 1 },
         { width: 70, height: 40, depth: 5 }
       );

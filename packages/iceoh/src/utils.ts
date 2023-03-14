@@ -1,49 +1,65 @@
 import { IPoint, IPoint3, MapThree } from "./interfaces";
 
 /**
- * Classic 2:1 projection angle found in most isometric games
+ * Classic projection found in most games
+ * @date 3/14/2023 - 12:21:46 PM
  *
+ * @export
  * @type {number}
  */
 export const CLASSIC = Math.atan(0.5);
+
 /**
  * Isometric projection
+ * @date 3/14/2023 - 12:23:04 PM
  *
+ * @export
  * @type {number}
  */
 export const ISOMETRIC = Math.PI / 6;
+
 /**
  * Military projection
+ * @date 3/14/2023 - 12:23:06 PM
  *
+ * @export
  * @type {number}
  */
 export const MILITARY = Math.PI / 4;
 
 /**
  * Point specifying top left placement factor
+ * @date 3/14/2023 - 12:23:06 PM
  *
+ * @export
  * @type {IPoint}
  */
 export const TOP_LEFT: IPoint = { x: 0, y: 0 };
 
 /**
  * Point specifying middle placement factor
+ * @date 3/14/2023 - 12:23:06 PM
  *
+ * @export
  * @type {IPoint}
  */
 export const MIDDLE: IPoint = { x: 0.5, y: 0.5 };
 
 /**
  * Point specifying a factor of 1 for both axes
+ * @date 3/14/2023 - 12:23:06 PM
  *
+ * @export
  * @type {IPoint}
  */
 export const FULL: IPoint = { x: 1, y: 1 };
 
 /**
  * Enum specifying compass directions, including NONE
+ * @date 3/14/2023 - 12:23:06 PM
  *
- * @type {DIRECTION}
+ * @export
+ * @enum {DIRECTION}
  */
 export enum DIRECTION {
   NONE = "NONE",
@@ -57,13 +73,27 @@ export enum DIRECTION {
   NW = "NW",
 }
 
-export function collect<T>(grids: MapThree<T>): T[][] {
-  const entries: T[][] = [];
-  for (const [z, xGrid] of grids) {
-    for (const [, yGrid] of xGrid) {
-      for (const [, item] of yGrid) {
-        if (!entries[z]) entries[z] = [];
-        entries[z].push(item);
+/**
+ * Given a three-dimensional map, return a one dimensional array sorted by ascending z -> x -> y containing values at those paths
+ * @date 3/14/2023 - 12:23:06 PM
+ *
+ * @export
+ * @template T
+ * @param {MapThree<T>} grids
+ * @returns {T[]}
+ *
+ * @example
+ *
+ *  const [furthest, middle, ...etc, closest] = collectRay(3dmap)
+ */
+export function collectRay<T>(grids: MapThree<T>): T[] {
+  const entries: T[] = [];
+  for (const z of Array.from(grids.keys()).sort()) {
+    const zPlane = grids.get(z);
+    for (const x of Array.from(zPlane.keys()).sort()) {
+      const xPlane = zPlane.get(x);
+      for (const y of Array.from(xPlane.keys()).sort()) {
+        entries.push(xPlane.get(y));
       }
     }
   }
@@ -72,15 +102,18 @@ export function collect<T>(grids: MapThree<T>): T[][] {
 
 /**
  * Deeply set a value in object at given indices using maps for new path creation
+ * @date 3/14/2023 - 12:23:06 PM
  *
- * @param {object} obj - Object to deeply set
- * @param {number[]} indices - Array of keys to set
- * @param {any} value - The value to set
- * @return {any} The value set
+ * @export
+ * @template T
+ * @param {Map<number, any>} obj
+ * @param {number[]} indices
+ * @param {T} value
+ * @returns {T}
  *
  * @example
  *
- *    const tile = set(new Map(), [0, 1, 2], sprite)
+ *  const tile = set(new Map(), [0, 1, 2], sprite)
  */
 export function set<T>(obj: Map<number, any>, indices: number[], value: T): T {
   let o = obj;
@@ -102,22 +135,25 @@ export function set<T>(obj: Map<number, any>, indices: number[], value: T): T {
 /**
  * Deeply get a value from a map at given indicies path.
  * If `setIfNull` is provided, new maps will be used for path creation and the value will be set.
+ * @date 3/14/2023 - 12:23:06 PM
  *
- * @param {object} obj - Object to deeply get
- * @param {number[]} indices - Array of keys to get
- * @param {any} [setIfNull] - The value to set, if any
- * @return {any} The value at given indices
+ * @export
+ * @template T
+ * @param {Map<number, any>} map
+ * @param {number[]} indices
+ * @param {?T} [setIfNull]
+ * @returns {T}
  *
  * @example
  *
- *    const tile = get(new Map(), [0, 1, 2], sprite)
+ *  const tile = get(new Map(), [0, 1, 2], sprite)
  */
 export function get<T>(
-  obj: Map<number, any>,
+  map: Map<number, any>,
   indices: number[],
   setIfNull?: T
 ): T {
-  var o = obj;
+  var o = map;
   while (indices.length) {
     var n = indices.shift();
     let v = o.get(n);
@@ -138,15 +174,35 @@ export function get<T>(
 }
 
 /**
- * Deeply remove a value in map at given indices
+ * Get a value from a three-dimensional map with a point
+ * @date 3/14/2023 - 12:35:21 PM
  *
- * @param {object} obj - Object to deeply set
- * @param {number[]} indices - Array of keys to set
- * @return {boolean} true if an element in the Map existed and has been removed, or false if the element does not exist.
+ * @export
+ * @template T
+ * @param {MapThree<T>} map
+ * @param {IPoint3} point
+ * @returns {T}
  *
  * @example
  *
- *    const removed = remove(new Map(), [0, 1, 2])
+ *  const v = pointGet(mapThree, { x: 1, y: 1, z: 1 })
+ */
+export function pointGet<T>(map: MapThree<T>, point: IPoint3): T {
+  return get<T>(map, [point.z || 0, point.x, point.y]);
+}
+
+/**
+ * Deeply remove a value in map at given indices
+ * @date 3/14/2023 - 12:23:06 PM
+ *
+ * @export
+ * @param {Map<number, any>} obj
+ * @param {number[]} indices
+ * @returns {boolean}
+ *
+ * @example
+ *
+ *  const removed = remove(new Map(), [0, 1, 2])
  */
 export function remove(obj: Map<number, any>, indices: number[]): boolean {
   let o = obj;
@@ -160,15 +216,17 @@ export function remove(obj: Map<number, any>, indices: number[]): boolean {
 }
 
 /**
- * Gets distance between two 2D Points
+ * Retrieves distance between two 2d points
+ * @date 3/14/2023 - 12:23:06 PM
  *
+ * @export
  * @param {IPoint} from
  * @param {IPoint} to
- * @return {number} Distance
+ * @returns {number}
  *
  * @example
  *
- *    const tile = getDistance({ x: 5, y: 5 }, { x: 10, y: 10 })
+ *  const dist = getDistance({ x: 5, y: 5 }, { x: 10, y: 10 })
  */
 export function getDistance(from: IPoint, to: IPoint): number {
   return Math.sqrt(
@@ -177,30 +235,34 @@ export function getDistance(from: IPoint, to: IPoint): number {
 }
 
 /**
- * Sums an array of numbers, ignoring null values
+ * Sums an array of numbers, ignoring null and undefined
+ * @date 3/14/2023 - 12:28:23 PM
  *
- * @param {number[]} numbers
- * @return {number} sum
+ * @export
+ * @param {(number | null | undefined)[]} numbers
+ * @returns {number}
  *
  * @example
- *
- *    const total = sum([ 1, 10, null, 5 ])
+ *  const total = sum([ 1, 10, null, 5 ])
  */
-export function sum(numbers: number[]): number {
+export function sum(numbers: (number | null | undefined)[]): number {
   return numbers.reduce((s, n) => (!!n ? s + n : s), 0);
 }
 
 const ZERO = 0;
+
 /**
  * Gets compass direction between two points
+ * @date 3/14/2023 - 12:23:06 PM
  *
- * @param {IPoint} from
- * @param {IPoint} to
- * @return {DIRECTION}
+ * @export
+ * @param {IPoint3} from
+ * @param {IPoint3} to
+ * @returns {DIRECTION}
  *
  * @example
  *
- *    const direction = getDirection({ x: 1, y: 1 }, { x: 1: y: 0 }) // DIRECTION.N
+ *  getDirection({ x: 1, y: 1 }, { x: 1: y: 0 }) === DIRECTION.N
  */
 export function getDirection(from: IPoint3, to: IPoint3): DIRECTION {
   let diffX = to.x - from.x,

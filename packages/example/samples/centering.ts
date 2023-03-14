@@ -11,6 +11,9 @@ export default function basicIso() {
   mapContainer.sortableChildren = true;
   app.stage.addChild(mapContainer);
 
+  mapContainer.scale.x = 1.5;
+  mapContainer.scale.y = 1.5;
+
   const debugGraphics = new Graphics();
   debugGraphics.lineStyle(2, 0xffffff, 1.0);
   app.stage.addChild(debugGraphics);

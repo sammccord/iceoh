@@ -1,13 +1,12 @@
+import { ITilemapConfig, Tilemap } from "./Tilemap";
 import {
-  IPoint3,
+  ExtendedBox,
   IPoint,
+  IPoint3,
   IRectangle3,
   MapThree,
-  ExtendedBox,
-  IRectangle,
 } from "./interfaces";
-import { set, sum, CLASSIC, get, remove } from "./utils";
-import { Tilemap, ITilemapConfig } from "./Tilemap";
+import { CLASSIC, get, remove, set, sum } from "./utils";
 
 /**
  * Object extending `ITilemapConfig` with optional projectionAngle, defaulting to `CLASSIC`
@@ -75,7 +74,6 @@ export class IsoTilemap<T> extends Tilemap<T> {
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.add(v);
     const position = this.toWorldPoint(tile, dimensions, origin);
     if (dimensions !== this.baseTileDimensions) {
       let d =
@@ -90,7 +88,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
             z,
             x: position.x,
             y: position.y,
-            value: tile,
+            value: v,
           });
         } else {
           set(this.tileDimensions, [z, tile.x, tile.y], {
@@ -100,7 +98,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
             z,
             x: position.x,
             y: position.y,
-            value: tile,
+            value: v,
           });
         }
         set(this.map, [z, tile.x, tile.y], tile);
@@ -112,7 +110,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
         z: tile.z || 0,
         x: position.x,
         y: position.y,
-        value: tile,
+        value: v,
       });
       set(this.map, [tile.z || 0, tile.x, tile.y], tile);
     }
@@ -142,7 +140,6 @@ export class IsoTilemap<T> extends Tilemap<T> {
       } catch {}
     }
     this.recalculateBounds(point);
-    this.tiles.delete(tile);
     return tile;
   }
 
@@ -198,8 +195,33 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return column;
   }
 
-  // Takes a world point and get a matrix of all tiles, returning Map(z, Map(x, Map(y)))
-  public castRay(point: IPoint): MapThree<T> {
+  public castRay(point: IPoint, include?: (t: T) => boolean): T | undefined {
+    const tile = this.toTile(point);
+    for (let z = this.bounds.z.max; z >= this.bounds.z.min; z--) {
+      const colX = tile.x + z;
+      const colY = tile.y + z;
+      for (let box of this.getDimensionsColumn({
+        x: colX,
+        y: colY,
+      }).reverse()) {
+        if (!box) continue;
+        const { x, y, value, origin, width, height } = box;
+        if (
+          point.x >= x - width * origin.x &&
+          point.x <= x + width * origin.x &&
+          point.y >= y - height * origin.y &&
+          point.y <= y + height * origin.y
+        ) {
+          if (include) {
+            if (include(value)) return value;
+          } else return value;
+        }
+      }
+    }
+  }
+
+  // Takes a world point and get a 3d map of all tiles, returning Map(z, Map(x, Map(y)))
+  public hits(point: IPoint, include?: (t: T) => boolean): MapThree<T> {
     const ray: MapThree<T> = new Map();
     const tile = this.toTile(point);
     for (let z = this.bounds.z.min; z <= this.bounds.z.max; z++) {
@@ -218,9 +240,13 @@ export class IsoTilemap<T> extends Tilemap<T> {
           point.y >= y - height * origin.y &&
           point.y <= y + height * origin.y
         ) {
-          // we've hit a tile
-          hasColHit = true;
-          set(ray, [level, colX, colY], value);
+          if (include && !include(value)) {
+            continue;
+          } else {
+            // we've hit a tile
+            hasColHit = true;
+            set(ray, [level, colX, colY], value);
+          }
         } else if (hasColHit) {
           // if we've hit tiles and aren't anymore, break early
           break;

@@ -1,45 +1,162 @@
 import {
-  IPoint3,
+  IBox,
   IPoint,
+  IPoint3,
   IRectangle,
   IRectangle3,
-  IBox,
   MapThree,
 } from "./interfaces";
-import { get, set, MIDDLE, FULL, TOP_LEFT, remove } from "./utils";
+import { FULL, MIDDLE, TOP_LEFT, get, pointGet, remove, set } from "./utils";
 
 /**
- * Tilemap configuration
+ * Base Tilemap class configuration
+ * @date 3/14/2023 - 12:44:55 PM
+ *
+ * @export
+ * @interface ITilemapConfig
+ * @typedef {ITilemapConfig}
  */
 export interface ITilemapConfig {
-  /** The screen offset for the 0,0 coordinate, deaults to `MIDDLE` */
+  /**
+   * The screen offset for the 0,0 tile coordinate, defaults to 'MIDDLE'
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {?IPoint}
+   */
   worldOrigin?: IPoint;
-  /** The anchor point at which tiles are expected to be drawn to screen, defaults to `MIDDLE` */
+  /**
+   * The anchor point at which tiles are expected to be drawn to screen, defaults to `MIDDLE`
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {?IPoint}
+   */
   baseTileOrigin?: IPoint;
+
   /**
    * The base dimensions of tiles that comprise the map.
    * In 2D Tilemaps this would ideally be squares, `{ x: 32, y: 32 }`.
    * Isometric tilemaps expect a depth field to correctly place tiles at z > 0
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {IRectangle3}
    */
   baseTileDimensions: IRectangle3;
-  /** A getter function that retuns the dimensions of the canvas */
+  /**
+   * A getter function that retuns the screen dimensions of the canvas
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {() => IRectangle}
+   *
+   * @example
+   *
+   *  getScreenDimensions: () => { width: 400, height: 400 }
+   */
   getScreenDimensions: () => IRectangle;
-  /** A getter function that returns the world offset, this defaults to `() => { x: 0, y: 0 }` */
+  /**
+   * A getter function that returns the world offset, this defaults to `() => { x: 0, y: 0 }`
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {?() => IPoint}
+   *
+   * @example
+   *
+   *  const world = new PIXI.Container()
+   *  getWorldPosition: () => world.position
+   */
   getWorldPosition?: () => IPoint;
-  /** A getter function that returns the world scale, this defaults to `() => { x: 1, y: 1 }` */
+  /**
+   * A getter function that returns the world scale, this defaults to `() => { x: 1, y: 1 }`
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @type {?() => IPoint}
+   *
+   * @example
+   *
+   *  const world = new PIXI.Container()
+   *  getWorldPosition: () => world.scale
+   *
+   */
   getWorldScale?: () => IPoint;
 }
 
+/**
+ * Description placeholder
+ * @date 3/14/2023 - 12:44:55 PM
+ *
+ * @export
+ * @class Tilemap
+ * @typedef {Tilemap}
+ * @template T
+ */
 export class Tilemap<T> {
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @type {() => IRectangle}
+   */
   protected getScreenDimensions: () => IRectangle;
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @type {() => IPoint}
+   */
   protected getWorldPosition: () => IPoint;
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @type {() => IPoint}
+   */
   protected getWorldScale: () => IPoint;
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @type {IRectangle3}
+   */
   protected baseTileDimensions: IRectangle3;
 
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @readonly
+   * @type {IPoint}
+   */
   protected readonly worldOrigin: IPoint = MIDDLE;
+  /**
+   * Description placeholder
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @readonly
+   * @type {IPoint}
+   */
   protected readonly baseTileOrigin: IPoint = MIDDLE;
-  protected readonly tiles: Set<T> = new Set();
+  /**
+   * Contains references to T values using their tile coordinates for three-dimensional map indices, z -> x -> y
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @readonly
+   * @type {MapThree<T>}
+   */
   protected readonly map: MapThree<T> = new Map();
+  /**
+   * Contains the lower and upper bounds of the map's z, x, y axes using tile coordinates
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @protected
+   * @readonly
+   * @type {{ x: { min: number; max: number; }; y: { min: number; max: number; }; z: { min: number; max: number; }; }}
+   */
   protected readonly bounds = {
     x: { min: 0, max: 0 },
     y: { min: 0, max: 0 },
@@ -48,7 +165,17 @@ export class Tilemap<T> {
 
   /**
    * Create a `Tilemap<T>` instance.
-   * @param {ITilemapConfig} config
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @constructor
+   * @param {ITilemapConfig} {
+      worldOrigin,
+      baseTileOrigin,
+      baseTileDimensions,
+      getScreenDimensions,
+      getWorldPosition,
+      getWorldScale,
+    }
    */
   constructor({
     worldOrigin,
@@ -67,56 +194,68 @@ export class Tilemap<T> {
   }
 
   /**
-   * Add tile to the tilemap at given coordinate.
-   * @param {T} tile
-   * @param {IPoint3} point - The map coordinates at which to store this tile
-   * @param {IRectangle3=} dimensions - The dimensions of the tile tile, defaults to `this.baseTileDimensions`
-   * @param {IPoint=} origin - The origin point of the tile
-   * @return {IPoint3} A point at which to place this tile in screen space
+   * Add a tile to the tilemap at a given coordinate, optionally providing different tile dimensions if the tile is a different size than the base scale.
+   * The returned coordinate is relative to the world origin.
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {T} t The value to store at provided map coordinates
+   * @param {IPoint3} tile The map tile coordinates to store the provided
+   * @param {IRectangle3} [dimensions=this.baseTileDimensions] Alternate dimensions to use instead of the base tile dimensions
+   * @param {IPoint} [origin=this.baseTileOrigin] Alterate origin with which to place tile if different from base origin
+   * @returns {IPoint3} A point at which to place this tile relative to the world origin
    *
    * @example
    *
-   *    const position = isoTilemap.add({}, { x: 1, y: 1, z: 0 })
+   *  const T = {}
+   *  const { x, y, z } = isoTilemap.add(T, { x: 1, y: 1, z: 0 })
+   *  sprite.position.x = x
+   *  sprite.position.y = y
+   *  sprite.zIndex = z
+   *  map.get({ x: 1, y: 1, z: 0 }) === T // true
    */
   public add(
-    sprite: T,
+    t: T,
     tile: IPoint3,
     dimensions: IRectangle3 = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    this.tiles.add(sprite);
-    set(this.map, [tile.z || 0, tile.x, tile.y], sprite);
+    set(this.map, [tile.z || 0, tile.x, tile.y], t);
     this.recalculateBounds(tile);
     return this.toWorldPoint(tile, dimensions, origin);
   }
 
   /**
-   * Get a tile at given map coordinates
+   * Get a single tile at given map coordinates
+   * @date 3/14/2023 - 12:44:55 PM
    *
-   * @param {IPoint3} point - Tile to get at given coordinates. If no z is provided, it defaults to 0.
-   * @return {T} The tile at given coordinates
+   * @public
+   * @param {IPoint3} point Map tile coordinates. If no z is provided, it defaults to 0.
+   * @returns {T} The tile at given coordinates
    *
    * @example
    *
    *    const tile = tilemap.get({ x: 1, y: 1, z: 1 })
    */
   public get(point: IPoint3): T {
-    return get(this.map, [point.z || 0, point.x, point.y]);
+    return pointGet<T>(this.map, point);
   }
 
   /**
-   * Get an array of values from a map at given x,y coordinates.
+   * Get an array of values from a map at given x,y coordinates, from ascending z index
+   * @date 3/14/2023 - 12:44:55 PM
    *
-   * @param {IPoint} point - Map coordinates to get at each z-layer
-   * @param {object=} map - Object to search against, defaults to `this.map`, but will also work if called with `this.depthMap`, in which case numerical tile depths are returned.
-   * @return {T[]} Array of values at given x,y coordinates. If the map is multiple z-layers deep, but the tile x,y coordinate doesn't exist in all layers, the returned array will contain null entries.
+   * @public
+   * @template C
+   * @param {IPoint} point Map coordinates to get at each z-layer
+   * @param {?MapThree<T>} [map] Map to search against, defaults to `this.map`
+   * @returns {C[]}
    *
    * @example
    *
-   *    const tiles = tilemap.getColumn({ x: 1, y: 1 })
-   *    const depths = tilemap.getColumn({ x: 1, y: 1 }, tilemap.depthMap)
+   *    const tile = tilemap.getColumn({ x: 1, y: 1, z: 1 })
    */
-  public getColumn<C>(point: IPoint, map?: MapThree<T>): C[] {
+  public getColumn<C = T>(point: IPoint, map?: MapThree<C>): C[] {
     const column = [];
     for (const [z, grid] of map || this.map) {
       column[z] = get(grid, [point.x, point.y]);
@@ -126,15 +265,21 @@ export class Tilemap<T> {
 
   /**
    * Moves a tile from given coordinate to another coordinate
-   * @param {IPoint3} from - The map coordinates of the tile to move
-   * @param {IPoint3} to - The map coordinates to move the tile to
-   * @param {IRectangle3=} dimensions - The dimensions of the tile, defaults to `this.baseTileDimensions`
-   * @param {IPoint=} origin - The origin point of the tile, defaults to `this.baseTileOrigin`
-   * @return {IPoint3} A point at which to place this tile in screen space
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint3} from The map coordinates of the tile to move
+   * @param {IPoint3} to The map coordinates to move the tile to
+   * @param {IRectangle} [dimensions=this.baseTileDimensions] The dimensions of the tile, defaults to `this.baseTileDimensions`
+   * @param {IPoint} [origin=this.baseTileOrigin] The origin point of the tile, defaults to `this.baseTileOrigin`
+   * @returns {IPoint3} A point at which to place the moved tile relative to the world origin
    *
    * @example
    *
-   *    const position = tilemap.move({ x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 0 })
+   *    const { x, y, z } = tilemap.move({ x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 0 })
+   *    sprite.position.x = x
+   *    sprite.position.y = y
+   *    sprite.zIndex = z
    */
   public move(
     from: IPoint3,
@@ -149,9 +294,11 @@ export class Tilemap<T> {
 
   /**
    * Remove a tile from the given point coordinates.
+   * @date 3/14/2023 - 12:44:55 PM
    *
-   * @param {IPoint3} point - Map coordinates to remove
-   * @return {[T][]} An array containing the elements that were deleted.
+   * @public
+   * @param {IPoint3} point Map coordinates to remove
+   * @returns {T} Removed tile, if any
    *
    * @example
    *
@@ -163,20 +310,30 @@ export class Tilemap<T> {
     if (!tile) return;
     remove(this.map, [point.z || 0, point.x, point.y]);
     this.recalculateBounds(point);
-    this.tiles.delete(tile);
     return tile;
   }
 
   /**
-   * Project a tile coordinate to screen space coordinate
-   * @param {IPoint3} point - The tile coordinates
-   * @param {IRectangle3=} dimensions - The dimensions of the tile, defaults to `this.baseTileDimensions`
-   * @param {IPoint=} origin - The origin point of the tile, defaults to `this.baseTileOrigin`
-   * @return {IPoint3} Screen space point
+   * Project a tile coordinate to an absolute screen space coordinate relative to the window, taking world offset / scale into account
+   *
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint3} tile The tile coordinates
+   * @param {IRectangle3} [dimensions=this.baseTileDimensions] The dimensions of the tile, defaults to `this.baseTileDimensions`
+   * @param {IPoint} [origin=this.baseTileOrigin] The origin point of the tile, defaults to `this.baseTileOrigin`
+   * @returns {IPoint3} Screen space point
    *
    * @example
    *
-   *    const position = tilemap.toPoint({ x: 1, y: 1, z: 0 })
+   *  const { x, y } = map.toScreenPoint({ x: 0, y: 0, z: 0 });
+   *  debugGraphics.lineStyle(2, 0xff00ff, 1);
+   *  debugGraphics.drawRect(
+   *    x - 32 * mapContainer.scale.x,
+   *    y - 32 * mapContainer.scale.y,
+   *    64 * mapContainer.scale.x,
+   *    32 * mapContainer.scale.y
+   *  );
    */
   public toScreenPoint(
     tile: IPoint3,
@@ -191,29 +348,38 @@ export class Tilemap<T> {
     return position;
   }
 
-  // Project a tile coordinate to a coordinate relative to the world origin
+  /**
+   * Project a tile coordinate to a world coordinate, not taking world offset / scale into account
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint3} tile The tile coordinates
+   * @param {IRectangle3} [dimensions=this.baseTileDimensions] The dimensions of the tile, defaults to `this.baseTileDimensions`
+   * @param {IPoint} [origin=this.baseTileOrigin] The origin point of the tile, defaults to `this.baseTileOrigin`
+   * @returns {IPoint3} World space point
+   */
   public toWorldPoint(
     tile: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    return this._project(
-      this._getAbsolutePosition(tile, dimensions, origin),
-      dimensions,
-      origin
-    );
+    return this._project(this._getAbsolutePosition(tile), dimensions, origin);
   }
 
   /**
-   * Project a world point to tile point
-   * @param {IPoint3} point - The screen coordinates to project
-   * @param {IRectangle3=} dimensions - The dimensions of each tile on the map, defaults to `this.baseTileDimensions`
-   * @param {IPoint=} origin - The origin point of the tile
-   * @return {IPoint3} The tile coordinate in the map
+   * Project a world coordinate to a tile coordinate, not taking world offset / scale into account.
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint3} point The world coordinates
+   * @param {IRectangle3} [dimensions=this.baseTileDimensions] The dimensions of the tile, defaults to `this.baseTileDimensions`
+   * @param {IPoint} [origin=this.baseTileOrigin] The origin point of the tile, defaults to `this.baseTileOrigin`
+   * @returns {IPoint3} tile coordinate
    *
    * @example
    *
-   *    const tilePosition = tileMap.toTile({ x: 400, y: 300 })
+   *  const tileCoord = tileMap.worldToTile(transformGlobalEventToWorldCoordinates({ x: e.offsetX, y: e.offsetY }))
+   *  const tileCoord = tileMap.worldToTile({ x: 400, y: 300 })
    */
   public worldToTile(
     point: IPoint3,
@@ -229,26 +395,38 @@ export class Tilemap<T> {
   }
 
   /**
-   * Returns the new position of the tiles' parent container where the given tile is in the center of the viewport.
-   * @param {IPoint3} point - The map coordinates to center
-   * @return {IPoint}
+   * Returns the new world position where the given tile is in the center of the viewport.
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint3} tile The tile coordinates to center
+   * @returns {IPoint}
    *
    * @example
    *
+   *    const mapContainer = new PIXI.Container()
    *    const worldPosition = tilemap.centerToTile({ x: 1, y: 1, z: 0 })
+   *    mapContainer.x = worldPosition.x
+   *    mapCOntainer.y = worldPosition.y
    */
   public centerToTile(tile: IPoint3): IPoint {
     return this.centerToPoint(this.toScreenPoint(tile));
   }
 
   /**
-   * Returns the new position of the world container where the given screen point is in the center of the viewport.
-   * @param {IPoint3} point - The screen coordinates to center
-   * @return {IPoint}
+   * Returns a world offset position where the given screen space coordinate is centered to the viewport
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @param {IPoint} point
+   * @returns {IPoint}
    *
    * @example
    *
+   *    const mapContainer = new PIXI.Container()
    *    const worldPosition = tilemap.centerToPoint({ x: 500, y: 200 })
+   *    mapContainer.x = worldPosition.x
+   *    mapCOntainer.y = worldPosition.y
    */
   public centerToPoint(point: IPoint): IPoint {
     const globalDimensions = this.getScreenDimensions();
@@ -261,23 +439,29 @@ export class Tilemap<T> {
 
   /**
    * Calculates the current map bounds and returns the tile coordinates in the center
-   * @return {IPoint}
+   * @date 3/14/2023 - 12:44:55 PM
    *
-   * @example
-   *
-   *    const { x, y } = tilemap.centerTile
+   * @public
+   * @readonly
+   * @type {IPoint}
    */
   public get centerTile(): IPoint {
     return this.getBounds();
   }
 
   /**
-   * Calls `tilemap.centerToTile(this.centerTile)` and returns the new position of the tiles' parent container where the center tile is in the center of the viewport.
-   * @return {IPoint}
+   * Returns a world offset position where the centermost tile is centered to the viewport
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @returns {IPoint}
    *
    * @example
    *
-   *    const { x, y } = tilemap.center()
+   *    const mapContainer = new PIXI.Container()
+   *    const worldPosition = tilemap.center()
+   *    mapContainer.x = worldPosition.x
+   *    mapCOntainer.y = worldPosition.y
    */
   public center(): IPoint {
     return this.centerToTile(this.centerTile);
@@ -285,7 +469,10 @@ export class Tilemap<T> {
 
   /**
    * Calculates the map bounds of the current tilemap.
-   * @return {IBox}
+   * @date 3/14/2023 - 12:44:55 PM
+   *
+   * @public
+   * @returns {IBox}
    *
    * @example
    *
@@ -307,10 +494,11 @@ export class Tilemap<T> {
   }
 
   /**
-   * Recalculate bounds
+   * Recalculate bounds given a new point modifying the floors and ceilings of all axes
+   * @date 3/14/2023 - 12:44:55 PM
    *
-   * @param {IPoint3} point - Map coordinates to remove
-   * @return {[T][]} An array containing the elements that were deleted.
+   * @protected
+   * @param {IPoint3} point
    *
    * @example
    *

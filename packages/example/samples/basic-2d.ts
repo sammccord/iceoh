@@ -93,8 +93,8 @@ export default function basic2d() {
   mapContainer.sortableChildren = true;
   app.stage.addChild(mapContainer);
 
-  mapContainer.scale.x = 1.5;
-  mapContainer.scale.y = 1.5;
+  mapContainer.scale.x = 0.5;
+  mapContainer.scale.y = 0.5;
 
   const map = new Tilemap({
     getScreenDimensions: () => app.view,
@@ -156,10 +156,12 @@ export default function basic2d() {
       if (Math.abs(distX) > 5 && Math.abs(distY) > 5) return;
 
       setTimeout(() => {
-        const tile = map.toTile(mapContainer.toLocal(e.data.global));
-        const { x, y } = map.toWorldPoint(tile);
+        const tile = map.worldToTile(mapContainer.toLocal(e.data.global));
+        const { x, y } = map.toWorldPoint(tile, { width: 120, height: 120 });
         console.log(tile, x, y);
         const sprite = new Sprite(sheet.textures[`sprite-${20}.png`]);
+        sprite.width = 120;
+        sprite.height = 120;
         sprite.anchor.set(0.5);
         sprite.position.set(x, y);
         mapContainer.addChild(sprite);
