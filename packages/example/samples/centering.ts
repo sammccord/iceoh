@@ -34,7 +34,7 @@ export default function basicIso() {
   let player,
     playerPosition = { x: 2, y: 2, z: 1 };
 
-  Assets.load("mushy.json").then((_sheet) => {
+  Assets.load("/mushy.json").then((_sheet) => {
     sheet = _sheet;
     for (let y = 0; y < 5; y++) {
       for (let x = 0; x < 5; x++) {

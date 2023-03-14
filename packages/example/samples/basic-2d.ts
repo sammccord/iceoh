@@ -106,7 +106,7 @@ export default function basic2d() {
       height: 64,
     },
   });
-  Assets.load("scut.json").then((_sheet) => {
+  Assets.load("/scut.json").then((_sheet) => {
     sheet = _sheet;
     tilemap.forEach((num, i) => {
       const sprite = new Sprite(sheet.textures[`sprite-${num}.png`]);

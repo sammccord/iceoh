@@ -25,7 +25,7 @@ export default function basicIso() {
       depth: 32,
     },
   });
-  Assets.load("mushy.json").then((_sheet) => {
+  Assets.load("/mushy.json").then((_sheet) => {
     sheet = _sheet;
     for (let y = 0; y < 5; y++) {
       for (let x = 0; x < 5; x++) {

@@ -18,8 +18,9 @@
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Class that extends basic 2D Tilemap functionality based on given projectionAngle.</p>
 
-<h3>Param</h3><p>The type of sprite object to store</p>
-</div></section> 
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+
+<h3>Export</h3></div></section> 
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
@@ -32,7 +33,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">IsoTilemap</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L22">IsoTilemap.ts:22</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L47">IsoTilemap.ts:47</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -54,12 +55,11 @@
 <a href="IsoTilemap.html#baseTileOrigin" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>base<wbr/>Tile<wbr/>Origin</span></a>
 <a href="IsoTilemap.html#bounds" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>bounds</span></a>
 <a href="IsoTilemap.html#clamp" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>clamp</span></a>
-<a href="IsoTilemap.html#depthMap" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>depth<wbr/>Map</span></a>
-<a href="IsoTilemap.html#getGlobalDimensions" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>get<wbr/>Global<wbr/>Dimensions</span></a>
+<a href="IsoTilemap.html#getScreenDimensions" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>get<wbr/>Screen<wbr/>Dimensions</span></a>
 <a href="IsoTilemap.html#getWorldPosition" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>get<wbr/>World<wbr/>Position</span></a>
 <a href="IsoTilemap.html#getWorldScale" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>get<wbr/>World<wbr/>Scale</span></a>
 <a href="IsoTilemap.html#map" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>map</span></a>
-<a href="IsoTilemap.html#tiles" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>tiles</span></a>
+<a href="IsoTilemap.html#tileDimensions" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>tile<wbr/>Dimensions</span></a>
 <a href="IsoTilemap.html#worldOrigin" class="tsd-index-link tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>world<wbr/>Origin</span></a>
 </div></section>
 <section class="tsd-index-section">
@@ -72,26 +72,32 @@
 <a href="IsoTilemap.html#_project" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-protected"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_project</span></a>
 <a href="IsoTilemap.html#_unproject" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-protected"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>_unproject</span></a>
 <a href="IsoTilemap.html#add" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>add</span></a>
+<a href="IsoTilemap.html#castRay" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>cast<wbr/>Ray</span></a>
 <a href="IsoTilemap.html#center" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>center</span></a>
 <a href="IsoTilemap.html#centerToPoint" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>center<wbr/>To<wbr/>Point</span></a>
 <a href="IsoTilemap.html#centerToTile" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>center<wbr/>To<wbr/>Tile</span></a>
+<a href="IsoTilemap.html#collisionMap" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>collision<wbr/>Map</span></a>
 <a href="IsoTilemap.html#get" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get</span></a>
 <a href="IsoTilemap.html#getBounds" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Bounds</span></a>
 <a href="IsoTilemap.html#getColumn" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Column</span></a>
+<a href="IsoTilemap.html#getDimensionsColumn" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>get<wbr/>Dimensions<wbr/>Column</span></a>
 <a href="IsoTilemap.html#move" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>move</span></a>
 <a href="IsoTilemap.html#recalculateBounds" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>recalculate<wbr/>Bounds</span></a>
 <a href="IsoTilemap.html#remove" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>remove</span></a>
-<a href="IsoTilemap.html#toPoint" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Point</span></a>
-<a href="IsoTilemap.html#toTile" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Tile</span></a>
+<a href="IsoTilemap.html#toScreenPoint" class="tsd-index-link tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>Screen<wbr/>Point</span></a>
+<a href="IsoTilemap.html#toWorldPoint" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>to<wbr/>World<wbr/>Point</span></a>
+<a href="IsoTilemap.html#worldToTile" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>world<wbr/>To<wbr/>Tile</span></a>
 </div></section></div></details></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Constructors</h2>
 <section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="constructor.new_IsoTilemap">new <wbr/>Iso<wbr/>Tilemap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/IIsoTilemapConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">IIsoTilemapConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="IsoTilemap.html" class="tsd-signature-type" data-tsd-kind="Class">IsoTilemap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_IsoTilemap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="constructor.new_IsoTilemap">new <wbr/>Iso<wbr/>Tilemap<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>{<span class="tsd-signature-symbol">: </span><a href="../interfaces/IIsoTilemapConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">IIsoTilemapConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="IsoTilemap.html" class="tsd-signature-type" data-tsd-kind="Class">IsoTilemap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_IsoTilemap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Create an <code>IsoTilemap&lt;T&gt;</code> instance.</p>
+<div class="tsd-comment tsd-typography"><p>Creates an instance of IsoTilemap.</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
 </div>
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
@@ -102,60 +108,96 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>config: <a href="../interfaces/IIsoTilemapConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">IIsoTilemapConfig</a></h5>
-<div class="tsd-comment tsd-typography"><p>projectionAngle will default to CLASSIC</p>
+<h5>{: <a href="../interfaces/IIsoTilemapConfig.html" class="tsd-signature-type" data-tsd-kind="Interface">IIsoTilemapConfig</a></h5>
+<div class="tsd-comment tsd-typography"><p>angle = CLASSIC, clamp = true, ...config }</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="IsoTilemap.html" class="tsd-signature-type" data-tsd-kind="Class">IsoTilemap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L37">IsoTilemap.ts:37</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L128">IsoTilemap.ts:128</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="angle" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>angle</span><a href="#angle" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">angle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature">angle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>Isometric projection angle, defaults to <code>CLASSIC</code>. Other angles are exported as ISOMETRIC, MILITARY</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L23">IsoTilemap.ts:23</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L56">IsoTilemap.ts:56</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="angleCos" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>angle<wbr/>Cos</span><a href="#angleCos" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">angle<wbr/>Cos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature">angle<wbr/>Cos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The cosign of the angle</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L24">IsoTilemap.ts:24</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L65">IsoTilemap.ts:65</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="angleSin" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>angle<wbr/>Sin</span><a href="#angleSin" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">angle<wbr/>Sin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature">angle<wbr/>Sin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The sine of the angle</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L25">IsoTilemap.ts:25</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L74">IsoTilemap.ts:74</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="baseOrigin" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>base<wbr/>Origin</span><a href="#baseOrigin" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">base<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></div><aside class="tsd-sources">
+<div class="tsd-signature">base<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></div>
+<div class="tsd-comment tsd-typography"><p>The tile offset coordinates given the base dimensions and origin</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L28">IsoTilemap.ts:28</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L93">IsoTilemap.ts:93</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="baseSurfaceHalfHeight" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>base<wbr/>Surface<wbr/>Half<wbr/>Height</span><a href="#baseSurfaceHalfHeight" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">base<wbr/>Surface<wbr/>Half<wbr/>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature">base<wbr/>Surface<wbr/>Half<wbr/>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The middle point of the top surface, (height - depth) / 2</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L30">IsoTilemap.ts:30</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L111">IsoTilemap.ts:111</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="baseSurfaceHeight" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>base<wbr/>Surface<wbr/>Height</span><a href="#baseSurfaceHeight" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">base<wbr/>Surface<wbr/>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<div class="tsd-signature">base<wbr/>Surface<wbr/>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><p>The height of the top surface of the tile, height - depth</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L29">IsoTilemap.ts:29</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L102">IsoTilemap.ts:102</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="baseTileDimensions" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>base<wbr/>Tile<wbr/>Dimensions</span><a href="#baseTileDimensions" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">base<wbr/>Tile<wbr/>Dimensions<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a></div><aside class="tsd-sources">
+<div class="tsd-signature">base<wbr/>Tile<wbr/>Dimensions<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a></div>
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#baseTileDimensions">baseTileDimensions</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L37">Tilemap.ts:37</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L123">Tilemap.ts:123</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="baseTileOrigin" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>base<wbr/>Tile<wbr/>Origin</span><a href="#baseTileOrigin" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">base<wbr/>Tile<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = MIDDLE</span></div><aside class="tsd-sources">
+<div class="tsd-signature">base<wbr/>Tile<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = MIDDLE</span></div>
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#baseTileOrigin">baseTileOrigin</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L40">Tilemap.ts:40</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L142">Tilemap.ts:142</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="bounds" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>bounds</span><a href="#bounds" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">bounds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>        </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span>y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>        </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span>    </span>z<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>        </span>max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>        </span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>Contains the lower and upper bounds of the map&#39;s z, x, y axes using tile coordinates</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
@@ -182,31 +224,34 @@
 <h5>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5></li></ul></li></ul></div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#bounds">bounds</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L43">Tilemap.ts:43</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L160">Tilemap.ts:160</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="clamp" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>clamp</span><a href="#clamp" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">clamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<div class="tsd-signature">clamp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Whether or not to clamp values</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L26">IsoTilemap.ts:26</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="depthMap" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>depth<wbr/>Map</span><a href="#depthMap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">depth<wbr/>Map<span class="tsd-signature-symbol">:</span> <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L31">IsoTilemap.ts:31</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="getGlobalDimensions" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Global<wbr/>Dimensions</span><a href="#getGlobalDimensions" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">get<wbr/>Global<wbr/>Dimensions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a><span class="tsd-signature-symbol">)</span></div>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L83">IsoTilemap.ts:83</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="getScreenDimensions" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Screen<wbr/>Dimensions</span><a href="#getScreenDimensions" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">get<wbr/>Screen<wbr/>Dimensions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a><span class="tsd-signature-symbol">)</span></div>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter-signature">
-<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class tsd-is-protected">
 <li class="tsd-signature" id="__type-4.__type-5"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a></li>
-<li class="tsd-description">
+<li class="tsd-description"><code class="tsd-tag ts-flagProtected">Protected</code> 
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a></h4></li></ul></li></ul></div><aside class="tsd-sources">
-<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getGlobalDimensions">getGlobalDimensions</a></p>
+<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getScreenDimensions">getScreenDimensions</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L34">Tilemap.ts:34</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L99">Tilemap.ts:99</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="getWorldPosition" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>World<wbr/>Position</span><a href="#getWorldPosition" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">get<wbr/>World<wbr/>Position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span></div>
@@ -214,13 +259,17 @@
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter-signature">
-<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class tsd-is-protected">
 <li class="tsd-signature" id="__type-6.__type-7"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></li>
-<li class="tsd-description">
+<li class="tsd-description"><code class="tsd-tag ts-flagProtected">Protected</code> 
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getWorldPosition">getWorldPosition</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L35">Tilemap.ts:35</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L107">Tilemap.ts:107</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="getWorldScale" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>World<wbr/>Scale</span><a href="#getWorldScale" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">get<wbr/>World<wbr/>Scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span></div>
@@ -228,31 +277,46 @@
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
 <li class="tsd-parameter-signature">
-<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class tsd-is-protected">
 <li class="tsd-signature" id="__type-8.__type-9"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></li>
-<li class="tsd-description">
+<li class="tsd-description"><code class="tsd-tag ts-flagProtected">Protected</code> 
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getWorldScale">getWorldScale</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L36">Tilemap.ts:36</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L115">Tilemap.ts:115</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="map" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>map</span><a href="#map" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">map<span class="tsd-signature-symbol">:</span> <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
+<div class="tsd-signature">map<span class="tsd-signature-symbol">:</span> <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>Contains references to T values using their tile coordinates for three-dimensional map indices, z -&gt; x -&gt; y</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#map">map</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L42">Tilemap.ts:42</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="tiles" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>tiles</span><a href="#tiles" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">tiles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div><aside class="tsd-sources">
-<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#tiles">tiles</a></p>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L151">Tilemap.ts:151</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="tileDimensions" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>tile<wbr/>Dimensions</span><a href="#tileDimensions" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">tile<wbr/>Dimensions<span class="tsd-signature-symbol">:</span> <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><a href="../types/ExtendedBox.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExtendedBox</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>A three-dimensional map of boxes containing references to tiles, with world coordinations and dimensions of placed tiles</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:31 PM</p>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L41">Tilemap.ts:41</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L119">IsoTilemap.ts:119</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="worldOrigin" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <code class="tsd-tag ts-flagReadonly">Readonly</code> <span>world<wbr/>Origin</span><a href="#worldOrigin" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">world<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = MIDDLE</span></div><aside class="tsd-sources">
+<div class="tsd-signature">world<wbr/>Origin<span class="tsd-signature-symbol">:</span> <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = MIDDLE</span></div>
+<div class="tsd-comment tsd-typography"><p>Description placeholder</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+</div><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#worldOrigin">worldOrigin</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L39">Tilemap.ts:39</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L133">Tilemap.ts:133</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Accessors</h2>
 <section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><a id="centerTile" class="tsd-anchor"></a>
@@ -262,14 +326,12 @@
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Calculates the current map bounds and returns the tile coordinates in the center</p>
 
-<h3>Returns</h3>
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0"> } = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-2">centerTile</span>
-</code></pre>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4><aside class="tsd-sources">
 <p>Inherited from Tilemap.centerTile</p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L258">Tilemap.ts:258</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L448">Tilemap.ts:448</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a id="_getAbsolutePosition" class="tsd-anchor"></a>
@@ -289,7 +351,7 @@
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#_getAbsolutePosition">_getAbsolutePosition</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L203">IsoTilemap.ts:203</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L459">IsoTilemap.ts:459</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a id="_project" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>_project</span><a href="#_project" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
@@ -309,7 +371,7 @@
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#_project">_project</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L160">IsoTilemap.ts:160</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L416">IsoTilemap.ts:416</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a id="_unproject" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>_unproject</span><a href="#_unproject" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
@@ -325,106 +387,191 @@
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#_unproject">_unproject</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L191">IsoTilemap.ts:191</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L447">IsoTilemap.ts:447</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="add" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>add</span><a href="#add" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="add.add-1">add<span class="tsd-signature-symbol">(</span>sprite<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#add.add-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="add.add-1">add<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#add.add-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Add tile to the tilemap at given coordinate.
-If given tile is tall enough to occupy multiple z-layers at the base tile depth, it will add a reference at those z-layers in the map.</p>
+<div class="tsd-comment tsd-typography"><p>Add a tile to the tilemap at a given coordinate, optionally providing different tile dimensions if the tile is a different size than the base scale.
+The returned coordinate is relative to the world origin.</p>
 
-<h3>Returns</h3><p>A 3D Point at which to place this tile in screen space</p>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">position</span><span class="hl-0"> = </span><span class="hl-2">isoTilemap</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">({}, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span>
+<h3>Returns</h3><p>A point at which to place this tile relative to the world origin</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">T</span><span class="hl-0"> = {}</span><br/><span class="hl-0"> </span><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0">, </span><span class="hl-7">z</span><span class="hl-0"> } = </span><span class="hl-2">isoTilemap</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">(</span><span class="hl-7">T</span><span class="hl-0">, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span><br/><span class="hl-0"> </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">position</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0"> = </span><span class="hl-2">x</span><br/><span class="hl-0"> </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">position</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0"> = </span><span class="hl-2">y</span><br/><span class="hl-0"> </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">zIndex</span><span class="hl-0"> = </span><span class="hl-2">z</span><br/><span class="hl-0"> </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">get</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> }) === </span><span class="hl-7">T</span><span class="hl-0"> </span><span class="hl-4">// true</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>sprite: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h5></li>
-<li>
-<h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
-<div class="tsd-comment tsd-typography"><p>The map coordinates at which to store this tile</p>
+<h5>v: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h5>
+<div class="tsd-comment tsd-typography"><p>The value to store at provided map coordinates</p>
 </div></li>
 <li>
-<h5>dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
-<div class="tsd-comment tsd-typography"><p>The dimensions of the tile, defaults to <code>this.baseTileDimensions</code></p>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The map tile coordinates to store the provided</p>
 </div></li>
 <li>
-<h5>origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
-<div class="tsd-comment tsd-typography"><p>The origin point of the tile, defaults to <code>this.baseTileOrigin</code></p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>Alternate dimensions to use instead of the base tile dimensions</p>
+</div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>Alterate origin with which to place tile if different from base origin</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#add">add</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L65">IsoTilemap.ts:65</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L164">IsoTilemap.ts:164</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="castRay" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>cast<wbr/>Ray</span><a href="#castRay" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="castRay.castRay-1">cast<wbr/>Ray<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a>, include<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#castRay.castRay-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Return the first visible tile that collides with a projected world coordinate.
+Starts at highest z and scans tiles along a ray to the lowest z.
+Optionally takes a callback with the backing value and tile coordinates to include in the ray&#39;s path</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:30 PM</p>
+
+<h3>Returns</h3>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">foo</span><span class="hl-0"> = </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">(</span><span class="hl-3">&#39;foo&#39;</span><span class="hl-0">, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span><br/><span class="hl-0"> </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">bar</span><span class="hl-0"> = </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">(</span><span class="hl-3">&#39;bar&#39;</span><span class="hl-0">, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span><br/><span class="hl-0"> </span><span class="hl-8">castRay</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0"> }) === </span><span class="hl-2">bar</span>
+</code></pre>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>point: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> include: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures tsd-kind-type-literal">
+<li class="tsd-signature"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>t: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h5></li>
+<li>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L333">IsoTilemap.ts:333</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="center" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>center</span><a href="#center" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="center.center-1">center<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><a href="#center.center-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Calls <code>tilemap.centerToTile(this.centerTile)</code> and returns the new position of the tiles&#39; parent container where the center tile is in the center of the viewport.</p>
+<div class="tsd-comment tsd-typography"><p>Returns a world offset position where the centermost tile is centered to the viewport</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3>
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0"> } = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">center</span><span class="hl-0">()</span>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">mapContainer</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">PIXI</span><span class="hl-0">.</span><span class="hl-8">Container</span><span class="hl-0">()</span><br/><span class="hl-0">   </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">worldPosition</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">center</span><span class="hl-0">()</span><br/><span class="hl-0">   </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">x</span><br/><span class="hl-0">   </span><span class="hl-2">mapCOntainer</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">y</span>
 </code></pre>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#center">center</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L270">Tilemap.ts:270</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L466">Tilemap.ts:466</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="centerToPoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>center<wbr/>To<wbr/>Point</span><a href="#centerToPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="centerToPoint.centerToPoint-1">center<wbr/>To<wbr/>Point<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><a href="#centerToPoint.centerToPoint-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Returns the new position of the tiles&#39; parent container where the given screen point is in the center of the viewport.</p>
+<div class="tsd-comment tsd-typography"><p>Returns a world offset position where the given screen space coordinate is centered to the viewport</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3>
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">worldPosition</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">centerToPoint</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">500</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">200</span><span class="hl-0"> })</span>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">mapContainer</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">PIXI</span><span class="hl-0">.</span><span class="hl-8">Container</span><span class="hl-0">()</span><br/><span class="hl-0">   </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">worldPosition</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">centerToPoint</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">500</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">200</span><span class="hl-0"> })</span><br/><span class="hl-0">   </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">x</span><br/><span class="hl-0">   </span><span class="hl-2">mapCOntainer</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">y</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>point: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h5>
-<div class="tsd-comment tsd-typography"><p>The screen coordinates to center</p>
-</div></li></ul></div>
+<h5>point: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#centerToPoint">centerToPoint</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L241">Tilemap.ts:241</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L431">Tilemap.ts:431</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="centerToTile" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>center<wbr/>To<wbr/>Tile</span><a href="#centerToTile" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-<li class="tsd-signature tsd-anchor-link" id="centerToTile.centerToTile-1">center<wbr/>To<wbr/>Tile<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><a href="#centerToTile.centerToTile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="centerToTile.centerToTile-1">center<wbr/>To<wbr/>Tile<span class="tsd-signature-symbol">(</span>tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><a href="#centerToTile.centerToTile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Returns the new position of the tiles&#39; parent container where the given tile is in the center of the viewport.</p>
+<div class="tsd-comment tsd-typography"><p>Returns the new world position where the given tile is in the center of the viewport.</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3>
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">worldPosition</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">centerToTile</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">mapContainer</span><span class="hl-0"> = </span><span class="hl-5">new</span><span class="hl-0"> </span><span class="hl-7">PIXI</span><span class="hl-0">.</span><span class="hl-8">Container</span><span class="hl-0">()</span><br/><span class="hl-0">   </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">worldPosition</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">centerToTile</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span><br/><span class="hl-0">   </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">x</span><br/><span class="hl-0">   </span><span class="hl-2">mapCOntainer</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0"> = </span><span class="hl-2">worldPosition</span><span class="hl-0">.</span><span class="hl-2">y</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
-<div class="tsd-comment tsd-typography"><p>The map coordinates to center</p>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The tile coordinates to center</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#centerToTile">centerToTile</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L228">Tilemap.ts:228</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L412">Tilemap.ts:412</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="collisionMap" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>collision<wbr/>Map</span><a href="#collisionMap" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="collisionMap.collisionMap-1">collision<wbr/>Map<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a>, include<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><a href="#collisionMap.collisionMap-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Returns a three-dimensional map of all tiles that collide with a projected world coordinate
+Optionally takes a callback with the backing value and tile coordinates to include in the ray&#39;s path</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:14:30 PM</p>
+
+<h3>Returns</h3>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">foo</span><span class="hl-0"> = </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">(</span><span class="hl-3">&#39;foo&#39;</span><span class="hl-0">, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span><br/><span class="hl-0"> </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">bar</span><span class="hl-0"> = </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">add</span><span class="hl-0">(</span><span class="hl-3">&#39;bar&#39;</span><span class="hl-0">, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span><br/><span class="hl-0"> </span><span class="hl-8">hits</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0"> }) === </span><span class="hl-2">Map</span><span class="hl-0">{ </span><span class="hl-9">0</span><span class="hl-0">: </span><span class="hl-2">Map</span><span class="hl-0">{ </span><span class="hl-9">0</span><span class="hl-0">: </span><span class="hl-2">Map</span><span class="hl-0">{ </span><span class="hl-9">0</span><span class="hl-0">: </span><span class="hl-2">foo</span><span class="hl-0"> } }, </span><span class="hl-9">1</span><span class="hl-0">: </span><span class="hl-2">Map</span><span class="hl-0">{ </span><span class="hl-9">1</span><span class="hl-0">: </span><span class="hl-2">Map</span><span class="hl-0">{ </span><span class="hl-9">1</span><span class="hl-0">: </span><span class="hl-2">bar</span><span class="hl-0"> } } }</span>
+</code></pre>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>point: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> include: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures tsd-kind-type-literal">
+<li class="tsd-signature"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span>, tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>t: <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h5></li>
+<li>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L378">IsoTilemap.ts:378</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="get" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get</span><a href="#get" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="get.get-1">get<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#get.get-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Get a tile at given map coordinates</p>
+<div class="tsd-comment tsd-typography"><p>Get a single tile at given map coordinates</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3><p>The tile at given coordinates</p>
 
@@ -436,18 +583,20 @@ If given tile is tall enough to occupy multiple z-layers at the base tile depth,
 <ul class="tsd-parameter-list">
 <li>
 <h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
-<div class="tsd-comment tsd-typography"><p>Tile to get at given coordinates. If no z is provided, it defaults to 0.</p>
+<div class="tsd-comment tsd-typography"><p>Map tile coordinates. If no z is provided, it defaults to 0.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#get">get</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L104">Tilemap.ts:104</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L240">Tilemap.ts:240</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="getBounds" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Bounds</span><a href="#getBounds" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="getBounds.getBounds-1">get<wbr/>Bounds<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/IBox.html" class="tsd-signature-type" data-tsd-kind="Type alias">IBox</a><a href="#getBounds.getBounds-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Calculates the map bounds of the current tilemap.</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3>
 <h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0">, </span><span class="hl-7">width</span><span class="hl-0">, </span><span class="hl-7">height</span><span class="hl-0">, </span><span class="hl-7">depth</span><span class="hl-0"> } = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">getBounds</span><span class="hl-0">()</span>
@@ -456,24 +605,25 @@ If given tile is tall enough to occupy multiple z-layers at the base tile depth,
 <h4 class="tsd-returns-title">Returns <a href="../types/IBox.html" class="tsd-signature-type" data-tsd-kind="Type alias">IBox</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getBounds">getBounds</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L282">Tilemap.ts:282</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L481">Tilemap.ts:481</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="getColumn" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Column</span><a href="#getColumn" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-<li class="tsd-signature tsd-anchor-link" id="getColumn.getColumn-1">get<wbr/>Column<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a>, map<span class="tsd-signature-symbol">?: </span><a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">[]</span><a href="#getColumn.getColumn-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="getColumn.getColumn-1">get<wbr/>Column<span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a>, map<span class="tsd-signature-symbol">?: </span><a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">[]</span><a href="#getColumn.getColumn-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Get an array of values from a map at given x,y coordinates.</p>
+<div class="tsd-comment tsd-typography"><p>Get an array of values from a map at given x,y coordinates, from ascending z index</p>
 
-<h3>Returns</h3><p>Array of values at given x,y coordinates. If the map is multiple z-layers deep, but the tile x,y coordinate doesn&#39;t exist in all layers, the returned array will contain null entries.</p>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">tiles</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">getColumn</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span><br/><span class="hl-0">   </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">depths</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">getColumn</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> }, </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-2">depthMap</span><span class="hl-0">)</span>
+<h3>Returns</h3>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> [</span><span class="hl-7">z0Tile</span><span class="hl-0">, </span><span class="hl-7">z1Tile</span><span class="hl-0">, </span><span class="hl-7">z2Tile</span><span class="hl-0">] = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">getColumn</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span>
 </code></pre>
 </div>
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
 <li>
-<h4>C</h4></li></ul></section>
+<h4>C = <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -482,23 +632,46 @@ If given tile is tall enough to occupy multiple z-layers at the base tile depth,
 <div class="tsd-comment tsd-typography"><p>Map coordinates to get at each z-layer</p>
 </div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> map: <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-<div class="tsd-comment tsd-typography"><p>Object to search against, defaults to <code>this.map</code>, but will also work if called with <code>this.depthMap</code>, in which case numerical tile depths are returned.</p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> map: <a href="../types/MapThree.html" class="tsd-signature-type" data-tsd-kind="Type alias">MapThree</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Map to search against, defaults to <code>this.map</code></p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">C</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#getColumn">getColumn</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L120">Tilemap.ts:120</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L258">Tilemap.ts:258</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getDimensionsColumn" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>get<wbr/>Dimensions<wbr/>Column</span><a href="#getDimensionsColumn" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="getDimensionsColumn.getDimensionsColumn-1">get<wbr/>Dimensions<wbr/>Column<span class="tsd-signature-symbol">(</span>tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/ExtendedBox.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExtendedBox</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><a href="#getDimensionsColumn.getDimensionsColumn-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get an array of tile dimensions from a map at given x,y coordinates, from ascending z index</p>
+
+<h3>Date</h3><p>3/14/2023 - 2:36:28 PM</p>
+
+<h3>Returns</h3>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> [...</span><span class="hl-7">boxDimensions</span><span class="hl-0">] = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">getDimensionsColumn</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span>
+</code></pre>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>tile: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../types/ExtendedBox.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExtendedBox</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L311">IsoTilemap.ts:311</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="move" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>move</span><a href="#move" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-<li class="tsd-signature tsd-anchor-link" id="move.move-1">move<span class="tsd-signature-symbol">(</span>from<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, to<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a>, origin<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#move.move-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="move.move-1">move<span class="tsd-signature-symbol">(</span>from<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, to<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a>, origin<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#move.move-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Moves a tile from given coordinate to another coordinate</p>
 
-<h3>Returns</h3><p>A point at which to place this tile in screen space</p>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">position</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">move</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> }, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span>
+<h3>Returns</h3><p>A point at which to place the moved tile relative to the world origin</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0">, </span><span class="hl-7">z</span><span class="hl-0"> } = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">move</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> }, { </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span><br/><span class="hl-0">   </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">position</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0"> = </span><span class="hl-2">x</span><br/><span class="hl-0">   </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">position</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0"> = </span><span class="hl-2">y</span><br/><span class="hl-0">   </span><span class="hl-2">sprite</span><span class="hl-0">.</span><span class="hl-2">zIndex</span><span class="hl-0"> = </span><span class="hl-2">z</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
@@ -513,27 +686,50 @@ If given tile is tall enough to occupy multiple z-layers at the base tile depth,
 <div class="tsd-comment tsd-typography"><p>The map coordinates to move the tile to</p>
 </div></li>
 <li>
-<h5>dimensions: <a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> dimensions: <a href="../interfaces/IRectangle.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle</a><span class="tsd-signature-symbol"> = ...</span></h5>
 <div class="tsd-comment tsd-typography"><p>The dimensions of the tile, defaults to <code>this.baseTileDimensions</code></p>
 </div></li>
 <li>
-<h5>origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
 <div class="tsd-comment tsd-typography"><p>The origin point of the tile, defaults to <code>this.baseTileOrigin</code></p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#move">move</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L140">Tilemap.ts:140</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L284">Tilemap.ts:284</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="recalculateBounds" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>recalculate<wbr/>Bounds</span><a href="#recalculateBounds" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
 <li class="tsd-signature tsd-anchor-link" id="recalculateBounds.recalculateBounds-1">recalculate<wbr/>Bounds<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><a href="#recalculateBounds.recalculateBounds-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Recalculate bounds</p>
+<li class="tsd-description"><code class="tsd-tag ts-flagProtected">Protected</code> 
+<div class="tsd-comment tsd-typography"><p>Recalculate bounds given a new point modifying the floors and ceilings of all axes</p>
 
-<h3>Returns</h3><p>An array containing the elements that were deleted.</p>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Example</h3><pre><code class="language-ts"><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">recalculateBounds</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> -</span><span class="hl-9">1</span><span class="hl-0"> })</span>
+</code></pre>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#recalculateBounds">recalculateBounds</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L507">Tilemap.ts:507</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="remove" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>remove</span><a href="#remove" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="remove.remove-1">remove<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#remove.remove-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Remove a tile from the given point coordinates.</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+
+<h3>Returns</h3><p>Removed tile, if any</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">tile</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">remove</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0"> })</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
@@ -543,75 +739,85 @@ If given tile is tall enough to occupy multiple z-layers at the base tile depth,
 <h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
 <div class="tsd-comment tsd-typography"><p>Map coordinates to remove</p>
 </div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
-<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#recalculateBounds">recalculateBounds</a></p>
-<ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L307">Tilemap.ts:307</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="remove" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>remove</span><a href="#remove" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="remove.remove-1">remove<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><a href="#remove.remove-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
-<li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Remove a tile from the given point coordinates.
-If the tile exists at multiple z-layers, it&#39;ll remove references to the tile at those layers as well.</p>
-
-<h3>Returns</h3><p>The tile that existed at the given point, or null if there was no tile.</p>
-
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">removedTile</span><span class="hl-0"> = </span><span class="hl-2">isoTilemap</span><span class="hl-0">.</span><span class="hl-8">remove</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span>
-</code></pre>
-</div>
-<div class="tsd-parameters">
-<h4 class="tsd-parameters-title">Parameters</h4>
-<ul class="tsd-parameter-list">
-<li>
-<h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
-<div class="tsd-comment tsd-typography"><p>The map coordinates from which to remove a tile</p>
-</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#remove">remove</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L118">IsoTilemap.ts:118</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="toPoint" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>to<wbr/>Point</span><a href="#toPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L226">IsoTilemap.ts:226</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="toScreenPoint" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>to<wbr/>Screen<wbr/>Point</span><a href="#toScreenPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-<li class="tsd-signature tsd-anchor-link" id="toPoint.toPoint-1">to<wbr/>Point<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#toPoint.toPoint-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="toScreenPoint.toScreenPoint-1">to<wbr/>Screen<wbr/>Point<span class="tsd-signature-symbol">(</span>tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#toScreenPoint.toScreenPoint-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Project a tile coordinate to screen space coordinate</p>
+<div class="tsd-comment tsd-typography"><p>Project a tile coordinate to an absolute screen space coordinate relative to the window, taking world offset / scale into account</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
 <h3>Returns</h3><p>Screen space point</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">position</span><span class="hl-0"> = </span><span class="hl-2">tilemap</span><span class="hl-0">.</span><span class="hl-8">toPoint</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">1</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> })</span>
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> { </span><span class="hl-7">x</span><span class="hl-0">, </span><span class="hl-7">y</span><span class="hl-0"> } = </span><span class="hl-2">map</span><span class="hl-0">.</span><span class="hl-8">toScreenPoint</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0">, </span><span class="hl-2">z:</span><span class="hl-0"> </span><span class="hl-9">0</span><span class="hl-0"> });</span><br/><span class="hl-0"> </span><span class="hl-2">debugGraphics</span><span class="hl-0">.</span><span class="hl-8">lineStyle</span><span class="hl-0">(</span><span class="hl-9">2</span><span class="hl-0">, </span><span class="hl-9">0xff00ff</span><span class="hl-0">, </span><span class="hl-9">1</span><span class="hl-0">);</span><br/><span class="hl-0"> </span><span class="hl-2">debugGraphics</span><span class="hl-0">.</span><span class="hl-8">drawRect</span><span class="hl-0">(</span><br/><span class="hl-0">   </span><span class="hl-2">x</span><span class="hl-0"> - </span><span class="hl-9">32</span><span class="hl-0"> * </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">scale</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0">,</span><br/><span class="hl-0">   </span><span class="hl-2">y</span><span class="hl-0"> - </span><span class="hl-9">32</span><span class="hl-0"> * </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">scale</span><span class="hl-0">.</span><span class="hl-2">y</span><span class="hl-0">,</span><br/><span class="hl-0">   </span><span class="hl-9">64</span><span class="hl-0"> * </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">scale</span><span class="hl-0">.</span><span class="hl-2">x</span><span class="hl-0">,</span><br/><span class="hl-0">   </span><span class="hl-9">32</span><span class="hl-0"> * </span><span class="hl-2">mapContainer</span><span class="hl-0">.</span><span class="hl-2">scale</span><span class="hl-0">.</span><span class="hl-2">y</span><br/><span class="hl-0"> );</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
 <div class="tsd-comment tsd-typography"><p>The tile coordinates</p>
 </div></li>
 <li>
-<h5>dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
 <div class="tsd-comment tsd-typography"><p>The dimensions of the tile, defaults to <code>this.baseTileDimensions</code></p>
 </div></li>
 <li>
-<h5>origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
 <div class="tsd-comment tsd-typography"><p>The origin point of the tile, defaults to <code>this.baseTileOrigin</code></p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
-<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#toPoint">toPoint</a></p>
+<p>Inherited from <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#toScreenPoint">toScreenPoint</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/Tilemap.ts#L180">Tilemap.ts:180</a></li></ul></aside></li></ul></section>
-<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toTile" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><span>to<wbr/>Tile</span><a href="#toTile" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/Tilemap.ts#L338">Tilemap.ts:338</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toWorldPoint" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>to<wbr/>World<wbr/>Point</span><a href="#toWorldPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="toTile.toTile-1">to<wbr/>Tile<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">?: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#toTile.toTile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="toWorldPoint.toWorldPoint-1">to<wbr/>World<wbr/>Point<span class="tsd-signature-symbol">(</span>tile<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#toWorldPoint.toWorldPoint-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Project a screen point to tile point</p>
+<div class="tsd-comment tsd-typography"><p>Project a tile coordinate to a world coordinate, not taking world offset / scale into account</p>
 
-<h3>Returns</h3><p>The tile coordinate in the map</p>
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
 
-<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">tilePosition</span><span class="hl-0"> = </span><span class="hl-2">isoTilemap</span><span class="hl-0">.</span><span class="hl-8">toTile</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">300</span><span class="hl-0"> })</span>
+<h3>Returns</h3><p>World space point</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>tile: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
+<div class="tsd-comment tsd-typography"><p>The tile coordinates</p>
+</div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>The dimensions of the tile, defaults to <code>this.baseTileDimensions</code></p>
+</div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>The origin point of the tile, defaults to <code>this.baseTileOrigin</code></p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
+<p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#toWorldPoint">toWorldPoint</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L282">IsoTilemap.ts:282</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="worldToTile" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>world<wbr/>To<wbr/>Tile</span><a href="#worldToTile" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="worldToTile.worldToTile-1">world<wbr/>To<wbr/>Tile<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a>, dimensions<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a>, origin<span class="tsd-signature-symbol">??: </span><a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a><a href="#worldToTile.worldToTile-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Project a world coordinate to a tile coordinate, not taking world offset / scale into account.</p>
+
+<h3>Date</h3><p>3/14/2023 - 12:44:55 PM</p>
+
+<h3>Returns</h3><p>tile coordinate</p>
+
+<h3>Example</h3><pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">tileCoord</span><span class="hl-0"> = </span><span class="hl-2">tileMap</span><span class="hl-0">.</span><span class="hl-8">worldToTile</span><span class="hl-0">(</span><span class="hl-8">transformGlobalEventToWorldCoordinates</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-2">e</span><span class="hl-0">.</span><span class="hl-2">offsetX</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-2">e</span><span class="hl-0">.</span><span class="hl-2">offsetY</span><span class="hl-0"> }))</span><br/><span class="hl-0"> </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-7">tileCoord</span><span class="hl-0"> = </span><span class="hl-2">tileMap</span><span class="hl-0">.</span><span class="hl-8">worldToTile</span><span class="hl-0">({ </span><span class="hl-2">x:</span><span class="hl-0"> </span><span class="hl-9">400</span><span class="hl-0">, </span><span class="hl-2">y:</span><span class="hl-0"> </span><span class="hl-9">300</span><span class="hl-0"> })</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
@@ -619,20 +825,20 @@ If the tile exists at multiple z-layers, it&#39;ll remove references to the tile
 <ul class="tsd-parameter-list">
 <li>
 <h5>point: <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h5>
-<div class="tsd-comment tsd-typography"><p>The screen coordinates to project</p>
+<div class="tsd-comment tsd-typography"><p>The world coordinates</p>
 </div></li>
 <li>
-<h5>dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
-<div class="tsd-comment tsd-typography"><p>The dimensions of each tile on the map, defaults to <code>this.baseTileDimensions</code></p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> dimensions: <a href="../interfaces/IRectangle3.html" class="tsd-signature-type" data-tsd-kind="Interface">IRectangle3</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>The dimensions of the tile, defaults to <code>this.baseTileDimensions</code></p>
 </div></li>
 <li>
-<h5>origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
-<div class="tsd-comment tsd-typography"><p>The origin point of the tile</p>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> origin: <a href="../interfaces/IPoint.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint</a><span class="tsd-signature-symbol"> = ...</span></h5>
+<div class="tsd-comment tsd-typography"><p>The origin point of the tile, defaults to <code>this.baseTileOrigin</code></p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/IPoint3.html" class="tsd-signature-type" data-tsd-kind="Interface">IPoint3</a></h4><aside class="tsd-sources">
-<p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#toTile">toTile</a></p>
+<p>Overrides <a href="Tilemap.html">Tilemap</a>.<a href="Tilemap.html#worldToTile">worldToTile</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f6ec788/packages/iceoh/src/IsoTilemap.ts#L144">IsoTilemap.ts:144</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/sammccord/iceoh/blob/f0cbf68/packages/iceoh/src/IsoTilemap.ts#L256">IsoTilemap.ts:256</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -669,29 +875,32 @@ If the tile exists at multiple z-layers, it&#39;ll remove references to the tile
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#baseTileOrigin" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>base<wbr/>Tile<wbr/>Origin</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#bounds" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>bounds</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="IsoTilemap.html#clamp" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>clamp</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class"><a href="IsoTilemap.html#depthMap" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>depth<wbr/>Map</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#getGlobalDimensions" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>get<wbr/>Global<wbr/>Dimensions</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#getScreenDimensions" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>get<wbr/>Screen<wbr/>Dimensions</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#getWorldPosition" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>get<wbr/>World<wbr/>Position</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#getWorldScale" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>get<wbr/>World<wbr/>Scale</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#map" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>map</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#tiles" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>tiles</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class"><a href="IsoTilemap.html#tileDimensions" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>tile<wbr/>Dimensions</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#worldOrigin" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>world<wbr/>Origin</a></li>
 <li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#centerTile" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-262144-path"></use><use href="#icon-262144-text"></use></svg>center<wbr/>Tile</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="IsoTilemap.html#_getAbsolutePosition" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_get<wbr/>Absolute<wbr/>Position</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="IsoTilemap.html#_project" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_project</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="IsoTilemap.html#_unproject" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>_unproject</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#add" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>add</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#castRay" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>cast<wbr/>Ray</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#center" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>center</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#centerToPoint" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>center<wbr/>To<wbr/>Point</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#centerToTile" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>center<wbr/>To<wbr/>Tile</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#collisionMap" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>collision<wbr/>Map</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#get" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#getBounds" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Bounds</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#getColumn" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Column</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#getDimensionsColumn" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>get<wbr/>Dimensions<wbr/>Column</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#move" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>move</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a href="IsoTilemap.html#recalculateBounds" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>recalculate<wbr/>Bounds</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#remove" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>remove</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#toPoint" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Point</a></li>
-<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#toTile" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Tile</a></li></ul></li></ul></nav></div></div>
+<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="IsoTilemap.html#toScreenPoint" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>Screen<wbr/>Point</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#toWorldPoint" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>to<wbr/>World<wbr/>Point</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="IsoTilemap.html#worldToTile" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>world<wbr/>To<wbr/>Tile</a></li></ul></li></ul></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div><script src="../assets/main.js"></script></body></html>

@@ -30,7 +30,7 @@ export default function basicIso() {
   // mapContainer.position.x += 64;
   // mapContainer.position.y += 64;
 
-  Assets.load("mushy.json").then((_sheet) => {
+  Assets.load("/mushy.json").then((_sheet) => {
     sheet = _sheet;
     for (let y = 0; y < 5; y++) {
       for (let x = 0; x < 5; x++) {
@@ -104,7 +104,7 @@ export default function basicIso() {
 
     const column = map.getColumn(tile).filter((n) => !!n);
     if (column.length === 1) {
-      const sprite = Sprite.from("tile2x.png");
+      const sprite = Sprite.from("/tile2x.png");
       sprite.anchor.set(0.5);
       const position = map.add(
         { x: tile.x, y: tile.y, z: 1 },
@@ -116,7 +116,7 @@ export default function basicIso() {
       sprite.position.set(position.x, position.y);
       mapContainer.addChild(sprite);
     } else if (column.length === 2) {
-      const sprite = Sprite.from("twostack.png");
+      const sprite = Sprite.from("/twostack.png");
       sprite.anchor.set(0.5);
       const position = map.add(
         { x: tile.x, y: tile.y, z: 2 },
@@ -127,7 +127,7 @@ export default function basicIso() {
       sprite.position.set(position.x, position.y);
       mapContainer.addChild(sprite);
     } else if (column.length > 2) {
-      const sprite = Sprite.from("tile.png");
+      const sprite = Sprite.from("/tile.png");
       sprite.anchor.set(0.5);
       const position = map.add(
         { x: tile.x, y: tile.y, z: column.length + 1 },
