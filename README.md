@@ -5,8 +5,8 @@
 
 > A small, simple, 0 dependency JS library for isometric and 2d tilemaps
 
-![](https://img.badgesize.io/sammccord/iceoh/master/packages/iceoh/dist/index.umd.js.svg)
-![](https://img.badgesize.io/sammccord/iceoh/master/packages/iceoh/dist/index.umd.js.svg?compression=gzip)
+![](https://img.shields.io/bundlephobia/min/iceoh/3.0.0)
+![](https://img.shields.io/bundlephobia/minzip/iceoh/3.0.0)
 
 ## Features
 
