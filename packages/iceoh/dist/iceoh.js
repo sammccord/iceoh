@@ -1,8 +1,8 @@
-var P = Object.defineProperty;
-var M = (r, i, e) => i in r ? P(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
-var l = (r, i, e) => (M(r, typeof i != "symbol" ? i + "" : i, e), e);
-const W = Math.atan(0.5), C = Math.PI / 6, L = Math.PI / 4, v = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, _ = { x: 1, y: 1 };
-var H = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(H || {});
+var M = Object.defineProperty;
+var W = (r, i, e) => i in r ? M(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
+var l = (r, i, e) => (W(r, typeof i != "symbol" ? i + "" : i, e), e);
+const v = Math.atan(0.5), B = Math.PI / 6, L = Math.PI / 4, _ = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, H = { x: 1, y: 1 };
+var A = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(A || {});
 function k(r) {
   const i = [];
   for (const e of Array.from(r.keys()).sort()) {
@@ -29,7 +29,7 @@ function y(r, i, e) {
   }
   return s.set(i[0], e), e;
 }
-function D(r, i, e) {
+function w(r, i, e) {
   for (var s = r; i.length; ) {
     var t = i.shift();
     let n = s.get(t);
@@ -45,8 +45,8 @@ function D(r, i, e) {
   }
   return s;
 }
-function A(r, i) {
-  return D(r, [i.z || 0, i.x, i.y]);
+function j(r, i) {
+  return w(r, [i.z || 0, i.x, i.y]);
 }
 function z(r, i) {
   let e = r;
@@ -65,15 +65,21 @@ function N(r, i) {
     (i.x - r.x) * (i.x - r.x) + (i.y - r.y) * (i.y - r.y)
   );
 }
-function j(r) {
+function Y(r) {
+  return {
+    x: D(r.map((i) => i.x)) / r.length,
+    y: D(r.map((i) => i.y)) / r.length
+  };
+}
+function D(r) {
   return r.reduce((i, e) => e ? i + e : i, 0);
 }
 const a = 0;
-function Y(r, i) {
+function X(r, i) {
   let e = i.x - r.x, s = i.y - r.y;
   return e === a && s < a ? "N" : e > a && s < a ? "NE" : e > a && s === a ? "E" : e > a && s > a ? "SE" : e === a && s > a ? "S" : e < a && s > a ? "SW" : e < a && s === a ? "W" : e < a && s < a ? "NW" : "NONE";
 }
-class E {
+class C {
   constructor({
     worldOrigin: i,
     baseTileOrigin: e,
@@ -94,18 +100,18 @@ class E {
       y: { min: 0, max: 0 },
       z: { min: 0, max: 0 }
     });
-    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s, this.getScreenDimensions = t, this.getWorldPosition = n || (() => v), this.getWorldScale = h || (() => _);
+    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s, this.getScreenDimensions = t, this.getWorldPosition = n || (() => _), this.getWorldScale = h || (() => H);
   }
   add(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
     return y(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
   }
   get(i) {
-    return A(this.map, i);
+    return j(this.map, i);
   }
   getColumn(i, e) {
     const s = [];
     for (const [t, n] of e || this.map)
-      s[t] = D(n, [i.x, i.y]);
+      s[t] = w(n, [i.x, i.y]);
     return s;
   }
   move(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
@@ -182,8 +188,8 @@ class E {
     };
   }
 }
-class X extends E {
-  constructor({ angle: e = W, clamp: s = !0, ...t }) {
+class F extends C {
+  constructor({ angle: e = v, clamp: s = !0, ...t }) {
     super({ ...t });
     l(this, "angle");
     l(this, "angleCos");
@@ -237,7 +243,7 @@ class X extends E {
       return null;
     for (const [t, n] of this.map)
       try {
-        D(n, [e.x, e.y]) === s && (z(this.tileDimensions, [t, e.x, e.y]), z(this.map, [t, e.x, e.y]));
+        w(n, [e.x, e.y]) === s && (z(this.tileDimensions, [t, e.x, e.y]), z(this.map, [t, e.x, e.y]));
       } catch {
       }
     return this.recalculateBounds(e), s;
@@ -254,7 +260,7 @@ class X extends E {
       this._getAbsolutePosition(e),
       s,
       t,
-      j(
+      D(
         this.getDimensionsColumn(e).map((n) => (n == null ? void 0 : n.depth) || this.baseTileDimensions.depth).slice(1, e.z || 0)
       )
     );
@@ -293,9 +299,9 @@ class X extends E {
       })) {
         if (!d)
           continue;
-        const { x: g, y: x, value: b, z: f, origin: m, width: w, height: S, tile: O } = d;
-        if (e.x >= g - w * m.x && e.x <= g + w * m.x && e.y >= x - S * m.y && e.y <= x + S * m.y) {
-          if (s && !s(b, O))
+        const { x: g, y: x, value: b, z: f, origin: m, width: S, height: O, tile: P } = d;
+        if (e.x >= g - S * m.x && e.x <= g + S * m.x && e.y >= x - O * m.y && e.y <= x + O * m.y) {
+          if (s && !s(b, P))
             continue;
           c = !0, y(t, [f, o, u], b);
         } else if (c)
@@ -325,21 +331,22 @@ class X extends E {
   }
 }
 export {
-  W as CLASSIC,
-  H as DIRECTION,
-  _ as FULL,
-  C as ISOMETRIC,
-  X as IsoTilemap,
+  v as CLASSIC,
+  A as DIRECTION,
+  H as FULL,
+  B as ISOMETRIC,
+  F as IsoTilemap,
   T as MIDDLE,
   L as MILITARY,
-  v as TOP_LEFT,
-  E as Tilemap,
+  _ as TOP_LEFT,
+  C as Tilemap,
   k as collectRay,
-  D as get,
-  Y as getDirection,
+  w as get,
+  Y as getCenter,
+  X as getDirection,
   N as getDistance,
-  A as pointGet,
+  j as pointGet,
   z as remove,
   y as set,
-  j as sum
+  D as sum
 };
