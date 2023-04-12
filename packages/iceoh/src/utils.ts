@@ -88,11 +88,11 @@ export enum DIRECTION {
  */
 export function collectRay<T>(grids: MapThree<T>): T[] {
   const entries: T[] = [];
-  for (const z of Array.from(grids.keys()).sort()) {
+  for (const z of [...grids.keys()].sort()) {
     const zPlane = grids.get(z);
-    for (const x of Array.from(zPlane.keys()).sort()) {
+    for (const x of [...zPlane.keys()].sort()) {
       const xPlane = zPlane.get(x);
-      for (const y of Array.from(xPlane.keys()).sort()) {
+      for (const y of [...xPlane.keys()].sort()) {
         entries.push(xPlane.get(y));
       }
     }

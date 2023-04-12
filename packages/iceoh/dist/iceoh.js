@@ -1,36 +1,36 @@
 var M = Object.defineProperty;
-var W = (r, i, e) => i in r ? M(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
-var l = (r, i, e) => (W(r, typeof i != "symbol" ? i + "" : i, e), e);
-const v = Math.atan(0.5), B = Math.PI / 6, L = Math.PI / 4, _ = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, H = { x: 1, y: 1 };
-var A = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(A || {});
-function k(r) {
+var W = (h, i, e) => i in h ? M(h, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : h[i] = e;
+var l = (h, i, e) => (W(h, typeof i != "symbol" ? i + "" : i, e), e);
+const v = Math.atan(0.5), A = Math.PI / 6, L = Math.PI / 4, _ = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, H = { x: 1, y: 1 };
+var j = /* @__PURE__ */ ((h) => (h.NONE = "NONE", h.N = "N", h.NE = "NE", h.E = "E", h.SE = "SE", h.S = "S", h.SW = "SW", h.W = "W", h.NW = "NW", h))(j || {});
+function k(h) {
   const i = [];
-  for (const e of Array.from(r.keys()).sort()) {
-    const s = r.get(e);
-    for (const t of Array.from(s.keys()).sort()) {
+  for (const e of [...h.keys()].sort()) {
+    const s = h.get(e);
+    for (const t of [...s.keys()].sort()) {
       const n = s.get(t);
-      for (const h of Array.from(n.keys()).sort())
-        i.push(n.get(h));
+      for (const r of [...n.keys()].sort())
+        i.push(n.get(r));
     }
   }
   return i;
 }
-function y(r, i, e) {
-  let s = r;
+function g(h, i, e) {
+  let s = h;
   for (; i.length - 1; ) {
     var t = i.shift();
     let n = s.get(t);
     if (n)
       s = n;
     else {
-      const h = /* @__PURE__ */ new Map();
-      s.set(t, h), s = h;
+      const r = /* @__PURE__ */ new Map();
+      s.set(t, r), s = r;
     }
   }
   return s.set(i[0], e), e;
 }
-function w(r, i, e) {
-  for (var s = r; i.length; ) {
+function w(h, i, e) {
+  for (var s = h; i.length; ) {
     var t = i.shift();
     let n = s.get(t);
     if (!n) {
@@ -45,11 +45,11 @@ function w(r, i, e) {
   }
   return s;
 }
-function j(r, i) {
-  return w(r, [i.z || 0, i.x, i.y]);
+function C(h, i) {
+  return w(h, [i.z || 0, i.x, i.y]);
 }
-function z(r, i) {
-  let e = r;
+function z(h, i) {
+  let e = h;
   for (; i.length - 1; ) {
     var s = i.shift();
     let t = e.get(s);
@@ -60,33 +60,33 @@ function z(r, i) {
   }
   return e.delete(i[0]);
 }
-function N(r, i) {
+function N(h, i) {
   return Math.sqrt(
-    (i.x - r.x) * (i.x - r.x) + (i.y - r.y) * (i.y - r.y)
+    (i.x - h.x) * (i.x - h.x) + (i.y - h.y) * (i.y - h.y)
   );
 }
-function Y(r) {
+function Y(h) {
   return {
-    x: D(r.map((i) => i.x)) / r.length,
-    y: D(r.map((i) => i.y)) / r.length
+    x: D(h.map((i) => i.x)) / h.length,
+    y: D(h.map((i) => i.y)) / h.length
   };
 }
-function D(r) {
-  return r.reduce((i, e) => e ? i + e : i, 0);
+function D(h) {
+  return h.reduce((i, e) => e ? i + e : i, 0);
 }
 const a = 0;
-function X(r, i) {
-  let e = i.x - r.x, s = i.y - r.y;
+function X(h, i) {
+  let e = i.x - h.x, s = i.y - h.y;
   return e === a && s < a ? "N" : e > a && s < a ? "NE" : e > a && s === a ? "E" : e > a && s > a ? "SE" : e === a && s > a ? "S" : e < a && s > a ? "SW" : e < a && s === a ? "W" : e < a && s < a ? "NW" : "NONE";
 }
-class C {
+class E {
   constructor({
     worldOrigin: i,
     baseTileOrigin: e,
     baseTileDimensions: s,
     getScreenDimensions: t,
     getWorldPosition: n,
-    getWorldScale: h
+    getWorldScale: r
   }) {
     l(this, "getScreenDimensions");
     l(this, "getWorldPosition");
@@ -100,13 +100,13 @@ class C {
       y: { min: 0, max: 0 },
       z: { min: 0, max: 0 }
     });
-    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s, this.getScreenDimensions = t, this.getWorldPosition = n || (() => _), this.getWorldScale = h || (() => H);
+    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s, this.getScreenDimensions = t, this.getWorldPosition = n || (() => _), this.getWorldScale = r || (() => H);
   }
   add(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    return y(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
+    return g(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
   }
   get(i) {
-    return j(this.map, i);
+    return C(this.map, i);
   }
   getColumn(i, e) {
     const s = [];
@@ -125,8 +125,8 @@ class C {
       return z(this.map, [i.z || 0, i.x, i.y]), this.recalculateBounds(i), e;
   }
   toScreenPoint(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
-    const t = this.toWorldPoint(i, e, s), n = this.getWorldScale(), h = this.getWorldPosition();
-    return t.x = t.x * n.x + h.x, t.y = t.y * n.y + h.y, t;
+    const t = this.toWorldPoint(i, e, s), n = this.getWorldScale(), r = this.getWorldPosition();
+    return t.x = t.x * n.x + r.x, t.y = t.y * n.y + r.y, t;
   }
   toWorldPoint(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
     return this._project(this._getAbsolutePosition(i), e, s);
@@ -169,10 +169,10 @@ class C {
     i.x < this.bounds.x.min && (this.bounds.x.min = i.x), i.x > this.bounds.x.max && (this.bounds.x.max = i.x), i.y < this.bounds.y.min && (this.bounds.y.min = i.y), i.y > this.bounds.y.max && (this.bounds.y.max = i.y), i.z !== void 0 && (i.z < this.bounds.z.min && (this.bounds.z.min = i.z), i.z > this.bounds.z.max && (this.bounds.z.max = i.z));
   }
   _project(i, e = this.baseTileDimensions, s = this.baseTileOrigin, t = 0) {
-    const { width: n, height: h } = this.getScreenDimensions();
+    const { width: n, height: r } = this.getScreenDimensions();
     return {
       x: i.x + n * this.worldOrigin.x,
-      y: i.y + h * this.worldOrigin.y,
+      y: i.y + r * this.worldOrigin.y,
       z: i.z || 0
     };
   }
@@ -188,7 +188,7 @@ class C {
     };
   }
 }
-class F extends C {
+class F extends E {
   constructor({ angle: e = v, clamp: s = !0, ...t }) {
     super({ ...t });
     l(this, "angle");
@@ -205,37 +205,37 @@ class F extends C {
     }, this.baseSurfaceHeight = this.baseTileDimensions.height - this.baseTileDimensions.depth, this.baseSurfaceHalfHeight = this.baseSurfaceHeight / 2;
   }
   add(e, s, t = this.baseTileDimensions, n = this.baseTileOrigin) {
-    const h = this.toWorldPoint(s, t, n);
+    const r = this.toWorldPoint(s, t, n);
     if (t !== this.baseTileDimensions) {
       let c = (t.depth || this.baseTileDimensions.depth) / this.baseTileDimensions.depth;
       for (let o = c, u = s.z || 0; o > 0; o--, u++)
-        o > 1 ? y(this.tileDimensions, [u, s.x, s.y], {
+        o > 1 ? g(this.tileDimensions, [u, s.x, s.y], {
           ...t,
           origin: n,
           depth: this.baseTileDimensions.depth,
           z: u,
-          x: h.x,
-          y: h.y,
+          x: r.x,
+          y: r.y,
           value: e
-        }) : y(this.tileDimensions, [u, s.x, s.y], {
+        }) : g(this.tileDimensions, [u, s.x, s.y], {
           ...t,
           origin: n,
           depth: this.baseTileDimensions.depth * o,
           z: u,
-          x: h.x,
-          y: h.y,
+          x: r.x,
+          y: r.y,
           value: e
-        }), y(this.map, [u, s.x, s.y], s);
+        }), g(this.map, [u, s.x, s.y], s);
     } else
-      y(this.tileDimensions, [s.z || 0, s.x, s.y], {
+      g(this.tileDimensions, [s.z || 0, s.x, s.y], {
         ...t,
         origin: n,
         z: s.z || 0,
-        x: h.x,
-        y: h.y,
+        x: r.x,
+        y: r.y,
         value: e
-      }), y(this.map, [s.z || 0, s.x, s.y], s);
-    return this.recalculateBounds(s), h;
+      }), g(this.map, [s.z || 0, s.x, s.y], s);
+    return this.recalculateBounds(s), r;
   }
   remove(e) {
     const s = this.get(e);
@@ -249,11 +249,11 @@ class F extends C {
     return this.recalculateBounds(e), s;
   }
   worldToTile(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    const n = this._unproject(e), h = {
+    const n = this._unproject(e), r = {
       x: s.width * t.x,
       y: s.width * t.y
     };
-    return n.x = Math.floor((n.x + h.x) / h.x), n.y = Math.floor((n.y + h.y) / h.y), n.z = n.z || 0, n;
+    return n.x = Math.floor((n.x + r.x) / r.x), n.y = Math.floor((n.y + r.y) / r.y), n.z = n.z || 0, n;
   }
   toWorldPoint(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
     return this._project(
@@ -271,39 +271,39 @@ class F extends C {
   castRay(e, s) {
     const t = this.worldToTile(e);
     for (let n = this.bounds.z.max; n >= this.bounds.z.min; n--) {
-      const h = t.x + n, c = t.y + n;
+      const r = t.x + n, c = t.y + n;
       for (let o of this.getDimensionsColumn({
-        x: h,
+        x: r,
         y: c
       }).reverse()) {
         if (!o)
           continue;
-        const { x: u, y: d, value: g, origin: x, width: b, height: f, tile: m } = o;
-        if (e.x >= u - b * x.x && e.x <= u + b * x.x && e.y >= d - f * x.y && e.y <= d + f * x.y)
+        const { x: u, y: m, value: y, origin: x, width: b, height: f, tile: d } = o;
+        if (e.x >= u - b * x.x && e.x <= u + b * x.x && e.y >= m - f * x.y && e.y <= m + f * x.y)
           if (s) {
-            if (s(g, m))
-              return g;
+            if (s(y, d))
+              return y;
           } else
-            return g;
+            return y;
       }
     }
   }
   collisionMap(e, s) {
     const t = /* @__PURE__ */ new Map(), n = this.worldToTile(e);
-    for (let h = this.bounds.z.min; h <= this.bounds.z.max; h++) {
+    for (let r = this.bounds.z.min; r <= this.bounds.z.max; r++) {
       let c = !1;
-      const o = n.x + h, u = n.y + h;
-      for (let d of this.getDimensionsColumn({
+      const o = n.x + r, u = n.y + r;
+      for (let m of this.getDimensionsColumn({
         x: o,
         y: u
       })) {
-        if (!d)
+        if (!m)
           continue;
-        const { x: g, y: x, value: b, z: f, origin: m, width: S, height: O, tile: P } = d;
-        if (e.x >= g - S * m.x && e.x <= g + S * m.x && e.y >= x - O * m.y && e.y <= x + O * m.y) {
+        const { x: y, y: x, value: b, z: f, origin: d, width: S, height: O, tile: P } = m;
+        if (e.x >= y - S * d.x && e.x <= y + S * d.x && e.y >= x - O * d.y && e.y <= x + O * d.y) {
           if (s && !s(b, P))
             continue;
-          c = !0, y(t, [f, o, u], b);
+          c = !0, g(t, [f, o, u], b);
         } else if (c)
           break;
       }
@@ -311,16 +311,16 @@ class F extends C {
     return t;
   }
   _project(e, s = this.baseTileDimensions, t = this.baseTileOrigin, n = 0) {
-    const { width: h, height: c } = this.getScreenDimensions(), o = {
-      x: (e.x - e.y) * this.angleCos + h * this.worldOrigin.x,
+    const { width: r, height: c } = this.getScreenDimensions(), o = {
+      x: (e.x - e.y) * this.angleCos + r * this.worldOrigin.x,
       y: (e.x + e.y) * this.angleSin + c * this.worldOrigin.y,
       z: (e.x + e.y) * (e.z + 1 || 1)
     };
     return s !== this.baseTileDimensions ? (o.y -= this.baseSurfaceHalfHeight + 0 - this.baseTileOrigin.y, o.y += s.height * t.y - (s.height - (s.height - s.depth) / 2), o.y -= n) : o.y -= this.baseTileDimensions.depth * e.z, this.clamp && (o.x = ~~(o.x + (o.x > 0 ? 0.5 : -0.5)), o.y = ~~(o.y + (o.y > 0 ? 0.5 : -0.5))), o;
   }
   _unproject(e, s = { x: 0, y: 0, z: 0 }) {
-    const t = this.getScreenDimensions(), n = e.x - t.width * this.worldOrigin.x, h = e.y - t.height * this.worldOrigin.y;
-    return s.x = n / (2 * this.angleCos) + h / (2 * this.angleSin), s.y = -(n / (2 * this.angleCos)) + h / (2 * this.angleSin), s.z = e.z || 0, s;
+    const t = this.getScreenDimensions(), n = e.x - t.width * this.worldOrigin.x, r = e.y - t.height * this.worldOrigin.y;
+    return s.x = n / (2 * this.angleCos) + r / (2 * this.angleSin), s.y = -(n / (2 * this.angleCos)) + r / (2 * this.angleSin), s.z = e.z || 0, s;
   }
   _getAbsolutePosition(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
     return {
@@ -332,21 +332,21 @@ class F extends C {
 }
 export {
   v as CLASSIC,
-  A as DIRECTION,
+  j as DIRECTION,
   H as FULL,
-  B as ISOMETRIC,
+  A as ISOMETRIC,
   F as IsoTilemap,
   T as MIDDLE,
   L as MILITARY,
   _ as TOP_LEFT,
-  C as Tilemap,
+  E as Tilemap,
   k as collectRay,
   w as get,
   Y as getCenter,
   X as getDirection,
   N as getDistance,
-  j as pointGet,
+  C as pointGet,
   z as remove,
-  y as set,
+  g as set,
   D as sum
 };
