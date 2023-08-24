@@ -125,7 +125,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
    * @constructor
    * @param {IIsoTilemapConfig} { angle = CLASSIC, clamp = true, ...config }
    */
-  constructor({ angle = CLASSIC, clamp = true, ...config }: IIsoTilemapConfig) {
+  constructor({ angle = CLASSIC, clamp = true, ...config }: IIsoTilemapConfig = { angle: CLASSIC, clamp: true }) {
     super({ ...config });
     this.angle = angle;
     this.angleCos = Math.cos(this.angle);

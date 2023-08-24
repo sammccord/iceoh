@@ -40,7 +40,7 @@ export interface ITilemapConfig {
    *
    * @type {IRectangle3}
    */
-  baseTileDimensions: IRectangle3;
+  baseTileDimensions?: IRectangle3;
   /**
    * A getter function that retuns the screen dimensions of the canvas
    * @date 3/14/2023 - 12:44:55 PM
@@ -51,7 +51,7 @@ export interface ITilemapConfig {
    *
    *  getScreenDimensions: () => { width: 400, height: 400 }
    */
-  getScreenDimensions: () => IRectangle;
+  getScreenDimensions?: () => IRectangle;
   /**
    * A getter function that returns the world offset, this defaults to `() => { x: 0, y: 0 }`
    * @date 3/14/2023 - 12:44:55 PM
@@ -184,11 +184,11 @@ export class Tilemap<T> {
     getScreenDimensions,
     getWorldPosition,
     getWorldScale,
-  }: ITilemapConfig) {
+  }: ITilemapConfig = {}) {
     this.worldOrigin = worldOrigin || MIDDLE;
     this.baseTileOrigin = baseTileOrigin || MIDDLE;
-    this.baseTileDimensions = baseTileDimensions;
-    this.getScreenDimensions = getScreenDimensions;
+    this.baseTileDimensions = baseTileDimensions || { width: 1, height: 1};
+    this.getScreenDimensions = getScreenDimensions || (() => ({ width: 1, height: 1}));
     this.getWorldPosition = getWorldPosition || (() => TOP_LEFT);
     this.getWorldScale = getWorldScale || (() => FULL);
   }

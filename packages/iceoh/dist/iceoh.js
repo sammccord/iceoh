@@ -1,7 +1,7 @@
-var P = Object.defineProperty;
-var M = (r, i, e) => i in r ? P(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
+var v = Object.defineProperty;
+var M = (r, i, e) => i in r ? v(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
 var l = (r, i, e) => (M(r, typeof i != "symbol" ? i + "" : i, e), e);
-const W = Math.atan(0.5), C = Math.PI / 6, L = Math.PI / 4, v = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, _ = { x: 1, y: 1 };
+const O = Math.atan(0.5), C = Math.PI / 6, L = Math.PI / 4, W = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, _ = { x: 1, y: 1 };
 var H = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(H || {});
 function k(r) {
   const i = [];
@@ -15,25 +15,24 @@ function k(r) {
   }
   return i;
 }
-function y(r, i, e) {
+function g(r, i, e) {
   let s = r;
   for (; i.length - 1; ) {
     var t = i.shift();
     let n = s.get(t);
-    if (n)
-      s = n;
-    else {
+    if (n === void 0) {
       const h = /* @__PURE__ */ new Map();
       s.set(t, h), s = h;
-    }
+    } else
+      s = n;
   }
   return s.set(i[0], e), e;
 }
-function D(r, i, e) {
+function w(r, i, e) {
   for (var s = r; i.length; ) {
     var t = i.shift();
     let n = s.get(t);
-    if (!n) {
+    if (n === void 0) {
       if (e && !i.length)
         return s.set(t, e), e;
       if (e)
@@ -46,17 +45,16 @@ function D(r, i, e) {
   return s;
 }
 function A(r, i) {
-  return D(r, [i.z || 0, i.x, i.y]);
+  return w(r, [i.z || 0, i.x, i.y]);
 }
 function z(r, i) {
   let e = r;
   for (; i.length - 1; ) {
     var s = i.shift();
     let t = e.get(s);
-    if (t)
-      e = t;
-    else
+    if (t === void 0)
       return !1;
+    e = t;
   }
   return e.delete(i[0]);
 }
@@ -81,7 +79,7 @@ class E {
     getScreenDimensions: t,
     getWorldPosition: n,
     getWorldScale: h
-  }) {
+  } = {}) {
     l(this, "getScreenDimensions");
     l(this, "getWorldPosition");
     l(this, "getWorldScale");
@@ -94,10 +92,10 @@ class E {
       y: { min: 0, max: 0 },
       z: { min: 0, max: 0 }
     });
-    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s, this.getScreenDimensions = t, this.getWorldPosition = n || (() => v), this.getWorldScale = h || (() => _);
+    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s || { width: 1, height: 1 }, this.getScreenDimensions = t || (() => ({ width: 1, height: 1 })), this.getWorldPosition = n || (() => W), this.getWorldScale = h || (() => _);
   }
   add(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    return y(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
+    return g(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
   }
   get(i) {
     return A(this.map, i);
@@ -105,7 +103,7 @@ class E {
   getColumn(i, e) {
     const s = [];
     for (const [t, n] of e || this.map)
-      s[t] = D(n, [i.x, i.y]);
+      s[t] = w(n, [i.x, i.y]);
     return s;
   }
   move(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
@@ -183,7 +181,7 @@ class E {
   }
 }
 class X extends E {
-  constructor({ angle: e = W, clamp: s = !0, ...t }) {
+  constructor({ angle: e = O, clamp: s = !0, ...t } = { angle: O, clamp: !0 }) {
     super({ ...t });
     l(this, "angle");
     l(this, "angleCos");
@@ -203,7 +201,7 @@ class X extends E {
     if (t !== this.baseTileDimensions) {
       let c = (t.depth || this.baseTileDimensions.depth) / this.baseTileDimensions.depth;
       for (let o = c, u = s.z || 0; o > 0; o--, u++)
-        o > 1 ? y(this.tileDimensions, [u, s.x, s.y], {
+        o > 1 ? g(this.tileDimensions, [u, s.x, s.y], {
           ...t,
           origin: n,
           depth: this.baseTileDimensions.depth,
@@ -211,7 +209,7 @@ class X extends E {
           x: h.x,
           y: h.y,
           value: e
-        }) : y(this.tileDimensions, [u, s.x, s.y], {
+        }) : g(this.tileDimensions, [u, s.x, s.y], {
           ...t,
           origin: n,
           depth: this.baseTileDimensions.depth * o,
@@ -219,16 +217,16 @@ class X extends E {
           x: h.x,
           y: h.y,
           value: e
-        }), y(this.map, [u, s.x, s.y], s);
+        }), g(this.map, [u, s.x, s.y], s);
     } else
-      y(this.tileDimensions, [s.z || 0, s.x, s.y], {
+      g(this.tileDimensions, [s.z || 0, s.x, s.y], {
         ...t,
         origin: n,
         z: s.z || 0,
         x: h.x,
         y: h.y,
         value: e
-      }), y(this.map, [s.z || 0, s.x, s.y], s);
+      }), g(this.map, [s.z || 0, s.x, s.y], s);
     return this.recalculateBounds(s), h;
   }
   remove(e) {
@@ -237,7 +235,7 @@ class X extends E {
       return null;
     for (const [t, n] of this.map)
       try {
-        D(n, [e.x, e.y]) === s && (z(this.tileDimensions, [t, e.x, e.y]), z(this.map, [t, e.x, e.y]));
+        w(n, [e.x, e.y]) === s && (z(this.tileDimensions, [t, e.x, e.y]), z(this.map, [t, e.x, e.y]));
       } catch {
       }
     return this.recalculateBounds(e), s;
@@ -272,13 +270,13 @@ class X extends E {
       }).reverse()) {
         if (!o)
           continue;
-        const { x: u, y: d, value: g, origin: x, width: b, height: f, tile: m } = o;
-        if (e.x >= u - b * x.x && e.x <= u + b * x.x && e.y >= d - f * x.y && e.y <= d + f * x.y)
+        const { x: u, y: m, value: y, origin: x, width: b, height: f, tile: d } = o;
+        if (e.x >= u - b * x.x && e.x <= u + b * x.x && e.y >= m - f * x.y && e.y <= m + f * x.y)
           if (s) {
-            if (s(g, m))
-              return g;
+            if (s(y, d))
+              return y;
           } else
-            return g;
+            return y;
       }
     }
   }
@@ -287,17 +285,17 @@ class X extends E {
     for (let h = this.bounds.z.min; h <= this.bounds.z.max; h++) {
       let c = !1;
       const o = n.x + h, u = n.y + h;
-      for (let d of this.getDimensionsColumn({
+      for (let m of this.getDimensionsColumn({
         x: o,
         y: u
       })) {
-        if (!d)
+        if (!m)
           continue;
-        const { x: g, y: x, value: b, z: f, origin: m, width: w, height: S, tile: O } = d;
-        if (e.x >= g - w * m.x && e.x <= g + w * m.x && e.y >= x - S * m.y && e.y <= x + S * m.y) {
-          if (s && !s(b, O))
+        const { x: y, y: x, value: b, z: f, origin: d, width: D, height: S, tile: P } = m;
+        if (e.x >= y - D * d.x && e.x <= y + D * d.x && e.y >= x - S * d.y && e.y <= x + S * d.y) {
+          if (s && !s(b, P))
             continue;
-          c = !0, y(t, [f, o, u], b);
+          c = !0, g(t, [f, o, u], b);
         } else if (c)
           break;
       }
@@ -325,21 +323,21 @@ class X extends E {
   }
 }
 export {
-  W as CLASSIC,
+  O as CLASSIC,
   H as DIRECTION,
   _ as FULL,
   C as ISOMETRIC,
   X as IsoTilemap,
   T as MIDDLE,
   L as MILITARY,
-  v as TOP_LEFT,
+  W as TOP_LEFT,
   E as Tilemap,
   k as collectRay,
-  D as get,
+  w as get,
   Y as getDirection,
   N as getDistance,
   A as pointGet,
   z as remove,
-  y as set,
+  g as set,
   j as sum
 };
