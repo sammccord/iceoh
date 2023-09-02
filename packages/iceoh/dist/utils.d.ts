@@ -156,6 +156,15 @@ export declare function remove(obj: Map<number, any>, indices: number[]): boolea
  */
 export declare function getDistance(from: IPoint, to: IPoint): number;
 /**
+ * Returns the 2D center of a list of points. This value is not rounded and can be floating point.
+ * @date 4/12/2023 - 9:01:37 AM
+ *
+ * @export
+ * @param {IPoint[]} points
+ * @returns {IPoint}
+ */
+export declare function getCenter(points: IPoint[]): IPoint;
+/**
  * Sums an array of numbers, ignoring null and undefined
  * @date 3/14/2023 - 12:28:23 PM
  *

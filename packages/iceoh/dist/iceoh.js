@@ -1,14 +1,14 @@
-var v = Object.defineProperty;
-var M = (r, i, e) => i in r ? v(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
-var l = (r, i, e) => (M(r, typeof i != "symbol" ? i + "" : i, e), e);
-const O = Math.atan(0.5), C = Math.PI / 6, L = Math.PI / 4, W = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, _ = { x: 1, y: 1 };
-var H = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(H || {});
+var M = Object.defineProperty;
+var W = (r, i, e) => i in r ? M(r, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : r[i] = e;
+var l = (r, i, e) => (W(r, typeof i != "symbol" ? i + "" : i, e), e);
+const P = Math.atan(0.5), B = Math.PI / 6, L = Math.PI / 4, _ = { x: 0, y: 0 }, T = { x: 0.5, y: 0.5 }, H = { x: 1, y: 1 };
+var A = /* @__PURE__ */ ((r) => (r.NONE = "NONE", r.N = "N", r.NE = "NE", r.E = "E", r.SE = "SE", r.S = "S", r.SW = "SW", r.W = "W", r.NW = "NW", r))(A || {});
 function k(r) {
   const i = [];
   for (const e of Array.from(r.keys()).sort()) {
-    const s = r.get(e);
-    for (const t of Array.from(s.keys()).sort()) {
-      const n = s.get(t);
+    const t = r.get(e);
+    for (const s of Array.from(t.keys()).sort()) {
+      const n = t.get(s);
       for (const h of Array.from(n.keys()).sort())
         i.push(n.get(h));
     }
@@ -16,45 +16,45 @@ function k(r) {
   return i;
 }
 function g(r, i, e) {
-  let s = r;
+  let t = r;
   for (; i.length - 1; ) {
-    var t = i.shift();
-    let n = s.get(t);
+    var s = i.shift();
+    let n = t.get(s);
     if (n === void 0) {
       const h = /* @__PURE__ */ new Map();
-      s.set(t, h), s = h;
+      t.set(s, h), t = h;
     } else
-      s = n;
+      t = n;
   }
-  return s.set(i[0], e), e;
+  return t.set(i[0], e), e;
 }
-function w(r, i, e) {
-  for (var s = r; i.length; ) {
-    var t = i.shift();
-    let n = s.get(t);
+function D(r, i, e) {
+  for (var t = r; i.length; ) {
+    var s = i.shift();
+    let n = t.get(s);
     if (n === void 0) {
       if (e && !i.length)
-        return s.set(t, e), e;
+        return t.set(s, e), e;
       if (e)
-        n = /* @__PURE__ */ new Map(), s.set(t, n);
+        n = /* @__PURE__ */ new Map(), t.set(s, n);
       else
         return;
     }
-    s = n;
+    t = n;
   }
-  return s;
+  return t;
 }
-function A(r, i) {
-  return w(r, [i.z || 0, i.x, i.y]);
+function j(r, i) {
+  return D(r, [i.z || 0, i.x, i.y]);
 }
 function z(r, i) {
   let e = r;
   for (; i.length - 1; ) {
-    var s = i.shift();
-    let t = e.get(s);
-    if (t === void 0)
+    var t = i.shift();
+    let s = e.get(t);
+    if (s === void 0)
       return !1;
-    e = t;
+    e = s;
   }
   return e.delete(i[0]);
 }
@@ -63,20 +63,26 @@ function N(r, i) {
     (i.x - r.x) * (i.x - r.x) + (i.y - r.y) * (i.y - r.y)
   );
 }
-function j(r) {
+function Y(r) {
+  return {
+    x: w(r.map((i) => i.x)) / r.length,
+    y: w(r.map((i) => i.y)) / r.length
+  };
+}
+function w(r) {
   return r.reduce((i, e) => e ? i + e : i, 0);
 }
 const a = 0;
-function Y(r, i) {
-  let e = i.x - r.x, s = i.y - r.y;
-  return e === a && s < a ? "N" : e > a && s < a ? "NE" : e > a && s === a ? "E" : e > a && s > a ? "SE" : e === a && s > a ? "S" : e < a && s > a ? "SW" : e < a && s === a ? "W" : e < a && s < a ? "NW" : "NONE";
+function X(r, i) {
+  let e = i.x - r.x, t = i.y - r.y;
+  return e === a && t < a ? "N" : e > a && t < a ? "NE" : e > a && t === a ? "E" : e > a && t > a ? "SE" : e === a && t > a ? "S" : e < a && t > a ? "SW" : e < a && t === a ? "W" : e < a && t < a ? "NW" : "NONE";
 }
-class E {
+class C {
   constructor({
     worldOrigin: i,
     baseTileOrigin: e,
-    baseTileDimensions: s,
-    getScreenDimensions: t,
+    baseTileDimensions: t,
+    getScreenDimensions: s,
     getWorldPosition: n,
     getWorldScale: h
   } = {}) {
@@ -92,23 +98,23 @@ class E {
       y: { min: 0, max: 0 },
       z: { min: 0, max: 0 }
     });
-    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = s || { width: 1, height: 1 }, this.getScreenDimensions = t || (() => ({ width: 1, height: 1 })), this.getWorldPosition = n || (() => W), this.getWorldScale = h || (() => _);
+    this.worldOrigin = i || T, this.baseTileOrigin = e || T, this.baseTileDimensions = t || { width: 1, height: 1 }, this.getScreenDimensions = s || (() => ({ width: 1, height: 1 })), this.getWorldPosition = n || (() => _), this.getWorldScale = h || (() => H);
   }
-  add(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    return g(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, s, t);
+  add(i, e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
+    return g(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, t, s);
   }
   get(i) {
-    return A(this.map, i);
+    return j(this.map, i);
   }
   getColumn(i, e) {
-    const s = [];
-    for (const [t, n] of e || this.map)
-      s[t] = w(n, [i.x, i.y]);
-    return s;
+    const t = [];
+    for (const [s, n] of e || this.map)
+      t[s] = D(n, [i.x, i.y]);
+    return t;
   }
-  move(i, e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
+  move(i, e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
     const n = this.remove(i);
-    return n ? this.add(n, e, s, t) : null;
+    return n ? this.add(n, e, t, s) : null;
   }
   remove(i) {
     i.z === void 0 && (i.z = 0);
@@ -116,18 +122,18 @@ class E {
     if (!!e)
       return z(this.map, [i.z || 0, i.x, i.y]), this.recalculateBounds(i), e;
   }
-  toScreenPoint(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
-    const t = this.toWorldPoint(i, e, s), n = this.getWorldScale(), h = this.getWorldPosition();
-    return t.x = t.x * n.x + h.x, t.y = t.y * n.y + h.y, t;
+  toScreenPoint(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    const s = this.toWorldPoint(i, e, t), n = this.getWorldScale(), h = this.getWorldPosition();
+    return s.x = s.x * n.x + h.x, s.y = s.y * n.y + h.y, s;
   }
-  toWorldPoint(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
-    return this._project(this._getAbsolutePosition(i), e, s);
+  toWorldPoint(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    return this._project(this._getAbsolutePosition(i), e, t);
   }
-  worldToTile(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
-    const t = this._unproject(i);
+  worldToTile(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    const s = this._unproject(i);
     return {
-      x: Math.round(t.x / e.width),
-      y: Math.round(t.y / e.height),
+      x: Math.round(s.x / e.width),
+      y: Math.round(s.y / e.height),
       z: i.z || 0
     };
   }
@@ -135,10 +141,10 @@ class E {
     return this.centerToPoint(this.toScreenPoint(i));
   }
   centerToPoint(i) {
-    const e = this.getScreenDimensions(), s = this.getWorldPosition();
+    const e = this.getScreenDimensions(), t = this.getWorldPosition();
     return {
-      x: s.x + e.width / 2 - i.x,
-      y: s.y + e.height / 2 - i.y
+      x: t.x + e.width / 2 - i.x,
+      y: t.y + e.height / 2 - i.y
     };
   }
   get centerTile() {
@@ -160,7 +166,7 @@ class E {
   recalculateBounds(i) {
     i.x < this.bounds.x.min && (this.bounds.x.min = i.x), i.x > this.bounds.x.max && (this.bounds.x.max = i.x), i.y < this.bounds.y.min && (this.bounds.y.min = i.y), i.y > this.bounds.y.max && (this.bounds.y.max = i.y), i.z !== void 0 && (i.z < this.bounds.z.min && (this.bounds.z.min = i.z), i.z > this.bounds.z.max && (this.bounds.z.max = i.z));
   }
-  _project(i, e = this.baseTileDimensions, s = this.baseTileOrigin, t = 0) {
+  _project(i, e = this.baseTileDimensions, t = this.baseTileOrigin, s = 0) {
     const { width: n, height: h } = this.getScreenDimensions();
     return {
       x: i.x + n * this.worldOrigin.x,
@@ -169,10 +175,10 @@ class E {
     };
   }
   _unproject(i, e = { x: 0, y: 0, z: 0 }) {
-    const { width: s, height: t } = this.getScreenDimensions();
-    return e.x = i.x - s * this.worldOrigin.x, e.y = i.y - t * this.worldOrigin.y + (i.z || 0), e.z = i.z || 0, e;
+    const { width: t, height: s } = this.getScreenDimensions();
+    return e.x = i.x - t * this.worldOrigin.x, e.y = i.y - s * this.worldOrigin.y + (i.z || 0), e.z = i.z || 0, e;
   }
-  _getAbsolutePosition(i, e = this.baseTileDimensions, s = this.baseTileOrigin) {
+  _getAbsolutePosition(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
     return {
       x: e.width * i.x,
       y: e.height * i.y,
@@ -180,9 +186,9 @@ class E {
     };
   }
 }
-class X extends E {
-  constructor({ angle: e = O, clamp: s = !0, ...t } = { angle: O, clamp: !0 }) {
-    super({ ...t });
+class F extends C {
+  constructor({ angle: e = P, clamp: t = !0, ...s } = { angle: P, clamp: !0 }) {
+    super({ ...s });
     l(this, "angle");
     l(this, "angleCos");
     l(this, "angleSin");
@@ -191,68 +197,68 @@ class X extends E {
     l(this, "baseSurfaceHeight");
     l(this, "baseSurfaceHalfHeight");
     l(this, "tileDimensions", /* @__PURE__ */ new Map());
-    this.angle = e, this.angleCos = Math.cos(this.angle), this.angleSin = Math.sin(this.angle), this.clamp = s, this.baseOrigin = {
+    this.angle = e, this.angleCos = Math.cos(this.angle), this.angleSin = Math.sin(this.angle), this.clamp = t, this.baseOrigin = {
       x: this.baseTileDimensions.width * this.baseTileOrigin.x,
       y: this.baseTileDimensions.height * this.baseTileOrigin.y
     }, this.baseSurfaceHeight = this.baseTileDimensions.height - this.baseTileDimensions.depth, this.baseSurfaceHalfHeight = this.baseSurfaceHeight / 2;
   }
-  add(e, s, t = this.baseTileDimensions, n = this.baseTileOrigin) {
-    const h = this.toWorldPoint(s, t, n);
-    if (t !== this.baseTileDimensions) {
-      let c = (t.depth || this.baseTileDimensions.depth) / this.baseTileDimensions.depth;
-      for (let o = c, u = s.z || 0; o > 0; o--, u++)
-        o > 1 ? g(this.tileDimensions, [u, s.x, s.y], {
-          ...t,
+  add(e, t, s = this.baseTileDimensions, n = this.baseTileOrigin) {
+    const h = this.toWorldPoint(t, s, n);
+    if (s !== this.baseTileDimensions) {
+      let c = (s.depth || this.baseTileDimensions.depth) / this.baseTileDimensions.depth;
+      for (let o = c, u = t.z || 0; o > 0; o--, u++)
+        o > 1 ? g(this.tileDimensions, [u, t.x, t.y], {
+          ...s,
           origin: n,
           depth: this.baseTileDimensions.depth,
           z: u,
           x: h.x,
           y: h.y,
           value: e
-        }) : g(this.tileDimensions, [u, s.x, s.y], {
-          ...t,
+        }) : g(this.tileDimensions, [u, t.x, t.y], {
+          ...s,
           origin: n,
           depth: this.baseTileDimensions.depth * o,
           z: u,
           x: h.x,
           y: h.y,
           value: e
-        }), g(this.map, [u, s.x, s.y], s);
+        }), g(this.map, [u, t.x, t.y], t);
     } else
-      g(this.tileDimensions, [s.z || 0, s.x, s.y], {
-        ...t,
+      g(this.tileDimensions, [t.z || 0, t.x, t.y], {
+        ...s,
         origin: n,
-        z: s.z || 0,
+        z: t.z || 0,
         x: h.x,
         y: h.y,
         value: e
-      }), g(this.map, [s.z || 0, s.x, s.y], s);
-    return this.recalculateBounds(s), h;
+      }), g(this.map, [t.z || 0, t.x, t.y], t);
+    return this.recalculateBounds(t), h;
   }
   remove(e) {
-    const s = this.get(e);
-    if (!s)
+    const t = this.get(e);
+    if (!t)
       return null;
-    for (const [t, n] of this.map)
+    for (const [s, n] of this.map)
       try {
-        w(n, [e.x, e.y]) === s && (z(this.tileDimensions, [t, e.x, e.y]), z(this.map, [t, e.x, e.y]));
+        D(n, [e.x, e.y]) === t && (z(this.tileDimensions, [s, e.x, e.y]), z(this.map, [s, e.x, e.y]));
       } catch {
       }
-    return this.recalculateBounds(e), s;
+    return this.recalculateBounds(e), t;
   }
-  worldToTile(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
+  worldToTile(e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
     const n = this._unproject(e), h = {
-      x: s.width * t.x,
-      y: s.width * t.y
+      x: t.width * s.x,
+      y: t.width * s.y
     };
     return n.x = Math.floor((n.x + h.x) / h.x), n.y = Math.floor((n.y + h.y) / h.y), n.z = n.z || 0, n;
   }
-  toWorldPoint(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
+  toWorldPoint(e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
     return this._project(
       this._getAbsolutePosition(e),
-      s,
       t,
-      j(
+      s,
+      w(
         this.getDimensionsColumn(e).map((n) => (n == null ? void 0 : n.depth) || this.baseTileDimensions.depth).slice(1, e.z || 0)
       )
     );
@@ -260,10 +266,10 @@ class X extends E {
   getDimensionsColumn(e) {
     return this.getColumn(e, this.tileDimensions);
   }
-  castRay(e, s) {
-    const t = this.worldToTile(e);
+  castRay(e, t) {
+    const s = this.worldToTile(e);
     for (let n = this.bounds.z.max; n >= this.bounds.z.min; n--) {
-      const h = t.x + n, c = t.y + n;
+      const h = s.x + n, c = s.y + n;
       for (let o of this.getDimensionsColumn({
         x: h,
         y: c
@@ -272,16 +278,16 @@ class X extends E {
           continue;
         const { x: u, y: m, value: y, origin: x, width: b, height: f, tile: d } = o;
         if (e.x >= u - b * x.x && e.x <= u + b * x.x && e.y >= m - f * x.y && e.y <= m + f * x.y)
-          if (s) {
-            if (s(y, d))
+          if (t) {
+            if (t(y, d))
               return y;
           } else
             return y;
       }
     }
   }
-  collisionMap(e, s) {
-    const t = /* @__PURE__ */ new Map(), n = this.worldToTile(e);
+  collisionMap(e, t) {
+    const s = /* @__PURE__ */ new Map(), n = this.worldToTile(e);
     for (let h = this.bounds.z.min; h <= this.bounds.z.max; h++) {
       let c = !1;
       const o = n.x + h, u = n.y + h;
@@ -291,53 +297,54 @@ class X extends E {
       })) {
         if (!m)
           continue;
-        const { x: y, y: x, value: b, z: f, origin: d, width: D, height: S, tile: P } = m;
-        if (e.x >= y - D * d.x && e.x <= y + D * d.x && e.y >= x - S * d.y && e.y <= x + S * d.y) {
-          if (s && !s(b, P))
+        const { x: y, y: x, value: b, z: f, origin: d, width: S, height: O, tile: v } = m;
+        if (e.x >= y - S * d.x && e.x <= y + S * d.x && e.y >= x - O * d.y && e.y <= x + O * d.y) {
+          if (t && !t(b, v))
             continue;
-          c = !0, g(t, [f, o, u], b);
+          c = !0, g(s, [f, o, u], b);
         } else if (c)
           break;
       }
     }
-    return t;
+    return s;
   }
-  _project(e, s = this.baseTileDimensions, t = this.baseTileOrigin, n = 0) {
+  _project(e, t = this.baseTileDimensions, s = this.baseTileOrigin, n = 0) {
     const { width: h, height: c } = this.getScreenDimensions(), o = {
       x: (e.x - e.y) * this.angleCos + h * this.worldOrigin.x,
       y: (e.x + e.y) * this.angleSin + c * this.worldOrigin.y,
       z: (e.x + e.y) * (e.z + 1 || 1)
     };
-    return s !== this.baseTileDimensions ? (o.y -= this.baseSurfaceHalfHeight + 0 - this.baseTileOrigin.y, o.y += s.height * t.y - (s.height - (s.height - s.depth) / 2), o.y -= n) : o.y -= this.baseTileDimensions.depth * e.z, this.clamp && (o.x = ~~(o.x + (o.x > 0 ? 0.5 : -0.5)), o.y = ~~(o.y + (o.y > 0 ? 0.5 : -0.5))), o;
+    return t !== this.baseTileDimensions ? (o.y -= this.baseSurfaceHalfHeight + 0 - this.baseTileOrigin.y, o.y += t.height * s.y - (t.height - (t.height - t.depth) / 2), o.y -= n) : o.y -= this.baseTileDimensions.depth * e.z, this.clamp && (o.x = ~~(o.x + (o.x > 0 ? 0.5 : -0.5)), o.y = ~~(o.y + (o.y > 0 ? 0.5 : -0.5))), o;
   }
-  _unproject(e, s = { x: 0, y: 0, z: 0 }) {
-    const t = this.getScreenDimensions(), n = e.x - t.width * this.worldOrigin.x, h = e.y - t.height * this.worldOrigin.y;
-    return s.x = n / (2 * this.angleCos) + h / (2 * this.angleSin), s.y = -(n / (2 * this.angleCos)) + h / (2 * this.angleSin), s.z = e.z || 0, s;
+  _unproject(e, t = { x: 0, y: 0, z: 0 }) {
+    const s = this.getScreenDimensions(), n = e.x - s.width * this.worldOrigin.x, h = e.y - s.height * this.worldOrigin.y;
+    return t.x = n / (2 * this.angleCos) + h / (2 * this.angleSin), t.y = -(n / (2 * this.angleCos)) + h / (2 * this.angleSin), t.z = e.z || 0, t;
   }
-  _getAbsolutePosition(e, s = this.baseTileDimensions, t = this.baseTileOrigin) {
+  _getAbsolutePosition(e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
     return {
-      x: s.width * t.x * e.x,
-      y: s.height * t.y * e.y,
+      x: t.width * s.x * e.x,
+      y: t.height * s.y * e.y,
       z: e.z || 0
     };
   }
 }
 export {
-  O as CLASSIC,
-  H as DIRECTION,
-  _ as FULL,
-  C as ISOMETRIC,
-  X as IsoTilemap,
+  P as CLASSIC,
+  A as DIRECTION,
+  H as FULL,
+  B as ISOMETRIC,
+  F as IsoTilemap,
   T as MIDDLE,
   L as MILITARY,
-  W as TOP_LEFT,
-  E as Tilemap,
+  _ as TOP_LEFT,
+  C as Tilemap,
   k as collectRay,
-  w as get,
-  Y as getDirection,
+  D as get,
+  Y as getCenter,
+  X as getDirection,
   N as getDistance,
-  A as pointGet,
+  j as pointGet,
   z as remove,
   g as set,
-  j as sum
+  w as sum
 };
