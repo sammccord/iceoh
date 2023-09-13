@@ -1,4 +1,4 @@
-import {
+import type {
   IBox,
   IPoint,
   IPoint3,
@@ -237,7 +237,7 @@ export class Tilemap<T> {
    *
    *    const tile = tilemap.get({ x: 1, y: 1, z: 1 })
    */
-  public get(point: IPoint3): T {
+  public get(point: IPoint3): T | undefined {
     return pointGet<T>(this.map, point);
   }
 
@@ -285,11 +285,12 @@ export class Tilemap<T> {
     from: IPoint3,
     to: IPoint3,
     dimensions: IRectangle = this.baseTileDimensions,
-    origin = this.baseTileOrigin
-  ): IPoint3 {
+    origin = this.baseTileOrigin,
+    fallback?: T
+  ): IPoint3 | undefined {
     const tile = this.remove(from);
-    if (!tile) return null;
-    return this.add(tile, to, dimensions, origin);
+    if (!tile || !fallback) return;
+    return this.add(tile || fallback, to, dimensions, origin);
   }
 
   /**
@@ -304,7 +305,7 @@ export class Tilemap<T> {
    *
    *    const tile = tilemap.remove({ x: 1, y: 1 })
    */
-  public remove(point: IPoint3): T {
+  public remove(point: IPoint3): T | undefined {
     if (point.z === undefined) point.z = 0;
     const tile = this.get(point);
     if (!tile) return;

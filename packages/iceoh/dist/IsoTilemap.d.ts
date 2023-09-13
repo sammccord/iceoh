@@ -1,5 +1,5 @@
-import { ITilemapConfig, Tilemap } from "./Tilemap";
-import { ExtendedBox, IPoint, IPoint3, IRectangle3, MapThree } from "./interfaces";
+import { type ITilemapConfig, Tilemap } from "./Tilemap";
+import type { ExtendedBox, IPoint, IPoint3, IRectangle3, MapThree } from "./interfaces";
 /**
  * ISOTilemap class configuration, extending ITilemapConfig
  * @date 3/14/2023 - 2:14:31 PM
@@ -115,6 +115,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @param {IIsoTilemapConfig} { angle = CLASSIC, clamp = true, ...config }
      */
     constructor({ angle, clamp, ...config }?: IIsoTilemapConfig);
+    protected get baseDepth(): number;
     /**
      * Add a tile to the tilemap at a given coordinate, optionally providing different tile dimensions if the tile is a different size than the base scale.
      * The returned coordinate is relative to the world origin.
@@ -149,7 +150,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      *
      *    const tile = tilemap.remove({ x: 1, y: 1 })
      */
-    remove(point: IPoint3): T;
+    remove(point: IPoint3): T | undefined;
     /**
      * Project a world coordinate to a tile coordinate, not taking world offset / scale into account.
      * @date 3/14/2023 - 12:44:55 PM

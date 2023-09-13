@@ -1,5 +1,5 @@
 import { Application, Container, Sprite, Assets } from "pixi.js";
-import { Tilemap } from "../../iceoh/src";
+import { Tilemap } from "iceoh";
 
 let sheet;
 const columns = 34;

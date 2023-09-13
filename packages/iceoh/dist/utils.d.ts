@@ -1,4 +1,4 @@
-import { IPoint, IPoint3, MapThree } from "./interfaces";
+import type { IPoint, IPoint3, MapThree } from "./interfaces";
 /**
  * Classic projection found in most games
  * @date 3/14/2023 - 12:21:46 PM
@@ -111,7 +111,7 @@ export declare function set<T>(obj: Map<number, any>, indices: number[], value: 
  *
  *  const tile = get(new Map(), [0, 1, 2], sprite)
  */
-export declare function get<T>(map: Map<number, any>, indices: number[], setIfNull?: T): T;
+export declare function get<T>(map: Map<number, any>, indices: number[], setIfNull?: T): T | undefined;
 /**
  * Get a value from a three-dimensional map with a point
  * @date 3/14/2023 - 12:35:21 PM
@@ -126,7 +126,7 @@ export declare function get<T>(map: Map<number, any>, indices: number[], setIfNu
  *
  *  const v = pointGet(mapThree, { x: 1, y: 1, z: 1 })
  */
-export declare function pointGet<T>(map: MapThree<T>, point: IPoint3): T;
+export declare function pointGet<T>(map: MapThree<T>, point: IPoint3): T | undefined;
 /**
  * Deeply remove a value in map at given indices
  * @date 3/14/2023 - 12:23:06 PM

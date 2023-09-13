@@ -1,4 +1,4 @@
-import { IBox, IPoint, IPoint3, IRectangle, IRectangle3, MapThree } from "./interfaces";
+import type { IBox, IPoint, IPoint3, IRectangle, IRectangle3, MapThree } from "./interfaces";
 /**
  * Base Tilemap class configuration
  * @date 3/14/2023 - 12:44:55 PM
@@ -208,7 +208,7 @@ export declare class Tilemap<T> {
      *
      *    const tile = tilemap.get({ x: 1, y: 1, z: 1 })
      */
-    get(point: IPoint3): T;
+    get(point: IPoint3): T | undefined;
     /**
      * Get an array of values from a map at given x,y coordinates, from ascending z index
      * @date 3/14/2023 - 12:44:55 PM
@@ -242,7 +242,7 @@ export declare class Tilemap<T> {
      *    sprite.position.y = y
      *    sprite.zIndex = z
      */
-    move(from: IPoint3, to: IPoint3, dimensions?: IRectangle, origin?: IPoint): IPoint3;
+    move(from: IPoint3, to: IPoint3, dimensions?: IRectangle, origin?: IPoint, fallback?: T): IPoint3 | undefined;
     /**
      * Remove a tile from the given point coordinates.
      * @date 3/14/2023 - 12:44:55 PM
@@ -255,7 +255,7 @@ export declare class Tilemap<T> {
      *
      *    const tile = tilemap.remove({ x: 1, y: 1 })
      */
-    remove(point: IPoint3): T;
+    remove(point: IPoint3): T | undefined;
     /**
      * Project a tile coordinate to an absolute screen space coordinate relative to the window, taking world offset / scale into account
      *

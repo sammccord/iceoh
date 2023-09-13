@@ -1,5 +1,5 @@
-import { ITilemapConfig, Tilemap } from "./Tilemap";
-import {
+import { type ITilemapConfig, Tilemap } from "./Tilemap";
+import type {
   ExtendedBox,
   IPoint,
   IPoint3,
@@ -136,8 +136,12 @@ export class IsoTilemap<T> extends Tilemap<T> {
       y: this.baseTileDimensions.height * this.baseTileOrigin.y,
     };
     this.baseSurfaceHeight =
-      this.baseTileDimensions.height - this.baseTileDimensions.depth;
+      this.baseTileDimensions.height - (this.baseTileDimensions.depth || 1);
     this.baseSurfaceHalfHeight = this.baseSurfaceHeight / 2;
+  }
+
+  protected get baseDepth(): number {
+    return this.baseTileDimensions.depth || 1
   }
 
   /**
@@ -170,14 +174,14 @@ export class IsoTilemap<T> extends Tilemap<T> {
     const position = this.toWorldPoint(tile, dimensions, origin);
     if (dimensions !== this.baseTileDimensions) {
       let d =
-        (dimensions.depth || this.baseTileDimensions.depth) /
-        this.baseTileDimensions.depth;
+        (dimensions.depth || this.baseDepth) /
+        this.baseDepth;
       for (let i = d, z = tile.z || 0; i > 0; i--, z++) {
         if (i > 1) {
           set(this.tileDimensions, [z, tile.x, tile.y], {
             ...dimensions,
             origin,
-            depth: this.baseTileDimensions.depth,
+            depth: this.baseDepth,
             z,
             x: position.x,
             y: position.y,
@@ -187,7 +191,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
           set(this.tileDimensions, [z, tile.x, tile.y], {
             ...dimensions,
             origin,
-            depth: this.baseTileDimensions.depth * i,
+            depth: this.baseDepth * i,
             z,
             x: position.x,
             y: position.y,
@@ -223,9 +227,9 @@ export class IsoTilemap<T> extends Tilemap<T> {
    *
    *    const tile = tilemap.remove({ x: 1, y: 1 })
    */
-  public remove(point: IPoint3): T {
+  public remove(point: IPoint3): T | undefined {
     const tile = this.get(point);
-    if (!tile) return null;
+    if (!tile) return;
     for (const [z, grid] of this.map) {
       try {
         if (get(grid, [point.x, point.y]) === tile) {
@@ -402,7 +406,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
           } else {
             // we've hit a tile
             hasColHit = true;
-            set(ray, [level, colX, colY], value);
+            set(ray, [level || 0, colX, colY], value);
           }
         } else if (hasColHit) {
           // if we've hit tiles and aren't anymore, break early
@@ -424,16 +428,16 @@ export class IsoTilemap<T> extends Tilemap<T> {
     const out = {
       x: (p.x - p.y) * this.angleCos + width * this.worldOrigin.x,
       y: (p.x + p.y) * this.angleSin + height * this.worldOrigin.y,
-      z: (p.x + p.y) * (p.z + 1 || 1),
+      z: (p.x + p.y) * ((p.z || 0) + 1 || 1),
     };
     if (dimensions !== this.baseTileDimensions) {
       out.y -= this.baseSurfaceHalfHeight + 0 - this.baseTileOrigin.y; // + (this.baseTileDimensions.depth * point3.z)) - this.baseTileOrigin.y
       out.y +=
         dimensions.height * origin.y -
-        (dimensions.height - (dimensions.height - dimensions.depth) / 2);
+        (dimensions.height - (dimensions.height - (dimensions.depth || 0)) / 2);
       out.y -= depth;
     } else {
-      out.y -= this.baseTileDimensions.depth * p.z;
+      out.y -= this.baseDepth * (p.z || 0);
     }
     // if we are clamping, then clamp the values
     // clamp using the fastest proper rounding: http://jsperf.com/math-round-vs-hack/3

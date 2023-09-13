@@ -1,4 +1,4 @@
-import { IPoint, IPoint3, MapThree } from "./interfaces";
+import type { IPoint, IPoint3, MapThree } from "./interfaces";
 
 /**
  * Classic projection found in most games
@@ -90,10 +90,10 @@ export function collectRay<T>(grids: MapThree<T>): T[] {
   const entries: T[] = [];
   for (const z of Array.from(grids.keys()).sort()) {
     const zPlane = grids.get(z);
-    for (const x of Array.from(zPlane.keys()).sort()) {
-      const xPlane = zPlane.get(x);
-      for (const y of Array.from(xPlane.keys()).sort()) {
-        entries.push(xPlane.get(y));
+    for (const x of Array.from(zPlane!.keys()).sort()) {
+      const xPlane = zPlane!.get(x);
+      for (const y of Array.from(xPlane!.keys()).sort()) {
+        entries.push(xPlane!.get(y)!);
       }
     }
   }
@@ -118,7 +118,7 @@ export function collectRay<T>(grids: MapThree<T>): T[] {
 export function set<T>(obj: Map<number, any>, indices: number[], value: T): T {
   let o = obj;
   while (indices.length - 1) {
-    var n = indices.shift();
+    var n = indices.shift() as number;
     let v = o.get(n);
     if (v === undefined) {
       const m = new Map();
@@ -128,7 +128,7 @@ export function set<T>(obj: Map<number, any>, indices: number[], value: T): T {
       o = v;
     }
   }
-  o.set(indices[0], value);
+  o.set(indices[0] as number, value);
   return value;
 }
 
@@ -152,10 +152,10 @@ export function get<T>(
   map: Map<number, any>,
   indices: number[],
   setIfNull?: T
-): T {
+): T | undefined {
   var o = map;
   while (indices.length) {
-    var n = indices.shift();
+    var n = indices.shift() as number;
     let v = o.get(n);
     if (v === undefined) {
       if (setIfNull && !indices.length) {
@@ -187,7 +187,7 @@ export function get<T>(
  *
  *  const v = pointGet(mapThree, { x: 1, y: 1, z: 1 })
  */
-export function pointGet<T>(map: MapThree<T>, point: IPoint3): T {
+export function pointGet<T>(map: MapThree<T>, point: IPoint3): T | undefined {
   return get<T>(map, [point.z || 0, point.x, point.y]);
 }
 
@@ -207,12 +207,12 @@ export function pointGet<T>(map: MapThree<T>, point: IPoint3): T {
 export function remove(obj: Map<number, any>, indices: number[]): boolean {
   let o = obj;
   while (indices.length - 1) {
-    var n = indices.shift();
+    var n = indices.shift() as number;
     let v = o.get(n);
     if (v === undefined) return false;
     else o = v;
   }
-  return o.delete(indices[0]);
+  return o.delete(indices[0] as number);
 }
 
 /**
@@ -261,7 +261,7 @@ export function getCenter(points: IPoint[]): IPoint {
  *  const total = sum([ 1, 10, null, 5 ])
  */
 export function sum(numbers: (number | null | undefined)[]): number {
-  return numbers.reduce((s, n) => (!!n ? s + n : s), 0);
+  return numbers.reduce((s: number, n) => (!!n ? s + n : s), 0);
 }
 
 const ZERO = 0;

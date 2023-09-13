@@ -1,6 +1,6 @@
 {
   "name": "iceoh",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "license": "MIT",
   "type": "module",
   "keywords": [
@@ -30,10 +30,10 @@
     "test": "turbo run test"
   },
   "devDependencies": {
-    "turbo": "^1.6.3",
-    "typedoc": "^0.23.23",
-    "typescript": "^4.6.3",
-    "vite": "^3.2.3",
-    "vitest": "^0.25.3"
+    "turbo": "^1.10.13",
+    "typedoc": "^0.23.28",
+    "typescript": "^4.9.5",
+    "vite": "^3.2.7",
+    "vitest": "^0.25.8"
   }
 }
