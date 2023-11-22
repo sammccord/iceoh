@@ -1,6 +1,6 @@
 {
   "name": "iceoh",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "license": "MIT",
   "type": "module",
   "source": "src/index.ts",
@@ -14,7 +14,8 @@
   "exports": {
     ".": {
       "import": "./dist/iceoh.js",
-      "require": "./dist/iceoh.umd.cjs"
+      "require": "./dist/iceoh.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "keywords": [
@@ -38,7 +39,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
-    "build": "NODE_ENV=production vite build && tsc --emitDeclarationOnly --declaration --project ./tsconfig.json",
+    "build": "NODE_ENV=production vite build && tsc --emitDeclarationOnly --declaration",
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {}

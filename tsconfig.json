@@ -1,17 +1,26 @@
 {
   "compilerOptions": {
+    /* Base Options: */
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "target": "es2022",
-    "allowJs": false,
+    "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
+    "isolatedModules": true,
+    /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "moduleResolution": "Node",
-    "module": "NodeNext",
-    "lib": ["ES2022", "DOM"],
+    /* AND if you're building for a library: */
+    "declaration": true,
+    /* AND if you're building for a library in a monorepo: */
+    "declarationMap": true,
+    /* If NOT transpiling with TypeScript: */
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    /* If your code runs in the DOM: */
+    "lib": ["es2022", "dom", "dom.iterable"],
+    /* If your code doesn't run in the DOM: */
     "paths": {
       "iceoh": ["./packages/iceoh/src/index.ts"]
     }
