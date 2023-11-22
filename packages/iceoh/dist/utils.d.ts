@@ -190,3 +190,4 @@ export declare function sum(numbers: (number | null | undefined)[]): number;
  *  getDirection({ x: 1, y: 1 }, { x: 1: y: 0 }) === DIRECTION.N
  */
 export declare function getDirection(from: IPoint3, to: IPoint3): DIRECTION;
+//# sourceMappingURL=utils.d.ts.map

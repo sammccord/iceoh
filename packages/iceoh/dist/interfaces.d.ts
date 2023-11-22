@@ -76,3 +76,4 @@ export type ExtendedBox<T> = IBox & {
     tile: IPoint3;
     origin: IPoint;
 };
+//# sourceMappingURL=interfaces.d.ts.map

@@ -188,7 +188,10 @@ class C {
   }
 }
 class F extends C {
-  constructor({ angle: e = P, clamp: t = !0, ...s } = { angle: P, clamp: !0 }) {
+  constructor({ angle: e = P, clamp: t = !0, ...s } = {
+    angle: P,
+    clamp: !0
+  }) {
     super({ ...s });
     a(this, "angle");
     a(this, "angleCos");

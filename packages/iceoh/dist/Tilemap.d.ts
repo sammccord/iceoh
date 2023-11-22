@@ -390,3 +390,4 @@ export declare class Tilemap<T> {
     protected _unproject(point: IPoint3, out?: IPoint3): IPoint3;
     protected _getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
 }
+//# sourceMappingURL=Tilemap.d.ts.map
