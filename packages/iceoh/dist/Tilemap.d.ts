@@ -1,4 +1,4 @@
-import type { IBox, IPoint, IPoint3, IRectangle, IRectangle3, MapThree } from "./interfaces";
+import type { IBox, IPoint, IPoint3, IRectangle, IRectangle3, MapThree, TileIterator } from "./interfaces";
 /**
  * Base Tilemap class configuration
  * @date 3/14/2023 - 12:44:55 PM
@@ -197,6 +197,34 @@ export declare class Tilemap<T> {
      */
     add(t: T, tile: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
     /**
+     * Add many tiles, returning world points for each.
+     * @date 11/26/2023 - 7:37:07 PM
+     *
+     * @public
+     * @param {[T, IPoint3][]} tiles
+     * @param {IRectangle3} [dimensions=this.baseTileDimensions]
+     * @param {IPoint} [origin=this.baseTileOrigin]
+     * @returns {*}
+     */
+    addMany(tiles: [T, IPoint3][], dimensions?: IRectangle3, origin?: IPoint): IPoint3[];
+    /**
+     * Will set a tile in the map without projecting coordinates
+     * @date 11/26/2023 - 7:33:05 PM
+     *
+     * @public
+     * @param {T} t
+     * @param {IPoint3} p
+     */
+    set(t: T, p: IPoint3): void;
+    /**
+     * Set many points
+     * @date 11/26/2023 - 7:34:19 PM
+     *
+     * @public
+     * @param {[T, IPoint3][]} tiles
+     */
+    setMany(tiles: [T, IPoint3][]): void;
+    /**
      * Get a single tile at given map coordinates
      * @date 3/14/2023 - 12:44:55 PM
      *
@@ -374,6 +402,10 @@ export declare class Tilemap<T> {
      *    const { x, y, width, height, depth } = tilemap.getBounds()
      */
     getBounds(): IBox;
+    each(iterator: TileIterator<T>): void;
+    within(floor: IPoint3, ceil: IPoint3, iterator: TileIterator<T | undefined>): void;
+    neighbors(point: IPoint3, iterator: TileIterator<T | undefined>): void;
+    around(point: IPoint3, radius: number, traverse: TileIterator<T | undefined>, iterator: TileIterator<T | undefined>): void;
     /**
      * Recalculate bounds given a new point modifying the floors and ceilings of all axes
      * @date 3/14/2023 - 12:44:55 PM

@@ -1,5 +1,26 @@
 import type { IPoint, IPoint3, MapThree } from "./interfaces";
 /**
+ * Get the one dimensional array index of a two dimensional point, given an X, Y, and width
+ * @date 11/26/2023 - 7:54:14 PM
+ *
+ * @export
+ * @param {number} x
+ * @param {number} y
+ * @param {number} w
+ * @returns {number}
+ */
+export declare function coordsToIndex(x: number, y: number, w: number): number;
+/**
+ * Get the two dimensional point of an index in a one dimensional array given a width
+ * @date 11/26/2023 - 7:55:40 PM
+ *
+ * @export
+ * @param {number} i
+ * @param {number} w
+ * @returns {IPoint3}
+ */
+export declare function indexToCoords(i: number, w: number): IPoint3;
+/**
  * Classic projection found in most games
  * @date 3/14/2023 - 12:21:46 PM
  *

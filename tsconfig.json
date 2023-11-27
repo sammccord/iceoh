@@ -8,16 +8,13 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-    /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    /* AND if you're building for a library: */
-    "declaration": true,
-    /* AND if you're building for a library in a monorepo: */
-    "declarationMap": true,
-    /* If NOT transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "module": "ESNext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"],
     /* If your code doesn't run in the DOM: */
@@ -25,6 +22,5 @@
       "iceoh": ["./packages/iceoh/src/index.ts"]
     }
   },
-  "include": ["packages/iceoh/src"],
   "exclude": ["node_modules"]
 }

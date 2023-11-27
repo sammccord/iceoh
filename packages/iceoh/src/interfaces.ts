@@ -82,3 +82,14 @@ export type ExtendedBox<T> = IBox & {
   tile: IPoint3;
   origin: IPoint;
 };
+
+
+/**
+ * A callback function that returns a tile value and its point, if false is returned then iteration will stop
+ * @date 11/26/2023 - 7:31:52 PM
+ *
+ * @export
+ * @typedef {TileIterator}
+ * @template T
+ */
+export type TileIterator<T> = (t: T, p: IPoint3) => boolean | void

@@ -5,6 +5,7 @@ import type {
   IRectangle,
   IRectangle3,
   MapThree,
+  TileIterator,
 } from "./interfaces";
 import { FULL, MIDDLE, TOP_LEFT, get, pointGet, remove, set } from "./utils";
 
@@ -223,6 +224,53 @@ export class Tilemap<T> {
     set(this.map, [tile.z || 0, tile.x, tile.y], t);
     this.recalculateBounds(tile);
     return this.toWorldPoint(tile, dimensions, origin);
+  }
+
+
+  /**
+   * Add many tiles, returning world points for each.
+   * @date 11/26/2023 - 7:37:07 PM
+   *
+   * @public
+   * @param {[T, IPoint3][]} tiles
+   * @param {IRectangle3} [dimensions=this.baseTileDimensions]
+   * @param {IPoint} [origin=this.baseTileOrigin]
+   * @returns {*}
+   */
+  public addMany(
+    tiles: [T, IPoint3][],
+    dimensions: IRectangle3 = this.baseTileDimensions,
+    origin = this.baseTileOrigin
+  ) {
+    return tiles.map(([t, p]) => this.add(t, p, dimensions, origin))
+  }
+
+
+  /**
+   * Will set a tile in the map without projecting coordinates
+   * @date 11/26/2023 - 7:33:05 PM
+   *
+   * @public
+   * @param {T} t
+   * @param {IPoint3} p
+   */
+  public set(t: T, p: IPoint3) {
+    set(this.map, [p.z || 0, p.x, p.y], t)
+    this.recalculateBounds(p)
+  }
+
+  
+  /**
+   * Set many points
+   * @date 11/26/2023 - 7:34:19 PM
+   *
+   * @public
+   * @param {[T, IPoint3][]} tiles
+   */
+  public setMany(tiles: [T, IPoint3][]) {
+    for (const [t, p] of tiles) {
+      this.set(t, p)
+    }
   }
 
   /**
@@ -492,6 +540,56 @@ export class Tilemap<T> {
     rect.y = Math.round(this.bounds.y.min + rect.height / 2);
 
     return rect;
+  }
+
+  public each(iterator: TileIterator<T>) {
+    for (const [z, xPlane] of this.map) {
+      for (const [x, yPlane] of xPlane) {
+        for (const [y, t] of yPlane) {
+          if (iterator(t, { x, y, z }) === false) return
+        }
+      }
+    }
+  }
+
+  public within(floor: IPoint3, ceil: IPoint3, iterator: TileIterator<T | undefined>) {
+    for (let z = floor.z || 0; z < (ceil.z || 1); z++) {
+      const zPlane = this.map.get(z)
+      for (let x = floor.x; x <= ceil.x; x++) {
+        const xPlane = zPlane && zPlane.get(x)
+        for (let y = floor.y; y <= ceil.y; y++) {
+          const t = xPlane && xPlane.get(y)
+          if (iterator(t, { x, y, z }) === false) return
+        }
+      }
+    }
+  }
+
+  public neighbors(point: IPoint3, iterator: TileIterator<T | undefined>) {
+    this.within(
+      { x: point.x - 1, y: point.y - 1, z: point.z || 0 },
+      { x: point.x + 1, y: point.y + 1, z: point.z || 0 },
+      (t, p) => {
+        if (p.x === point.x && p.y === point.y && p.z === (point.z || 0)) return
+        return iterator(t, p)
+      }
+    )
+  }
+
+  public around(
+    point: IPoint3,
+    radius: number,
+    traverse: TileIterator<T | undefined>,
+    iterator: TileIterator<T | undefined>
+  ) {
+    this.within(
+      { x: point.x - radius, y: point.y - radius, z: point.z || 0 },
+      { x: point.x + radius, y: point.y + radius, z: point.z || 0 },
+      (t, p) => {
+        if (p.x === point.x && p.y === point.y && p.z === (point.z || 0)) return
+        if (traverse(t, p) !== false) return iterator(t, p)
+      }
+    )
   }
 
   /**
