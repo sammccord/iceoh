@@ -254,9 +254,10 @@ export class Tilemap<T> {
    * @param {T} t
    * @param {IPoint3} p
    */
-  public set(t: T, p: IPoint3) {
+  public set(t: T, p: IPoint3): () => void {
     set(this.map, [p.z || 0, p.x, p.y], t)
     this.recalculateBounds(p)
+    return () => this.remove(p)
   }
 
   
@@ -267,10 +268,8 @@ export class Tilemap<T> {
    * @public
    * @param {[T, IPoint3][]} tiles
    */
-  public setMany(tiles: [T, IPoint3][]) {
-    for (const [t, p] of tiles) {
-      this.set(t, p)
-    }
+  public setMany(tiles: [T, IPoint3][]): Array<() => void> {
+    return tiles.map(([t, p]) => this.set(t, p))
   }
 
   /**

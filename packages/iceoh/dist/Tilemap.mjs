@@ -32,11 +32,10 @@ class P {
     return i.map(([e, r]) => this.add(e, r, s, t));
   }
   set(i, s) {
-    l(this.map, [s.z || 0, s.x, s.y], i), this.recalculateBounds(s);
+    return l(this.map, [s.z || 0, s.x, s.y], i), this.recalculateBounds(s), () => this.remove(s);
   }
   setMany(i) {
-    for (const [s, t] of i)
-      this.set(s, t);
+    return i.map(([s, t]) => this.set(s, t));
   }
   get(i) {
     return z(this.map, i);

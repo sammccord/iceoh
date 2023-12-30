@@ -215,7 +215,7 @@ export declare class Tilemap<T> {
      * @param {T} t
      * @param {IPoint3} p
      */
-    set(t: T, p: IPoint3): void;
+    set(t: T, p: IPoint3): () => void;
     /**
      * Set many points
      * @date 11/26/2023 - 7:34:19 PM
@@ -223,7 +223,7 @@ export declare class Tilemap<T> {
      * @public
      * @param {[T, IPoint3][]} tiles
      */
-    setMany(tiles: [T, IPoint3][]): void;
+    setMany(tiles: [T, IPoint3][]): Array<() => void>;
     /**
      * Get a single tile at given map coordinates
      * @date 3/14/2023 - 12:44:55 PM
