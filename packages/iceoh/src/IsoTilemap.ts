@@ -241,7 +241,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
           remove(this.tileDimensions, [z, point.x, point.y]);
           remove(this.map, [z, point.x, point.y]);
         }
-      } catch {}
+      } catch { }
     }
     this.recalculateBounds(point);
     return tile;
@@ -340,7 +340,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
    *  castRay({ x: 400, y: 400 }) === bar
    */
   public castRay(
-    point: IPoint,
+    point: IPoint3,
     include?: (t: T, tile: IPoint3) => boolean
   ): T | undefined {
     const tile = this.worldToTile(point);
@@ -385,7 +385,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
    *  hits({ x: 400, y: 400 }) === Map{ 0: Map{ 0: Map{ 0: foo } }, 1: Map{ 1: Map{ 1: bar } } }
    */
   public collisionMap(
-    point: IPoint,
+    point: IPoint3,
     include?: (t: T, tile: IPoint3) => boolean
   ): MapThree<T> {
     const ray: MapThree<T> = new Map();

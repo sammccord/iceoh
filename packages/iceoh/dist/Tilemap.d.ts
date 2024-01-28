@@ -374,7 +374,7 @@ export declare class Tilemap<T> {
      * @readonly
      * @type {IPoint}
      */
-    get centerTile(): IPoint;
+    get centerTile(): IPoint3;
     /**
      * Returns a world offset position where the centermost tile is centered to the viewport
      * @date 3/14/2023 - 12:44:55 PM

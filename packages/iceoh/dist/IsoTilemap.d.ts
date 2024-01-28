@@ -209,7 +209,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      *  const bar = map.add('bar', { x: 1, y: 1, z: 1 })
      *  castRay({ x: 400, y: 400 }) === bar
      */
-    castRay(point: IPoint, include?: (t: T, tile: IPoint3) => boolean): T | undefined;
+    castRay(point: IPoint3, include?: (t: T, tile: IPoint3) => boolean): T | undefined;
     /**
      * Returns a three-dimensional map of all tiles that collide with a projected world coordinate
      * Optionally takes a callback with the backing value and tile coordinates to include in the ray's path
@@ -227,7 +227,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      *  const bar = map.add('bar', { x: 1, y: 1, z: 1 })
      *  hits({ x: 400, y: 400 }) === Map{ 0: Map{ 0: Map{ 0: foo } }, 1: Map{ 1: Map{ 1: bar } } }
      */
-    collisionMap(point: IPoint, include?: (t: T, tile: IPoint3) => boolean): MapThree<T>;
+    collisionMap(point: IPoint3, include?: (t: T, tile: IPoint3) => boolean): MapThree<T>;
     protected _project(p: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
     protected _unproject(point: IPoint3, out?: IPoint3): IPoint3;
     protected _getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;

@@ -1,7 +1,7 @@
 import { IsoTilemap, Tilemap } from "../../iceoh/src";
 import { beforeEach, describe, expect, test } from "vitest";
 
-interface Sprite {}
+interface Sprite { }
 
 describe("IsoTilemap", () => {
   let tilemap: Tilemap<Sprite>;
@@ -16,20 +16,6 @@ describe("IsoTilemap", () => {
       baseTileDimensions: { width: 10, height: 10 },
       getGlobalDimensions: () => ({ width: 100, height: 100 }),
     });
-  });
-
-  test("add with no z", () => {
-    const sprite = { foo: "bar" };
-    tilemap.add(sprite, { x: 10, y: 20 });
-    const t = tilemap.get({ x: 10, y: 20 });
-    expect(t).toBe(sprite);
-  });
-
-  test("add with no z", () => {
-    const sprite = { foo: "bar" };
-    isoTilemap.add(sprite, { x: 10, y: 20 });
-    const t = isoTilemap.get({ x: 10, y: 20 });
-    expect(t).toBe(sprite);
   });
 
   // test("renders children", () => {

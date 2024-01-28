@@ -94,7 +94,8 @@ class P {
       y: 0,
       width: this.bounds.x.max - this.bounds.x.min,
       height: this.bounds.y.max - this.bounds.y.min,
-      depth: this.bounds.z.max - this.bounds.z.min
+      depth: this.bounds.z.max - this.bounds.z.min,
+      z: 0
     };
     return i.x = Math.round(this.bounds.x.min + i.width / 2), i.y = Math.round(this.bounds.y.min + i.height / 2), i;
   }

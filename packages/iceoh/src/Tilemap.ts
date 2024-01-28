@@ -188,8 +188,8 @@ export class Tilemap<T> {
   }: ITilemapConfig = {}) {
     this.worldOrigin = worldOrigin || MIDDLE;
     this.baseTileOrigin = baseTileOrigin || MIDDLE;
-    this.baseTileDimensions = baseTileDimensions || { width: 1, height: 1};
-    this.getScreenDimensions = getScreenDimensions || (() => ({ width: 1, height: 1}));
+    this.baseTileDimensions = baseTileDimensions || { width: 1, height: 1 };
+    this.getScreenDimensions = getScreenDimensions || (() => ({ width: 1, height: 1 }));
     this.getWorldPosition = getWorldPosition || (() => TOP_LEFT);
     this.getWorldScale = getWorldScale || (() => FULL);
   }
@@ -260,7 +260,7 @@ export class Tilemap<T> {
     return () => this.remove(p)
   }
 
-  
+
   /**
    * Set many points
    * @date 11/26/2023 - 7:34:19 PM
@@ -493,7 +493,7 @@ export class Tilemap<T> {
    * @readonly
    * @type {IPoint}
    */
-  public get centerTile(): IPoint {
+  public get centerTile(): IPoint3 {
     return this.getBounds();
   }
 
@@ -533,6 +533,7 @@ export class Tilemap<T> {
       width: this.bounds.x.max - this.bounds.x.min,
       height: this.bounds.y.max - this.bounds.y.min,
       depth: this.bounds.z.max - this.bounds.z.min,
+      z: 0,
     };
 
     rect.x = Math.round(this.bounds.x.min + rect.width / 2);

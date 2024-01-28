@@ -31,7 +31,7 @@ export interface IPoint {
  * @extends {IPoint}
  */
 export interface IPoint3 extends IPoint {
-  z?: number;
+  z: number;
 }
 
 /**
