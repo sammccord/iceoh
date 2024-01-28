@@ -186,6 +186,15 @@ export declare function getDistance(from: IPoint, to: IPoint): number;
  */
 export declare function getCenter(points: IPoint[]): IPoint;
 /**
+ * Returns the 3D center of a list of points. This value is not rounded and can be floating point.
+ * @date 4/12/2023 - 9:01:37 AM
+ *
+ * @export
+ * @param {IPoint3[]} points
+ * @returns {IPoint3}
+ */
+export declare function get3DCenter(points: IPoint3[]): IPoint3;
+/**
  * Sums an array of numbers, ignoring null and undefined
  * @date 3/14/2023 - 12:28:23 PM
  *

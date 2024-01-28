@@ -1,25 +1,26 @@
 import { Tilemap as t } from "./Tilemap.mjs";
 import { IsoTilemap as I } from "./IsoTilemap.mjs";
-import { CLASSIC as i, DIRECTION as m, FULL as n, ISOMETRIC as p, MIDDLE as s, MILITARY as C, TOP_LEFT as L, collectRay as c, coordsToIndex as x, get as D, getCenter as a, getDirection as d, getDistance as g, indexToCoords as l, pointGet as E, remove as R, set as f, sum as M } from "./utils.mjs";
+import { CLASSIC as i, DIRECTION as m, FULL as n, ISOMETRIC as C, MIDDLE as p, MILITARY as s, TOP_LEFT as D, collectRay as L, coordsToIndex as c, get as g, get3DCenter as x, getCenter as a, getDirection as d, getDistance as l, indexToCoords as E, pointGet as R, remove as f, set as M, sum as O } from "./utils.mjs";
 export {
   i as CLASSIC,
   m as DIRECTION,
   n as FULL,
-  p as ISOMETRIC,
+  C as ISOMETRIC,
   I as IsoTilemap,
-  s as MIDDLE,
-  C as MILITARY,
-  L as TOP_LEFT,
+  p as MIDDLE,
+  s as MILITARY,
+  D as TOP_LEFT,
   t as Tilemap,
-  c as collectRay,
-  x as coordsToIndex,
-  D as get,
+  L as collectRay,
+  c as coordsToIndex,
+  g as get,
+  x as get3DCenter,
   a as getCenter,
   d as getDirection,
-  g as getDistance,
-  l as indexToCoords,
-  E as pointGet,
-  R as remove,
-  f as set,
-  M as sum
+  l as getDistance,
+  E as indexToCoords,
+  R as pointGet,
+  f as remove,
+  M as set,
+  O as sum
 };
