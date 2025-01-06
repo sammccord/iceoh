@@ -228,8 +228,10 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      *  hits({ x: 400, y: 400 }) === Map{ 0: Map{ 0: Map{ 0: foo } }, 1: Map{ 1: Map{ 1: bar } } }
      */
     collisionMap(point: IPoint3, include?: (t: T, tile: IPoint3) => boolean): MapThree<T>;
-    protected _project(p: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
-    protected _unproject(point: IPoint3, out?: IPoint3): IPoint3;
-    protected _getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
+    project(p: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
+    screenProject(p: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
+    unproject(point: IPoint3, out?: IPoint3): IPoint3;
+    screenUnproject(point: IPoint3, out?: IPoint3): IPoint3;
+    getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
 }
 //# sourceMappingURL=IsoTilemap.d.ts.map

@@ -411,7 +411,7 @@ export class Tilemap<T> {
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    return this._project(this._getAbsolutePosition(tile), dimensions, origin);
+    return this.screenProject(this.getAbsolutePosition(tile), dimensions, origin);
   }
 
   /**
@@ -434,7 +434,7 @@ export class Tilemap<T> {
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    const p = this._unproject(point);
+    const p = this.screenUnproject(point);
     return {
       x: Math.round(p.x / dimensions.width),
       y: Math.round(p.y / dimensions.height),
@@ -614,7 +614,20 @@ export class Tilemap<T> {
     }
   }
 
-  protected _project(
+  public project(
+    point3: IPoint3,
+    dimensions = this.baseTileDimensions,
+    origin = this.baseTileOrigin,
+    depth = 0
+  ): IPoint3 {
+    return {
+      x: point3.x,
+      y: point3.y,
+      z: point3.z || 0,
+    };
+  }
+
+  public screenProject(
     point3: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin,
@@ -628,7 +641,14 @@ export class Tilemap<T> {
     };
   }
 
-  protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
+  public unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
+    out.x = point.x;
+    out.y = point.y + (point.z || 0);
+    out.z = point.z || 0;
+    return out;
+  }
+
+  public screenUnproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
     const { width, height } = this.getScreenDimensions();
     out.x = point.x - width * this.worldOrigin.x;
     out.y = point.y - height * this.worldOrigin.y + (point.z || 0);
@@ -636,7 +656,7 @@ export class Tilemap<T> {
     return out;
   }
 
-  protected _getAbsolutePosition(
+  public getAbsolutePosition(
     point: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin

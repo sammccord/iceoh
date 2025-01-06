@@ -1,13 +1,13 @@
-var m = Object.defineProperty;
-var g = (o, i, s) => i in o ? m(o, i, { enumerable: !0, configurable: !0, writable: !0, value: s }) : o[i] = s;
-var h = (o, i, s) => (g(o, typeof i != "symbol" ? i + "" : i, s), s);
-import { MIDDLE as x, TOP_LEFT as y, FULL as c, set as l, pointGet as z, get as b, remove as T } from "./utils.mjs";
+var u = Object.defineProperty;
+var y = (o, i, e) => i in o ? u(o, i, { enumerable: !0, configurable: !0, writable: !0, value: e }) : o[i] = e;
+var h = (o, i, e) => (y(o, typeof i != "symbol" ? i + "" : i, e), e);
+import { MIDDLE as d, TOP_LEFT as c, FULL as g, set as l, pointGet as z, get as b, remove as T } from "./utils.mjs";
 class P {
   constructor({
     worldOrigin: i,
-    baseTileOrigin: s,
+    baseTileOrigin: e,
     baseTileDimensions: t,
-    getScreenDimensions: e,
+    getScreenDimensions: s,
     getWorldPosition: r,
     getWorldScale: n
   } = {}) {
@@ -15,60 +15,60 @@ class P {
     h(this, "getWorldPosition");
     h(this, "getWorldScale");
     h(this, "baseTileDimensions");
-    h(this, "worldOrigin", x);
-    h(this, "baseTileOrigin", x);
+    h(this, "worldOrigin", d);
+    h(this, "baseTileOrigin", d);
     h(this, "map", /* @__PURE__ */ new Map());
     h(this, "bounds", {
       x: { min: 0, max: 0 },
       y: { min: 0, max: 0 },
       z: { min: 0, max: 0 }
     });
-    this.worldOrigin = i || x, this.baseTileOrigin = s || x, this.baseTileDimensions = t || { width: 1, height: 1 }, this.getScreenDimensions = e || (() => ({ width: 1, height: 1 })), this.getWorldPosition = r || (() => y), this.getWorldScale = n || (() => c);
+    this.worldOrigin = i || d, this.baseTileOrigin = e || d, this.baseTileDimensions = t || { width: 1, height: 1 }, this.getScreenDimensions = s || (() => ({ width: 1, height: 1 })), this.getWorldPosition = r || (() => c), this.getWorldScale = n || (() => g);
   }
-  add(i, s, t = this.baseTileDimensions, e = this.baseTileOrigin) {
-    return l(this.map, [s.z || 0, s.x, s.y], i), this.recalculateBounds(s), this.toWorldPoint(s, t, e);
+  add(i, e, t = this.baseTileDimensions, s = this.baseTileOrigin) {
+    return l(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), this.toWorldPoint(e, t, s);
   }
-  addMany(i, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    return i.map(([e, r]) => this.add(e, r, s, t));
+  addMany(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    return i.map(([s, r]) => this.add(s, r, e, t));
   }
-  set(i, s) {
-    return l(this.map, [s.z || 0, s.x, s.y], i), this.recalculateBounds(s), () => this.remove(s);
+  set(i, e) {
+    return l(this.map, [e.z || 0, e.x, e.y], i), this.recalculateBounds(e), () => this.remove(e);
   }
   setMany(i) {
-    return i.map(([s, t]) => this.set(s, t));
+    return i.map(([e, t]) => this.set(e, t));
   }
   get(i) {
     return z(this.map, i);
   }
-  getColumn(i, s) {
+  getColumn(i, e) {
     const t = [];
-    for (const [e, r] of s || this.map)
-      t[e] = b(r, [i.x, i.y]);
+    for (const [s, r] of e || this.map)
+      t[s] = b(r, [i.x, i.y]);
     return t;
   }
-  move(i, s, t = this.baseTileDimensions, e = this.baseTileOrigin, r) {
+  move(i, e, t = this.baseTileDimensions, s = this.baseTileOrigin, r) {
     const n = this.remove(i);
     if (!(!n || !r))
-      return this.add(n || r, s, t, e);
+      return this.add(n || r, e, t, s);
   }
   remove(i) {
     i.z === void 0 && (i.z = 0);
-    const s = this.get(i);
-    if (!!s)
-      return T(this.map, [i.z || 0, i.x, i.y]), this.recalculateBounds(i), s;
+    const e = this.get(i);
+    if (!!e)
+      return T(this.map, [i.z || 0, i.x, i.y]), this.recalculateBounds(i), e;
   }
-  toScreenPoint(i, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    const e = this.toWorldPoint(i, s, t), r = this.getWorldScale(), n = this.getWorldPosition();
-    return e.x = e.x * r.x + n.x, e.y = e.y * r.y + n.y, e;
+  toScreenPoint(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    const s = this.toWorldPoint(i, e, t), r = this.getWorldScale(), n = this.getWorldPosition();
+    return s.x = s.x * r.x + n.x, s.y = s.y * r.y + n.y, s;
   }
-  toWorldPoint(i, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    return this._project(this._getAbsolutePosition(i), s, t);
+  toWorldPoint(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    return this.screenProject(this.getAbsolutePosition(i), e, t);
   }
-  worldToTile(i, s = this.baseTileDimensions, t = this.baseTileOrigin) {
-    const e = this._unproject(i);
+  worldToTile(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
+    const s = this.screenUnproject(i);
     return {
-      x: Math.round(e.x / s.width),
-      y: Math.round(e.y / s.height),
+      x: Math.round(s.x / e.width),
+      y: Math.round(s.y / e.height),
       z: i.z || 0
     };
   }
@@ -76,10 +76,10 @@ class P {
     return this.centerToPoint(this.toScreenPoint(i));
   }
   centerToPoint(i) {
-    const s = this.getScreenDimensions(), t = this.getWorldPosition();
+    const e = this.getScreenDimensions(), t = this.getWorldPosition();
     return {
-      x: t.x + s.width / 2 - i.x,
-      y: t.y + s.height / 2 - i.y
+      x: t.x + e.width / 2 - i.x,
+      y: t.y + e.height / 2 - i.y
     };
   }
   get centerTile() {
@@ -100,49 +100,56 @@ class P {
     return i.x = Math.round(this.bounds.x.min + i.width / 2), i.y = Math.round(this.bounds.y.min + i.height / 2), i;
   }
   each(i) {
-    for (const [s, t] of this.map)
-      for (const [e, r] of t)
+    for (const [e, t] of this.map)
+      for (const [s, r] of t)
         for (const [n, a] of r)
-          if (i(a, { x: e, y: n, z: s }) === !1)
+          if (i(a, { x: s, y: n, z: e }) === !1)
             return;
   }
-  within(i, s, t) {
-    for (let e = i.z || 0; e < (s.z || 1); e++) {
-      const r = this.map.get(e);
-      for (let n = i.x; n <= s.x; n++) {
+  within(i, e, t) {
+    for (let s = i.z || 0; s < (e.z || 1); s++) {
+      const r = this.map.get(s);
+      for (let n = i.x; n <= e.x; n++) {
         const a = r && r.get(n);
-        for (let d = i.y; d <= s.y; d++) {
-          const u = a && a.get(d);
-          if (t(u, { x: n, y: d, z: e }) === !1)
+        for (let x = i.y; x <= e.y; x++) {
+          const m = a && a.get(x);
+          if (t(m, { x: n, y: x, z: s }) === !1)
             return;
         }
       }
     }
   }
-  neighbors(i, s) {
+  neighbors(i, e) {
     this.within(
       { x: i.x - 1, y: i.y - 1, z: i.z || 0 },
       { x: i.x + 1, y: i.y + 1, z: i.z || 0 },
-      (t, e) => {
-        if (!(e.x === i.x && e.y === i.y && e.z === (i.z || 0)))
-          return s(t, e);
+      (t, s) => {
+        if (!(s.x === i.x && s.y === i.y && s.z === (i.z || 0)))
+          return e(t, s);
       }
     );
   }
-  around(i, s, t, e) {
+  around(i, e, t, s) {
     this.within(
-      { x: i.x - s, y: i.y - s, z: i.z || 0 },
-      { x: i.x + s, y: i.y + s, z: i.z || 0 },
+      { x: i.x - e, y: i.y - e, z: i.z || 0 },
+      { x: i.x + e, y: i.y + e, z: i.z || 0 },
       (r, n) => {
         if (!(n.x === i.x && n.y === i.y && n.z === (i.z || 0)) && t(r, n) !== !1)
-          return e(r, n);
+          return s(r, n);
       }
     );
   }
   recalculateBounds(i) {
     i.x < this.bounds.x.min && (this.bounds.x.min = i.x), i.x > this.bounds.x.max && (this.bounds.x.max = i.x), i.y < this.bounds.y.min && (this.bounds.y.min = i.y), i.y > this.bounds.y.max && (this.bounds.y.max = i.y), i.z !== void 0 && (i.z < this.bounds.z.min && (this.bounds.z.min = i.z), i.z > this.bounds.z.max && (this.bounds.z.max = i.z));
   }
-  _project(i, s = this.baseTileDimensions, t = this.baseTileOrigin, e = 0) {
+  project(i, e = this.baseTileDimensions, t = this.baseTileOrigin, s = 0) {
+    return {
+      x: i.x,
+      y: i.y,
+      z: i.z || 0
+    };
+  }
+  screenProject(i, e = this.baseTileDimensions, t = this.baseTileOrigin, s = 0) {
     const { width: r, height: n } = this.getScreenDimensions();
     return {
       x: i.x + r * this.worldOrigin.x,
@@ -150,14 +157,17 @@ class P {
       z: i.z || 0
     };
   }
-  _unproject(i, s = { x: 0, y: 0, z: 0 }) {
-    const { width: t, height: e } = this.getScreenDimensions();
-    return s.x = i.x - t * this.worldOrigin.x, s.y = i.y - e * this.worldOrigin.y + (i.z || 0), s.z = i.z || 0, s;
+  unproject(i, e = { x: 0, y: 0, z: 0 }) {
+    return e.x = i.x, e.y = i.y + (i.z || 0), e.z = i.z || 0, e;
   }
-  _getAbsolutePosition(i, s = this.baseTileDimensions, t = this.baseTileOrigin) {
+  screenUnproject(i, e = { x: 0, y: 0, z: 0 }) {
+    const { width: t, height: s } = this.getScreenDimensions();
+    return e.x = i.x - t * this.worldOrigin.x, e.y = i.y - s * this.worldOrigin.y + (i.z || 0), e.z = i.z || 0, e;
+  }
+  getAbsolutePosition(i, e = this.baseTileDimensions, t = this.baseTileOrigin) {
     return {
-      x: s.width * i.x,
-      y: s.height * i.y,
+      x: e.width * i.x,
+      y: e.height * i.y,
       z: i.z || 0
     };
   }

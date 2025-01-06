@@ -418,8 +418,10 @@ export declare class Tilemap<T> {
      *    tilemap.recalculateBounds({ x: 1, y: 1, z: -1 })
      */
     protected recalculateBounds(point: IPoint3): void;
-    protected _project(point3: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
-    protected _unproject(point: IPoint3, out?: IPoint3): IPoint3;
-    protected _getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
+    project(point3: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
+    screenProject(point3: IPoint3, dimensions?: IRectangle3, origin?: IPoint, depth?: number): IPoint3;
+    unproject(point: IPoint3, out?: IPoint3): IPoint3;
+    screenUnproject(point: IPoint3, out?: IPoint3): IPoint3;
+    getAbsolutePosition(point: IPoint3, dimensions?: IRectangle3, origin?: IPoint): IPoint3;
 }
 //# sourceMappingURL=Tilemap.d.ts.map

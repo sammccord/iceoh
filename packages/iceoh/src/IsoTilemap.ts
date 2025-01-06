@@ -267,7 +267,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    const p = this._unproject(point);
+    const p = this.screenUnproject(point);
     const edge = {
       x: dimensions.width * origin.x,
       y: dimensions.width * origin.y,
@@ -293,8 +293,8 @@ export class IsoTilemap<T> extends Tilemap<T> {
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
   ): IPoint3 {
-    return this._project(
-      this._getAbsolutePosition(tile),
+    return this.screenProject(
+      this.getAbsolutePosition(tile),
       dimensions,
       origin,
       sum(
@@ -422,7 +422,37 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return ray;
   }
 
-  protected _project(
+  public project(
+    p: IPoint3,
+    dimensions = this.baseTileDimensions,
+    origin = this.baseTileOrigin,
+    depth: number = 0
+  ): IPoint3 {
+    // calculate the cartesion coordinates
+    const out = {
+      x: (p.x - p.y) * this.angleCos,
+      y: (p.x + p.y) * this.angleSin,
+      z: (p.x + p.y) * ((p.z || 0) + 1 || 1),
+    };
+    if (dimensions !== this.baseTileDimensions) {
+      out.y -= this.baseSurfaceHalfHeight + 0 - this.baseTileOrigin.y; // + (this.baseTileDimensions.depth * point3.z)) - this.baseTileOrigin.y
+      out.y +=
+        dimensions.height * origin.y -
+        (dimensions.height - (dimensions.height - (dimensions.depth || 0)) / 2);
+      out.y -= depth;
+    } else {
+      out.y -= this.baseDepth * (p.z || 0);
+    }
+    // if we are clamping, then clamp the values
+    // clamp using the fastest proper rounding: http://jsperf.com/math-round-vs-hack/3
+    if (this.clamp) {
+      out.x = ~~(out.x + (out.x > 0 ? 0.5 : -0.5));
+      out.y = ~~(out.y + (out.y > 0 ? 0.5 : -0.5));
+    }
+    return out;
+  }
+
+  public screenProject(
     p: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin,
@@ -453,7 +483,15 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return out;
   }
 
-  protected _unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
+  public unproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
+    out.x = point.x / (2 * this.angleCos) + point.y / (2 * this.angleSin);
+    out.y = -(point.x / (2 * this.angleCos)) + point.y / (2 * this.angleSin);
+    out.z = point.z || 0;
+
+    return out;
+  }
+
+  public screenUnproject(point: IPoint3, out: IPoint3 = { x: 0, y: 0, z: 0 }) {
     const worldDimensions = this.getScreenDimensions();
     const x = point.x - worldDimensions.width * this.worldOrigin.x;
     const y = point.y - worldDimensions.height * this.worldOrigin.y;
@@ -465,7 +503,7 @@ export class IsoTilemap<T> extends Tilemap<T> {
     return out;
   }
 
-  protected _getAbsolutePosition(
+  public getAbsolutePosition(
     point: IPoint3,
     dimensions = this.baseTileDimensions,
     origin = this.baseTileOrigin
