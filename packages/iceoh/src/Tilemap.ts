@@ -131,7 +131,7 @@ export class Tilemap<T> {
    * @readonly
    * @type {IPoint}
    */
-  protected readonly worldOrigin: IPoint = MIDDLE;
+  public readonly worldOrigin: IPoint = MIDDLE;
   /**
    * Description placeholder
    * @date 3/14/2023 - 12:44:55 PM
@@ -140,7 +140,7 @@ export class Tilemap<T> {
    * @readonly
    * @type {IPoint}
    */
-  protected readonly baseTileOrigin: IPoint = MIDDLE;
+  public readonly baseTileOrigin: IPoint = MIDDLE;
   /**
    * Contains references to T values using their tile coordinates for three-dimensional map indices, z -> x -> y
    * @date 3/14/2023 - 12:44:55 PM
@@ -149,7 +149,7 @@ export class Tilemap<T> {
    * @readonly
    * @type {MapThree<T>}
    */
-  protected readonly map: MapThree<T> = new Map();
+  public readonly map: MapThree<T> = new Map();
   /**
    * Contains the lower and upper bounds of the map's z, x, y axes using tile coordinates
    * @date 3/14/2023 - 12:44:55 PM
@@ -158,7 +158,7 @@ export class Tilemap<T> {
    * @readonly
    * @type {{ x: { min: number; max: number; }; y: { min: number; max: number; }; z: { min: number; max: number; }; }}
    */
-  protected readonly bounds = {
+  public readonly bounds = {
     x: { min: 0, max: 0 },
     y: { min: 0, max: 0 },
     z: { min: 0, max: 0 },

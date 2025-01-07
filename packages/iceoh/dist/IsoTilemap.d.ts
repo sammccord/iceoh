@@ -44,7 +44,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {number}
      */
-    protected readonly angle: number;
+    readonly angle: number;
     /**
      * The cosign of the angle
      * @date 3/14/2023 - 2:14:31 PM
@@ -53,7 +53,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {number}
      */
-    protected readonly angleCos: number;
+    readonly angleCos: number;
     /**
      * The sine of the angle
      * @date 3/14/2023 - 2:14:31 PM
@@ -62,7 +62,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {number}
      */
-    protected readonly angleSin: number;
+    readonly angleSin: number;
     /**
      * Whether or not to clamp values
      * @date 3/14/2023 - 2:14:31 PM
@@ -71,7 +71,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {boolean}
      */
-    protected readonly clamp: boolean;
+    readonly clamp: boolean;
     /**
      * The tile offset coordinates given the base dimensions and origin
      * @date 3/14/2023 - 2:14:31 PM
@@ -80,7 +80,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {IPoint}
      */
-    protected readonly baseOrigin: IPoint;
+    readonly baseOrigin: IPoint;
     /**
      * The height of the top surface of the tile, height - depth
      * @date 3/14/2023 - 2:14:31 PM
@@ -89,7 +89,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {number}
      */
-    protected readonly baseSurfaceHeight: number;
+    readonly baseSurfaceHeight: number;
     /**
      * The middle point of the top surface, (height - depth) / 2
      * @date 3/14/2023 - 2:14:31 PM
@@ -98,7 +98,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {number}
      */
-    protected readonly baseSurfaceHalfHeight: number;
+    readonly baseSurfaceHalfHeight: number;
     /**
      * A three-dimensional map of boxes containing references to tiles, with world coordinations and dimensions of placed tiles
      * @date 3/14/2023 - 2:14:31 PM
@@ -106,7 +106,7 @@ export declare class IsoTilemap<T> extends Tilemap<T> {
      * @readonly
      * @type {MapThree<ExtendedBox<T>>}
      */
-    readonly tileDimensions: MapThree<ExtendedBox<T>>;
+    tileDimensions: MapThree<ExtendedBox<T>>;
     /**
      * Creates an instance of IsoTilemap.
      * @date 3/14/2023 - 2:14:31 PM

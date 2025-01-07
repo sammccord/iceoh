@@ -118,7 +118,7 @@ export declare class Tilemap<T> {
      * @readonly
      * @type {IPoint}
      */
-    protected readonly worldOrigin: IPoint;
+    readonly worldOrigin: IPoint;
     /**
      * Description placeholder
      * @date 3/14/2023 - 12:44:55 PM
@@ -127,7 +127,7 @@ export declare class Tilemap<T> {
      * @readonly
      * @type {IPoint}
      */
-    protected readonly baseTileOrigin: IPoint;
+    readonly baseTileOrigin: IPoint;
     /**
      * Contains references to T values using their tile coordinates for three-dimensional map indices, z -> x -> y
      * @date 3/14/2023 - 12:44:55 PM
@@ -136,7 +136,7 @@ export declare class Tilemap<T> {
      * @readonly
      * @type {MapThree<T>}
      */
-    protected readonly map: MapThree<T>;
+    readonly map: MapThree<T>;
     /**
      * Contains the lower and upper bounds of the map's z, x, y axes using tile coordinates
      * @date 3/14/2023 - 12:44:55 PM
@@ -145,7 +145,7 @@ export declare class Tilemap<T> {
      * @readonly
      * @type {{ x: { min: number; max: number; }; y: { min: number; max: number; }; z: { min: number; max: number; }; }}
      */
-    protected readonly bounds: {
+    readonly bounds: {
         x: {
             min: number;
             max: number;
